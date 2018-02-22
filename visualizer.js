@@ -2,18 +2,38 @@ const treeData =
 	{"name" : "#01", "info" : "Swine 1", "children" : [
 		{"name" : "#02", "info" : "Swine 2", "children": [
 
-			{"name": "#04", "info": "Swine 4"},
+			{"name": "#04", "info": "Swine 4", "children": [
+
+				{"name" : "#06", "info" : "Swine 6" }, 
+				{"name" : "#07", "info" : "Swine 7" }
+			]},
 			{"name": "#05", "info": "Swine 5", "children": [
 
 				{"name": "#08", "info": "Swine 6"},
-				{"name": "#09", "info": "Swine 7"}
+				{"name": "#09", "info": "Swine 7", "children": [
+
+					{"name" : "#06", "info" : "Swine 6" }, 
+					{"name" : "#07", "info" : "Swine 7", "children": [
+
+						{"name" : "#06", "info" : "Swine 6" }, 
+						{"name" : "#07", "info" : "Swine 7" }
+					]}
+				]}
 			]}
 		]},
 
 		{"name" : "#03", "info" : "Swine 3", "children": [
 			
-			{"name" : "#06", "info" : "Swine 6" }, 
-			{"name" : "#07", "info" : "Swine 7" }
+			{"name" : "#06", "info" : "Swine 6", "children": [
+
+				{"name" : "#06", "info" : "Swine 6" }, 
+				{"name" : "#07", "info" : "Swine 7" }
+			]}, 
+			{"name" : "#07", "info" : "Swine 7", "children": [
+
+				{"name" : "#06", "info" : "Swine 6" }, 
+				{"name" : "#07", "info" : "Swine 7" }
+			]}
 		]}
 	]};
 
@@ -76,7 +96,22 @@ let node =	g.selectAll(".node")
 
 // Add circle to node
 node.append("circle")
-	.attr("r", 10);
+	.attr("r", 7)
+	.on("mouseover", function(d) {
+
+		tooltipdiv.transition()
+			.duration(200)
+			.style("opacity", 0.8);
+		tooltipdiv.html(d.data.info)
+			.style("left", (d3.event.pageX) + "px")
+			.style("top", (d3.event.pageY - 28) + "px");
+	})
+	.on("mouseout", function(d) {
+
+		tooltipdiv.transition()
+			.duration(500)
+			.style("opacity", 0);
+	});
 
 // Add text(id) to node
 node.append("text")
