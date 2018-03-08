@@ -1,41 +1,48 @@
-const treeData = 
-	{"name" : "#01", "info" : "Swine 1", "children" : [
-		{"name" : "#02", "info" : "Swine 2", "children": [
+//	registrationnumber -> name
+//	parents -> children
 
-			{"name": "#04", "info": "Swine 4", "children": [
+let treeData = 
+	{"registrationnumber" : "#01", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents" : [
+		{"registrationnumber" : "#02", "info" : {"sex" : "Female", "breed" : "Duroc"}, "parents": [
 
-				{"name" : "#06", "info" : "Swine 6" }, 
-				{"name" : "#07", "info" : "Swine 7" }
+			{"registrationnumber": "#04", "info": {"sex" : "Female", "breed" : "Duroc"}, "parents": [
+
+				{"registrationnumber" : "#06", "info" : "Swine 6" }, 
+				{"registrationnumber" : "#07", "info" : "Swine 7" }
 			]},
-			{"name": "#05", "info": "Swine 5", "children": [
+			{"registrationnumber": "#05", "info": {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-				{"name": "#08", "info": "Swine 6"},
-				{"name": "#09", "info": "Swine 7", "children": [
+				{"registrationnumber": "#08", "info": {"sex" : "Female", "breed" : "Duroc"}},
+				{"registrationnumber": "#09", "info": {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-					{"name" : "#06", "info" : "Swine 6" }, 
-					{"name" : "#07", "info" : "Swine 7", "children": [
+					{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+					{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-						{"name" : "#06", "info" : "Swine 6" }, 
-						{"name" : "#07", "info" : "Swine 7" }
+						{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+						{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
 					]}
 				]}
 			]}
 		]},
 
-		{"name" : "#03", "info" : "Swine 3", "children": [
+		{"registrationnumber" : "#03", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 			
-			{"name" : "#06", "info" : "Swine 6", "children": [
+			{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"}, "parents": [
 
-				{"name" : "#06", "info" : "Swine 6" }, 
-				{"name" : "#07", "info" : "Swine 7" }
+				{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+				{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
 			]}, 
-			{"name" : "#07", "info" : "Swine 7", "children": [
+			{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-				{"name" : "#06", "info" : "Swine 6" }, 
-				{"name" : "#07", "info" : "Swine 7" }
+				{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+				{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
 			]}
 		]}
 	]};
+
+treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').join('"name":'));
+treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
+console.log(treeData);
 
 // Set initial margins for SVG dimension initialization
 let margin =	{
@@ -95,14 +102,25 @@ let node =	g.selectAll(".node")
 				});
 
 // Add circle to node
+
 node.append("circle")
 	.attr("r", 7)
 	.on("mouseover", function(d) {
 
+		let animalinfo = "";
+
 		tooltipdiv.transition()
 			.duration(200)
-			.style("opacity", 0.8);
-		tooltipdiv.html(d.data.info)
+			.style("opacity", 0.9);
+
+		for(var key in d.data.info) {
+
+			animalinfo = animalinfo + key + ": " + d.data.info[key] + "</br>";
+		}	
+
+		console.log(animalinfo);
+
+		tooltipdiv.html(animalinfo)
 			.style("left", (d3.event.pageX) + "px")
 			.style("top", (d3.event.pageY - 28) + "px");
 	})
@@ -112,6 +130,8 @@ node.append("circle")
 			.duration(500)
 			.style("opacity", 0);
 	});
+
+	info = "";
 
 // Add text(id) to node
 node.append("text")
