@@ -1,44 +1,55 @@
 //	registrationnumber -> name
 //	parents -> children
 
-let treeData = 
-	{"registrationnumber" : "#01", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents" : [
-		{"registrationnumber" : "#02", "info" : {"sex" : "Female", "breed" : "Duroc"}, "parents": [
+// let treeData = 
+// 	{"registrationnumber" : "#01", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents" : [
+// 		{"registrationnumber" : "#02", "info" : {"sex" : "Female", "breed" : "Duroc"}, "parents": [
 
-			{"registrationnumber": "#04", "info": {"sex" : "Female", "breed" : "Duroc"}, "parents": [
+// 			{"registrationnumber": "#04", "info": {"sex" : "Female", "breed" : "Duroc"}, "parents": [
 
-				{"registrationnumber" : "#06", "info" : "Swine 6" }, 
-				{"registrationnumber" : "#07", "info" : "Swine 7" }
-			]},
-			{"registrationnumber": "#05", "info": {"sex" : "Male", "breed" : "Duroc"}, "parents": [
+// 				{"registrationnumber" : "#06", "info" : "Swine 6" }, 
+// 				{"registrationnumber" : "#07", "info" : "Swine 7" }
+// 			]},
+// 			{"registrationnumber": "#05", "info": {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-				{"registrationnumber": "#08", "info": {"sex" : "Female", "breed" : "Duroc"}},
-				{"registrationnumber": "#09", "info": {"sex" : "Male", "breed" : "Duroc"}, "parents": [
+// 				{"registrationnumber": "#08", "info": {"sex" : "Female", "breed" : "Duroc"}},
+// 				{"registrationnumber": "#09", "info": {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-					{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
-					{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
+// 					{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+// 					{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-						{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
-						{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
-					]}
-				]}
-			]}
-		]},
+// 						{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+// 						{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
+// 					]}
+// 				]}
+// 			]}
+// 		]},
 
-		{"registrationnumber" : "#03", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
+// 		{"registrationnumber" : "#03", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 			
-			{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"}, "parents": [
+// 			{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"}, "parents": [
 
-				{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
-				{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
-			]}, 
-			{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
+// 				{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+// 				{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
+// 			]}, 
+// 			{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"}, "parents": [
 
-				{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
-				{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
-			]}
-		]}
-	]};
+// 				{"registrationnumber" : "#06", "info" : {"sex" : "Female", "breed" : "Duroc"} }, 
+// 				{"registrationnumber" : "#07", "info" : {"sex" : "Male", "breed" : "Duroc"} }
+// 			]}
+// 		]}
+// 	]};
+
+let treeData = {"registrationnumber":"#01", "info":{"breed":"Duroc", "sex":"Male"}, "parents": [
+	{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+		{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+		{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+	]},
+	{"registrationnumber":"#03", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+		{"registrationnumber":"#06","info":{"breed":"Duroc","sex":"Female"}},
+		{"registrationnumber":"#07","info":{"breed":"Duroc","sex":"Male"}}
+	]}
+]};
 
 treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').join('"name":'));
 treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
@@ -105,6 +116,16 @@ let node =	g.selectAll(".node")
 
 node.append("circle")
 	.attr("r", 7)
+	.style("stroke", function(d) {
+
+		for(let key in d.data.info) {
+
+			if(key == "sex") {
+				if(d.data.info[key] == "Male") return "red";
+				else return "yellow";
+			}
+		}
+	})
 	.on("mouseover", function(d) {
 
 		let animalinfo = "";
@@ -113,12 +134,10 @@ node.append("circle")
 			.duration(200)
 			.style("opacity", 0.9);
 
-		for(var key in d.data.info) {
+		for(let key in d.data.info) {
 
 			animalinfo = animalinfo + key + ": " + d.data.info[key] + "</br>";
 		}	
-
-		console.log(animalinfo);
 
 		tooltipdiv.html(animalinfo)
 			.style("left", (d3.event.pageX) + "px")
