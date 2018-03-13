@@ -40,7 +40,7 @@
 // 		]}
 // 	]};
 
-let treeData = {"registrationnumber":"#01", "info":{"breed":"Duroc", "sex":"Male"}, "parents": [
+let treeData = {"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": 01/29/2017, "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents": [
 	{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
 		{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
 		{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
