@@ -40,14 +40,51 @@
 // 		]}
 // 	]};
 
-let treeData = {"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": 01/29/2017, "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents": [
+let treeData = {"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents": [
 	{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
-		{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
-		{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+		{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]},
+			
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]}
+		]},
+		{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]},
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]}
+		]}	
 	]},
 	{"registrationnumber":"#03", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
-		{"registrationnumber":"#06","info":{"breed":"Duroc","sex":"Female"}},
-		{"registrationnumber":"#07","info":{"breed":"Duroc","sex":"Male"}}
+		{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]},
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]}
+		]},
+		{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Female"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]},
+			{"registrationnumber":"#02", "info":{"breed":"Duroc", "sex":"Male"}, "parents":[
+				{"registrationnumber":"#04","info":{"breed":"Duroc","sex":"Female"}},
+				{"registrationnumber":"#05","info":{"breed":"Duroc","sex":"Male"}}
+			]}
+		]}
 	]}
 ]};
 
@@ -128,7 +165,7 @@ node.append("circle")
 	})
 	.on("mouseover", function(d) {
 
-		let animalinfo = "";
+		let animalinfo = "<table>";
 
 		tooltipdiv.transition()
 			.duration(200)
@@ -136,8 +173,10 @@ node.append("circle")
 
 		for(let key in d.data.info) {
 
-			animalinfo = animalinfo + key + ": " + d.data.info[key] + "</br>";
-		}	
+			animalinfo = animalinfo + "<tr><td>" + key + "</td><td>" + d.data.info[key] + "</td></tr>";
+		}
+
+		animalinfo = animalinfo + "</table>"
 
 		tooltipdiv.html(animalinfo)
 			.style("left", (d3.event.pageX) + "px")

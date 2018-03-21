@@ -1,6 +1,5 @@
 .node circle {
 	fill:	white;
-	stroke:	red;
 	stroke-width:	2px;
 }
 
@@ -22,7 +21,6 @@
 div.tooltip {
 	position: absolute;
 	text-align: center;
-	width: 300px;
 	padding: 2px;
 	font: 12px sans-serif;
 	background: lightsteelblue;
@@ -30,4 +28,13 @@ div.tooltip {
 	border-radius: 8px;
 	pointer-events: none;
 	text-align: justify;
+}
+
+pre {
+	tab-size: 16;
+}
+
+table, tr, td {
+	border: 1px solid black;
+	border-collapse: collapse;
 }
