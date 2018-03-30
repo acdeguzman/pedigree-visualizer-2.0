@@ -15,49 +15,49 @@ TO DO
 //	registrationnumber -> name
 //	parents -> children
 
-let treeData = {"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents": [
-	{"registrationnumber":"#20", "info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "weight_at_data_collection": 70, "age_at_data_collection": 5, "date_registered": "2008-07-20", "registered_by":"Netty", "average_daily_gain":4, "backfat_thickness": 7, "feed_efficiency": 3, "birth_weight":5, "total_when_born_male": 4, "total_when_born_female": 9, "littersize_born_alive": 5, "parity": 3}, "parents":[
-		{"registrationnumber":"#411", "info":{"farm_name":"Jutrosin","breed":"Yorkshire", "sex":"Female","birthyear":"2004", "weight_at_data_collection": 50, "age_at_data_collection": 5, "date_registered": "2017-06-22", "registered_by":"Brose", "average_daily_gain":2, "backfat_thickness": 6, "feed_efficiency": 2, "birth_weight":6, "total_when_born_male": 8, "total_when_born_female": 4, "littersize_born_alive": 2, "parity": 1}, "parents":[
-			{"registrationnumber":"#489", "info":{"farm_name":"Iwatsuki","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 4, "date_registered": "2015-10-01", "registered_by":"Dermot", "average_daily_gain":8, "backfat_thickness": 9, "feed_efficiency": 9, "birth_weight":5, "total_when_born_male": 8, "total_when_born_female": 10, "littersize_born_alive": 6, "parity": 1}, "parents":[
-				{"registrationnumber":"#148", "info":{"farm_name":"Khairpur","breed":"Duroc", "sex":"Female","birthyear":"2004", "weight_at_data_collection": 57, "age_at_data_collection": 6, "date_registered": "2014-12-06", "registered_by":"Jo", "average_daily_gain":2, "backfat_thickness": 2, "feed_efficiency": 4, "birth_weight":10, "total_when_born_male": 5, "total_when_born_female": 5, "littersize_born_alive": 2, "parity": 1}},
-				{"registrationnumber":"#277", "info":{"farm_name":"Tsyelyakhany","breed":"Duroc", "sex":"Male","birthyear":"2001", "weight_at_data_collection": 70, "age_at_data_collection": 4, "date_registered": "2004-07-02", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+let treeData = {"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": '4', "birth_weight":'9', "total_when_born_male": '8', "total_when_born_female": '7', "littersize_born_alive": '6', "parity": '2'}, "parents": [
+	{"registrationnumber":"#20", "info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "70", "age_at_data_collection": "5", "date_registered": "2008-07-20", "registered_by":"Netty", "average_daily_gain":"4", "backfat_thickness": "7", "feed_efficiency": "3", "birth_weight":"5", "total_when_born_male": "4", "total_when_born_female": "9", "littersize_born_alive": "5", "parity": "3"}, "parents":[
+		{"registrationnumber":"#411", "info":{"farm_name":"Jutrosin","breed":"Yorkshire", "sex":"Female","birthyear":"2004", "weight_at_data_collection": "50", "age_at_data_collection": "5", "date_registered": "2017-06-22", "registered_by":"Brose", "average_daily_gain":"2", "backfat_thickness": "6", "feed_efficiency": "2", "birth_weight":"6", "total_when_born_male": "8", "total_when_born_female": "4", "littersize_born_alive": "2", "parity": "1"}, "parents":[
+			{"registrationnumber":"#489", "info":{"farm_name":"Iwatsuki","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "4", "date_registered": "2015-10-01", "registered_by":"Dermot", "average_daily_gain":"8", "backfat_thickness": "9", "feed_efficiency": "9", "birth_weight":"5", "total_when_born_male": "8", "total_when_born_female": "10", "littersize_born_alive": "6", "parity": "1"}, "parents":[
+				{"registrationnumber":"#148", "info":{"farm_name":"Khairpur","breed":"Duroc", "sex":"Female","birthyear":"2004", "weight_at_data_collection": "57", "age_at_data_collection": "6", "date_registered": "2014-12-06", "registered_by":"Jo", "average_daily_gain":"2", "backfat_thickness": "2", "feed_efficiency": "4", "birth_weight":"10", "total_when_born_male": "5", "total_when_born_female": "5", "littersize_born_alive": "2", "parity": "1"}},
+				{"registrationnumber":"#277", "info":{"farm_name":"Tsyelyakhany","breed":"Duroc", "sex":"Male","birthyear":"2001", "weight_at_data_collection": "70", "age_at_data_collection": "4", "date_registered": "2004-07-02", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]},
 			
-			{"registrationnumber":"#102", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2003", "weight_at_data_collection": 50, "age_at_data_collection": 3, "date_registered": "2012-04-10", "registered_by":"Jo", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 2, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 2, "parity": 2}, "parents":[
-				{"registrationnumber":"#445", "info":{"farm_name":"Khairpur","breed":"Yorkshire", "sex":"Female","birthyear":"2000", "weight_at_data_collection": 49, "age_at_data_collection": 1, "date_registered": "2014-11-11", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 5, "birth_weight": 5, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#102", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2003", "weight_at_data_collection": "50", "age_at_data_collection": "3", "date_registered": "2012-04-10", "registered_by":"Jo", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "2", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "2", "parity": "2"}, "parents":[
+				{"registrationnumber":"#445", "info":{"farm_name":"Khairpur","breed":"Yorkshire", "sex":"Female","birthyear":"2000", "weight_at_data_collection": "49", "age_at_data_collection": "1", "date_registered": "2014-11-11", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "5", "birth_weight": "5", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]}
 		]},
-		{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-			{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+		{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+			{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]},
-			{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]}
 		]}	
 	]},
-	{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-		{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-			{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+	{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+		{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+			{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]},
-			{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]}
 		]},
-		{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-			{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+		{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+			{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]},
-			{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}, "parents":[
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#5", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": 58, "age_at_data_collection": 5, "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}, "parents":[
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Female","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}},
+				{"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "weight_at_data_collection": "58", "age_at_data_collection": "5", "date_registered": "2014-02-10", "registered_by":"Wendy", "average_daily_gain":"8", "backfat_thickness": "4", "feed_efficiency": "4", "birth_weight":"9", "total_when_born_male": "8", "total_when_born_female": "7", "littersize_born_alive": "6", "parity": "2"}}
 			]}
 		]}
 	]}
@@ -67,6 +67,7 @@ treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').jo
 treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
 
 let keys = [];	//storage of keys;
+let nodecount = 0;
 
 // Set initial margins for SVG dimension initialization
 let margin =	{
@@ -76,12 +77,12 @@ let margin =	{
 					bottom: 20
 				},
 
-	width =		500,
-	height =	500; 
+	width =		450,
+	height =	450; 
 
 // Set SVG size
 let svg =	d3.select("#mainDiv").append("svg")
-				.attr("width", 800)
+				.attr("width", 1200)
 				.attr("height", 600),
 	g	=	svg.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -133,6 +134,8 @@ node.append("circle")
 	.attr("r", 7)
 	.style("stroke", function(d) {
 
+		nodecount++;
+
 		for(let key in d.data.info) {
 
 			if(key == "sex") {
@@ -177,10 +180,18 @@ node.append("text")
 	.text(function(d) {return d.data.name;});
 
 
+console.log(nodecount);
+
 // Adding filter features
 let body = document.getElementsByTagName("body")[0];
 
 let filterDiv = document.createElement('div');
+
+// filter positioning
+filterDiv.style.margin = 'auto';
+filterDiv.style.width = '38%';
+filterDiv.style.padding = '10px';
+filterDiv.style.border = '2px solid black';
 
 let flag = 0, selectCounter = 0;	// for adding "Apply filter" button
 
@@ -188,12 +199,31 @@ const addButton = document.createElement('button');
 addButton.type = "submit";
 addButton.appendChild(document.createTextNode("Add Filters"));
 
+const goFilter = document.createElement('button');
+goFilter.type = 'submit';
+goFilter.appendChild(document.createTextNode("Go Filter!"));
+goFilter.style.display = 'block';
+goFilter.style.marginLeft = 'auto';
+goFilter.style.marginRight = 'auto';
+goFilter.style.marginTop = '10px';
+goFilter.style.color = 'white';
+goFilter.style.background = 'green';
+goFilter.style.padding = '10px';
+
+
 let inputDiv = document.createElement('div');
+
+body.appendChild(filterDiv);
 
 addButton.addEventListener('click', function() {
 
+	flag++;
+
 	let select = document.createElement('select');
+	let textField = document.createElement('input');
+	textField.type = 'text';
 	let option;
+	select.style.margin = '3px';
 
 	for(let i = 0; i < keys.length; i++) {
 
@@ -204,10 +234,13 @@ addButton.addEventListener('click', function() {
 	}
 
 	inputDiv.appendChild(select);
+	inputDiv.appendChild(textField);
 	inputDiv.appendChild(document.createElement('br'));
+
+	if(flag == 1) body.appendChild(goFilter);
+
 });
 
-body.appendChild(filterDiv);
 filterDiv.appendChild(addButton);
 filterDiv.appendChild(inputDiv);
 // REFERENCES
