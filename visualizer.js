@@ -66,7 +66,7 @@ let treeData = {"registrationnumber":"#1412221234", "info":{"farm_name":"Nangkar
 treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').join('"name":'));
 treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
 
-let keys = [];	//storage of keys;
+let keysForSelect = [];	//storage of keys for select;
 let nodecount = 0;
 
 // Set initial margins for SVG dimension initialization
@@ -107,7 +107,7 @@ let link =	g.selectAll(".link")
 				.attr("class", "link")
 				.attr("d", function(d) {
 
-					for(let key in d.data.info) if(!keys.includes(key)) keys.push(key);
+					for(let key in d.data.info) if(!keysForSelect.includes(key)) keysForSelect.push(key);
 
 					return	"M" + d.y + "," + d.x
 							+ "C" + (d.y + d.parent.y) / 2 + "," + d.x
@@ -225,11 +225,11 @@ addButton.addEventListener('click', function() {
 	let option;
 	select.style.margin = '3px';
 
-	for(let i = 0; i < keys.length; i++) {
+	for(let i = 0; i < keysForSelect.length; i++) {
 
 		option = document.createElement('option');
-		option.value = keys[i];
-		option.innerHTML = keys[i];
+		option.value = keysForSelect[i];
+		option.innerHTML = keysForSelect[i];
 		select.appendChild(option);
 	}
 
@@ -243,6 +243,85 @@ addButton.addEventListener('click', function() {
 
 filterDiv.appendChild(addButton);
 filterDiv.appendChild(inputDiv);
+
+goFilter.addEventListener('click', function() {
+
+	// reset the tree to default
+	node.append("circle")
+	.attr("r", 5)
+	.style("fill", function(d) {
+
+		return "white";
+	});
+
+	let i = 0;
+
+	let keysForFilter = [], valuesForFilter = [];
+
+	while(i != inputDiv.childNodes.length) {
+
+		keysForFilter.push(inputDiv.childNodes[i].value);
+		valuesForFilter.push(inputDiv.childNodes[i+1].value);
+
+		i+=3;
+	}
+
+	// fill nodes according to filter
+	node.append("circle")
+	.attr("r", 6)
+	.style("fill", function(d) {
+
+		for(let i = 0; i < keysForFilter.length; i++) {
+
+			// if(d.data.info.includes(keysForFilter[i])) {
+
+			// 	if(d.data.info[keysForFilter[i]].equals(valuesForFilter[i])) {
+
+			// 		if(d.data.info.sex == "Male") return "red";
+			// 		else if(d.data.info.sex == "Female") return "yellow";
+			// 	}
+			// }
+
+			for(let key in d.data.info) {
+
+				if(key == keysForFilter[i]) {
+
+					if(d.data.info[key] == valuesForFilter[i]) {
+
+						if(d.data.info.sex == "Male") return "red";
+						else if(d.data.info.sex == "Female") return "yellow";
+					}
+				}
+			}
+		}
+	})
+	.on("mouseover", function(d) {
+
+		let animalinfo = "<table>";
+
+		tooltipdiv.transition()
+			.duration(200)
+			.style("opacity", 0.9);
+
+		for(let key in d.data.info) {
+
+			animalinfo = animalinfo + "<tr><td>" + key + "</td><td>" + d.data.info[key] + "</td></tr>";
+		}
+
+		animalinfo = animalinfo + "</table>"
+
+		tooltipdiv.html(animalinfo)
+			.style("left", (d3.event.pageX) + "px")
+			.style("top", (d3.event.pageY - 28) + "px");
+	})
+	.on("mouseout", function(d) {
+
+		tooltipdiv.transition()
+			.duration(500)
+			.style("opacity", 0);
+	});
+
+});
 // REFERENCES
 // https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
 // https://bl.ocks.org/d3noob/5537fe63086c4f100114f87f124850dd
