@@ -66,7 +66,9 @@ let treeData = {"registrationnumber":"#1412221234", "qualitative_info":{"farm_na
 treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').join('"name":'));
 treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
 
-let keysForSelect = [];	//storage of keys for select;
+let keysForSelect = [];		//storage of qualitative keys
+let keysForCheckbox = [];	//storage of quantitative keys
+let map = {};	// for values in input
 let nodecount = 0;
 
 // Set initial margins for SVG dimension initialization
@@ -108,6 +110,18 @@ let link =	g.selectAll(".link")
 				.attr("d", function(d) {
 
 					for(let key in d.data.qualitative_info) if(!keysForSelect.includes(key)) keysForSelect.push(key);
+					for(let key in d.data.quantitative_info) if(!keysForCheckbox.includes(key)) keysForCheckbox.push(key);
+
+					for(let i = 0; i < keysForSelect.length; i++) {
+
+						map[keysForSelect[i]] = [];
+
+						for(let value in d.data.qualitative_info[keysForSelect[i]]) {
+
+							console.log(d.data.qualitative_info[keysForSelect[i]]);
+							if(!map[keysForSelect[i]].includes(value)) map[keysForSelect[i]].push(value);
+						}
+					}
 
 					return	"M" + d.y + "," + d.x
 							+ "C" + (d.y + d.parent.y) / 2 + "," + d.x
@@ -139,8 +153,8 @@ node.append("circle")
 		for(let key in d.data.qualitative_info) {
 
 			if(key == "sex") {
-				if(d.data.qualitative_info[key] == "Male") return "red";
-				else return "yellow";
+				if(d.data.qualitative_info[key] == "Male") return "#1b77b8";
+				else return "#f5a905";
 			}
 		}
 	})
@@ -183,50 +197,69 @@ node.append("text")
 	.text(function(d) {return d.data.name;});
 
 
-console.log(nodecount);
-
 // Adding filter features
 let body = document.getElementsByTagName("body")[0];
 
 let filterDiv = document.createElement('div');
 
 // filter positioning
-// filterDiv.style.margin = 'auto';
 filterDiv.style.width = '50%';
 filterDiv.style.padding = '10px';
-filterDiv.style.border = '2px solid black';
+filterDiv.style.border = '1px solid #c6b89e';
+filterDiv.style.borderRadius = '5px';
+filterDiv.style.float = 'left';
+filterDiv.style.marginBottom = '3%';
+
+body.appendChild(filterDiv);
+
+let buttonDiv = document.createElement('div');
+buttonDiv.style.width = '100%';
+buttonDiv.style.paddingBottom = '7%';
 
 let flag = 0, selectCounter = 0;	// for adding "Apply filter" button
 
 const addButton = document.createElement('button');
 addButton.type = "submit";
 addButton.appendChild(document.createTextNode("Add Filters"));
+addButton.style.color = 'white';
+addButton.style.background = '#0865ab';
+addButton.style.padding = '8px';
+addButton.style.float = 'left';
+addButton.style.width = '30%';
+addButton.style.border = 'none';
+addButton.style.cursor = 'pointer';
+addButton.style.borderRadius = '3px';
 
 const goFilter = document.createElement('button');
 goFilter.type = 'submit';
 goFilter.appendChild(document.createTextNode("Go Filter!"));
-goFilter.style.display = 'block';
-goFilter.style.marginLeft = 'auto';
-goFilter.style.marginRight = 'auto';
-goFilter.style.marginTop = '10px';
 goFilter.style.color = 'white';
 goFilter.style.background = 'green';
-goFilter.style.padding = '10px';
+goFilter.style.padding = '8px';
+goFilter.style.float = 'right';
+goFilter.style.width = '30%';
+goFilter.style.border = 'none';
+goFilter.style.cursor = 'pointer';
+goFilter.style.borderRadius = '3px';
 
+buttonDiv.appendChild(addButton);
 
-let inputDiv = document.createElement('div');
-
-body.appendChild(filterDiv);
+filterDiv.appendChild(buttonDiv);
 
 addButton.addEventListener('click', function() {
-
+	
 	flag++;
+
+	let inputDiv = document.createElement('div');
 
 	let select = document.createElement('select');
 	let textField = document.createElement('input');
 	textField.type = 'text';
+	textField.style.width = '41%';
+	textField.style.margin = '3px';
 	let option;
 	select.style.margin = '3px';
+	select.style.width = '50%';
 
 	for(let i = 0; i < keysForSelect.length; i++) {
 
@@ -236,17 +269,37 @@ addButton.addEventListener('click', function() {
 		select.appendChild(option);
 	}
 
+	let deleteButton = document.createElement('button');
+	deleteButton.appendChild(document.createTextNode('x'));
+	deleteButton.style.color = 'white';
+	deleteButton.style.background = 'red';
+	deleteButton.style.height = '27px';
+	deleteButton.style.width = '5%';
+	deleteButton.style.border = 'none';
+	deleteButton.style.cursor = 'pointer';
+	deleteButton.style.borderRadius = '3px';
+
+	deleteButton.addEventListener('click', function() {
+
+		if(this.parentNode.parentNode.childNodes.length == 2) {
+
+			buttonDiv.removeChild(buttonDiv.childNodes[1]);
+			flag = 0;
+		}
+		this.parentNode.parentNode.removeChild(this.parentNode);
+	});
+
 	inputDiv.appendChild(select);
 	inputDiv.appendChild(textField);
-	inputDiv.appendChild(document.createElement('br'));
-
+	inputDiv.appendChild(deleteButton);
+	filterDiv.appendChild(inputDiv);
 	// check if there is at least one filter
-	if(flag == 1) body.appendChild(goFilter);
+	
+	if(flag == 1) buttonDiv.appendChild(goFilter);
 
 });
 
-filterDiv.appendChild(addButton);
-filterDiv.appendChild(inputDiv);
+console.log(map);
 
 goFilter.addEventListener('click', function() {
 
@@ -258,16 +311,19 @@ goFilter.addEventListener('click', function() {
 		return "white";
 	});
 
-	let i = 0;
+	let i = 1;
 
 	let keysForFilter = [], valuesForFilter = [];	// will be used for traversing the tree
 
-	while(i != inputDiv.childNodes.length) {
+	while(i < filterDiv.childNodes.length) {
 
-		keysForFilter.push(inputDiv.childNodes[i].value);
-		valuesForFilter.push(inputDiv.childNodes[i+1].value);
+		// keysForFilter.push(inputDiv.childNodes[i].value);
+		// valuesForFilter.push(inputDiv.childNodes[i+1].value);
 
-		i+=3;
+		keysForFilter.push(filterDiv.childNodes[i].childNodes[0].value);
+		valuesForFilter.push(filterDiv.childNodes[i].childNodes[1].value);
+
+		i++;
 	}
 
 	// fill nodes according to filter
@@ -281,10 +337,10 @@ goFilter.addEventListener('click', function() {
 
 				if(key == keysForFilter[i]) {
 
-					if(d.data.qualitative_info[key] == valuesForFilter[i]) {
+					if(d.data.qualitative_info[key].toLowerCase() == valuesForFilter[i].toLowerCase()) {
 
-						if(d.data.qualitative_info.sex == "Male") return "red";
-						else if(d.data.qualitative_info.sex == "Female") return "yellow";
+						if(d.data.qualitative_info.sex == "Male") return "#1b77b8";
+						else if(d.data.qualitative_info.sex == "Female") return "#f5a905";
 					}
 				}
 			}
@@ -300,7 +356,12 @@ goFilter.addEventListener('click', function() {
 
 		for(let key in d.data.qualitative_info) {
 
-			animalinfo = animalinfo + "<tr><td>" + key + "</td><td>" + d.data.info[key] + "</td></tr>";
+			animalinfo = animalinfo + "<tr><td>" + key + "</td><td>" + d.data.qualitative_info[key] + "</td></tr>";
+		}
+
+		for(let key in d.data.quantitative_info) {
+
+			animalinfo = animalinfo + "<tr><td>" + key + "</td><td>" + d.data.quantitative_info[key] + "</td></tr>";	
 		}
 
 		animalinfo = animalinfo + "</table>"
@@ -317,6 +378,50 @@ goFilter.addEventListener('click', function() {
 	});
 
 });
+
+// Section for checkboxes div (for quantitative data)
+
+let quanti_div = document.createElement('div');
+quanti_div.style.width = '47%';
+quanti_div.style.float = 'left';
+quanti_div.style.marginLeft = '10px';
+quanti_div.style.marginBottom = '3%';
+quanti_div.style.border = '1px solid #c6b89e';
+quanti_div.style.borderRadius = '5px';
+
+// div for checkboxes
+let quanti_form_div = document.createElement('div');
+
+// create form for checkboxes
+let quanti_form = document.createElement('form');
+quanti_form.action = "";
+
+for(let i = 0; i < keysForCheckbox.length; i++) {
+
+	let quanti_input = document.createElement('input');
+
+	quanti_input.type = 'checkbox';
+	quanti_input.name = 'quanti_info';
+	quanti_input.id = keysForCheckbox[i];
+
+	quanti_input.value = keysForCheckbox[i];
+
+	quanti_form.appendChild(quanti_input);
+	
+	let label = document.createElement('label');
+
+	label.htmlFor = keysForCheckbox[i];
+	label.appendChild(document.createTextNode(keysForCheckbox[i]));
+	label.style.fontSize = '15px';
+	label.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+	quanti_form.appendChild(label);
+	quanti_form.appendChild(document.createElement('br'));
+}
+
+quanti_form_div.appendChild(quanti_form)
+quanti_div.appendChild(quanti_form_div);
+body.appendChild(quanti_div);
 
 // REFERENCES
 // https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
