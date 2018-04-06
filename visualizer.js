@@ -257,22 +257,45 @@ addButton.addEventListener('click', function() {
 
 	let inputDiv = document.createElement('div');
 
-	let select = document.createElement('select');
-	let textField = document.createElement('input');
-	textField.type = 'text';
-	textField.style.width = '41%';
-	textField.style.margin = '3px';
+	let selectKey = document.createElement('select');
+	let selectValue = document.createElement('select');
+	selectValue.style.width = '41%';
+	selectValue.style.margin = '3px';
 	let option;
-	select.style.margin = '3px';
-	select.style.width = '50%';
+	selectKey.style.margin = '3px';
+	selectKey.style.width = '50%';
 
 	for(let i = 0; i < keysForSelect.length; i++) {
 
 		option = document.createElement('option');
 		option.value = keysForSelect[i];
 		option.innerHTML = keysForSelect[i];
-		select.appendChild(option);
+		selectKey.appendChild(option);
 	}
+
+	selectKey.addEventListener('change', function() {
+
+		// console.log(map[selectKey.value]);
+
+		let selectLength = selectValue.options.length;
+
+		for(let i = selectValue.options.length - 1; i >= 0; i--) {
+
+			selectValue.remove(i);
+		}
+
+		for(let i = 0; i < map[selectKey.value].length; i++) {
+
+			console.log(map[selectKey.value][i]);
+
+			opt = document.createElement('option');
+			opt.value = map[selectKey.value][i];
+			opt.innerHTML = map[selectKey.value][i];
+			selectValue.appendChild(opt)
+		}
+
+		console.log(selectValue);
+	});
 
 	let deleteButton = document.createElement('button');
 	deleteButton.appendChild(document.createTextNode('x'));
@@ -294,8 +317,8 @@ addButton.addEventListener('click', function() {
 		this.parentNode.parentNode.removeChild(this.parentNode);
 	});
 
-	inputDiv.appendChild(select);
-	inputDiv.appendChild(textField);
+	inputDiv.appendChild(selectKey);
+	inputDiv.appendChild(selectValue);
 	inputDiv.appendChild(deleteButton);
 	filterDiv.appendChild(inputDiv);
 	// check if there is at least one filter
@@ -321,9 +344,6 @@ goFilter.addEventListener('click', function() {
 	let keysForFilter = [], valuesForFilter = [];	// will be used for traversing the tree
 
 	while(i < filterDiv.childNodes.length) {
-
-		// keysForFilter.push(inputDiv.childNodes[i].value);
-		// valuesForFilter.push(inputDiv.childNodes[i+1].value);
 
 		keysForFilter.push(filterDiv.childNodes[i].childNodes[0].value);
 		valuesForFilter.push(filterDiv.childNodes[i].childNodes[1].value);
@@ -434,4 +454,4 @@ body.appendChild(quanti_div);
 
 // FOR IMPROVEMENTS
 // https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
-// https://codepen.io/marxtseng/pen/oBVjvB?editors=0010
+// https://codepen.io/marxtseng/pen/oBVjvB?editors=0010	
