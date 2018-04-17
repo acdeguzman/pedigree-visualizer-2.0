@@ -3,61 +3,56 @@
 TO DO
 	
 	1. CREATE SVG DIMENSIONS DYNAMIC (DEPEND ON THE NUMBER OF NODES ON THE TREE)
-	2. CREATE FILTER FUNCTIONALITY
-
-	3. CHANGE SVG DEPENDING ON THE CONFIGURED FILTER
+	2. THEMES
 
 **/
-
-
-// "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},
 
 //	registrationnumber -> name
 //	parents -> children
 
-let treeData = {"registrationnumber":"#00001", "qualitative_info":{"farm_name":"St. Peter","breed":"Duroc", "sex":"Female","birthyear":"1994", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents": [
+let treeData = {"registrationnumber":"#00001", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Female","birthyear":"1994", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents": [
 	{"registrationnumber":"#20", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2008-07-20", "registered_by":"Netty"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-		{"registrationnumber":"#411", "qualitative_info":{"farm_name":"Jutrosin","breed":"Yorkshire", "sex":"Female","birthyear":"2004", "date_registered": "2017-06-22", "registered_by":"Brose"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-			{"registrationnumber":"#489", "qualitative_info":{"farm_name":"Iwatsuki","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2015-10-01", "registered_by":"Dermot"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#148", "qualitative_info":{"farm_name":"Sierra","breed":"Duroc", "sex":"Female","birthyear":"2004", "date_registered": "2014-12-06", "registered_by":"Jo"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#277", "qualitative_info":{"farm_name":"Tsyelyakhany","breed":"Duroc", "sex":"Male","birthyear":"2001", "date_registered": "2004-07-02", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+		{"registrationnumber":"#411", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2004", "date_registered": "2017-06-22", "registered_by":"Brose"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#489", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2015-10-01", "registered_by":"Dermot"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#148", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Female","birthyear":"2004", "date_registered": "2014-12-06", "registered_by":"Jo"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#277", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Male","birthyear":"2001", "date_registered": "2004-07-02", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]},
 			
 			{"registrationnumber":"#102", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2003", "date_registered": "2012-04-10", "registered_by":"Jo"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#445", "qualitative_info":{"farm_name":"Malolos","breed":"Yorkshire", "sex":"Female","birthyear":"2000", "date_registered": "2014-11-11", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"St. Lukes","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+				{"registrationnumber":"#445", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Yorkshire", "sex":"Female","birthyear":"2000", "date_registered": "2014-11-11", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]}
 		]},
 		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Los Banos","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Calamba","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Rizal","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]},
 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Pansol","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"San Pedro","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]}
 		]}	
 	]},
 	{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Nagcarlan","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Liliw","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Sta. Cruz","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Santisimo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]},
-			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Sta. Maria","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"San Jose","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"San Gabriel","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]}
 		]},
-		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Puerto","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Boracay","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Anilao","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Bataan","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]},
-			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Quezon","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Siquijor","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"San Diego","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
 			]}
 		]}
 	]}
@@ -67,8 +62,8 @@ treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').jo
 treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
 
 let keysForSelect = [];		//storage of qualitative keys
-let keysForCheckbox = [];	//storage of quantitative keys
 let map = {};	// for values in input
+let tree = [];
 let nodecount = 0;
 
 // Set initial margins for SVG dimension initialization
@@ -79,13 +74,13 @@ let margin =	{
 					bottom: 20
 				},
 
-	width =		450,
+	width =		600,
 	height =	450; 
 
 // Set SVG size
 let svg =	d3.select("#mainDiv").append("svg")
-				.attr("width", 1200)
-				.attr("height", 600),
+				.attr("width", screen.width - 70)
+				.attr("height", screen.height - 200),
 	g	=	svg.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -110,7 +105,6 @@ let link =	g.selectAll(".link")
 				.attr("d", function(d) {
 
 					for(let key in d.data.qualitative_info) if(!keysForSelect.includes(key)) keysForSelect.push(key);
-					for(let key in d.data.quantitative_info) if(!keysForCheckbox.includes(key)) keysForCheckbox.push(key);
 
 					for(let i = 0; i < keysForSelect.length; i++) map[keysForSelect[i]] = [];
 
@@ -132,6 +126,7 @@ let node =	g.selectAll(".node")
 
 					return "translate(" + d.y + "," + d.x + ")";
 				})
+
 				// for storing different values to dropdown of values (depending on keys)
 				.attr("d", function(d) {
 
@@ -145,10 +140,11 @@ let node =	g.selectAll(".node")
 							}
 						}
 					}
+
+					tree.push(d.data);
 				});
 
 // Add circle to node
-
 node.append("circle")
 	.attr("r", 7)
 	.style("stroke", function(d) {
@@ -202,24 +198,43 @@ node.append("text")
 	.text(function(d) {return d.data.name;});
 
 
-// Adding filter features
+/********
+
+DIFFERENT FEATURES:
+
+1. FILTER
+2. PERFORMANCE OF FAMILY
+3. IN-BREEDING COEFFICIENT
+4. ADDITIVE GENETIC RELATIONSHIP
+
+********/
 let body = document.getElementsByTagName("body")[0];
+
+/***
+
+1. FILTER FEATURE
+
+Filter feature creates a filter that can be used to view the SVG differently.
+The filter feature depends on the qualitative data of the JSON data
+
+***/
 
 let filterDiv = document.createElement('div');
 
 // filter positioning
-filterDiv.style.width = '50%';
+filterDiv.style.width = '35%';
 filterDiv.style.padding = '10px';
 filterDiv.style.border = '1px solid #c6b89e';
-filterDiv.style.borderRadius = '5px';
 filterDiv.style.float = 'left';
-filterDiv.style.marginBottom = '3%';
-
+filterDiv.style.borderRadius = '3px';
+filterDiv.style.marginBottom = '10px';
+// Add the filter div to the body as 3rd element after the theme div. Keep track for DOM manipulation
 body.appendChild(filterDiv);
 
+// Filter div has 2 divs (button div and input div). Keep track for DOM manipulation
 let buttonDiv = document.createElement('div');
 buttonDiv.style.width = '100%';
-buttonDiv.style.paddingBottom = '7%';
+buttonDiv.style.paddingBottom = '5%';
 
 let flag = 0, selectCounter = 0;	// for adding "Apply filter" button
 
@@ -251,6 +266,15 @@ buttonDiv.appendChild(addButton);
 
 filterDiv.appendChild(buttonDiv);
 
+let inputDivContainer = document.createElement("div");
+inputDivContainer.style.height = '250px';
+inputDivContainer.style.maxHeight = '250px';
+inputDivContainer.style.width = '100%';
+inputDivContainer.style.overflowY = 'auto';
+inputDivContainer.style.paddingTop = '5px';
+
+filterDiv.appendChild(inputDivContainer);
+
 addButton.addEventListener('click', function() {
 	
 	flag++;
@@ -259,7 +283,7 @@ addButton.addEventListener('click', function() {
 
 	let selectKey = document.createElement('select');
 	let selectValue = document.createElement('select');
-	selectValue.style.width = '41%';
+	selectValue.style.width = '40%';
 	selectValue.style.margin = '3px';
 	let option;
 	selectKey.style.margin = '3px';
@@ -273,9 +297,15 @@ addButton.addEventListener('click', function() {
 		selectKey.appendChild(option);
 	}
 
-	selectKey.addEventListener('change', function() {
+	for(let i = 0; i < map[selectKey.value].length; i++) {
 
-		// console.log(map[selectKey.value]);
+		opt = document.createElement('option');
+		opt.value = map[selectKey.value][i];
+		opt.innerHTML = map[selectKey.value][i];
+		selectValue.appendChild(opt)
+	}
+
+	selectKey.addEventListener('change', function() {
 
 		let selectLength = selectValue.options.length;
 
@@ -286,22 +316,18 @@ addButton.addEventListener('click', function() {
 
 		for(let i = 0; i < map[selectKey.value].length; i++) {
 
-			console.log(map[selectKey.value][i]);
-
 			opt = document.createElement('option');
 			opt.value = map[selectKey.value][i];
 			opt.innerHTML = map[selectKey.value][i];
 			selectValue.appendChild(opt)
 		}
-
-		console.log(selectValue);
 	});
 
 	let deleteButton = document.createElement('button');
 	deleteButton.appendChild(document.createTextNode('x'));
 	deleteButton.style.color = 'white';
 	deleteButton.style.background = 'red';
-	deleteButton.style.height = '27px';
+	deleteButton.style.height = '20px';
 	deleteButton.style.width = '5%';
 	deleteButton.style.border = 'none';
 	deleteButton.style.cursor = 'pointer';
@@ -309,7 +335,7 @@ addButton.addEventListener('click', function() {
 
 	deleteButton.addEventListener('click', function() {
 
-		if(this.parentNode.parentNode.childNodes.length == 2) {
+		if(this.parentNode.parentNode.childNodes.length == 1) {
 
 			buttonDiv.removeChild(buttonDiv.childNodes[1]);
 			flag = 0;
@@ -320,14 +346,13 @@ addButton.addEventListener('click', function() {
 	inputDiv.appendChild(selectKey);
 	inputDiv.appendChild(selectValue);
 	inputDiv.appendChild(deleteButton);
-	filterDiv.appendChild(inputDiv);
+	inputDivContainer.appendChild(inputDiv);
 	// check if there is at least one filter
 	
 	if(flag == 1) buttonDiv.appendChild(goFilter);
 
 });
 
-console.log(map);
 
 goFilter.addEventListener('click', function() {
 
@@ -339,14 +364,14 @@ goFilter.addEventListener('click', function() {
 		return "white";
 	});
 
-	let i = 1;
+	let i = 0;
 
 	let keysForFilter = [], valuesForFilter = [];	// will be used for traversing the tree
 
-	while(i < filterDiv.childNodes.length) {
+	while(i < inputDivContainer.childNodes.length) {
 
-		keysForFilter.push(filterDiv.childNodes[i].childNodes[0].value);
-		valuesForFilter.push(filterDiv.childNodes[i].childNodes[1].value);
+		keysForFilter.push(inputDivContainer.childNodes[i].childNodes[0].value);
+		valuesForFilter.push(inputDivContainer.childNodes[i].childNodes[1].value);
 
 		i++;
 	}
@@ -404,49 +429,120 @@ goFilter.addEventListener('click', function() {
 
 });
 
-// Section for checkboxes div (for quantitative data)
+/**
 
-let quanti_div = document.createElement('div');
-quanti_div.style.width = '47%';
-quanti_div.style.float = 'left';
-quanti_div.style.marginLeft = '10px';
-quanti_div.style.marginBottom = '3%';
-quanti_div.style.border = '1px solid #c6b89e';
-quanti_div.style.borderRadius = '5px';
+2. PERFORMANCE OF FAMILY
 
-// div for checkboxes
-let quanti_form_div = document.createElement('div');
+Performance of family basically tabularize the quantitative and qualitative traits of the entities in the tree.
+The number/quantity/tally of each value of each traits are displayed.
 
-// create form for checkboxes
-let quanti_form = document.createElement('form');
-quanti_form.action = "";
+**/
 
-for(let i = 0; i < keysForCheckbox.length; i++) {
+let performance_div = document.createElement("div");
+performance_div.style.width = '62%';
+performance_div.style.float = 'left';
+performance_div.style.marginLeft = '5px';
+performance_div.style.marginBottom = '10px';
+performance_div.style.border = '1px solid #c6b89e';
+performance_div.style.borderRadius = '5px';
+performance_div.style.marginLeft = '14px';
 
-	let quanti_input = document.createElement('input');
+body.appendChild(performance_div);
 
-	quanti_input.type = 'checkbox';
-	quanti_input.name = 'quanti_info';
-	quanti_input.id = keysForCheckbox[i];
+let qualitative_text = document.createElement("h2");
+qualitative_text.innerHTML = "Qualitative Data"
+qualitative_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
+qualitative_text.style.paddingLeft = '1%';
+// qualitative_text.style.textAlign = 'center';
 
-	quanti_input.value = keysForCheckbox[i];
+let table_container = document.createElement("div");
+table_container.style.maxHeight = '307px';
+table_container.style.overflow = 'auto';
+table_container.style.width = '100%';
 
-	quanti_form.appendChild(quanti_input);
+table_container.appendChild(qualitative_text);
+
+performance_div.appendChild(table_container);
+
+//	tables for qualitative data
+
+for(let i = 0; i < keysForSelect.length; i++) {
+
+	let trait_text = document.createElement("h4");
+	trait_text.innerHTML = keysForSelect[i];
+	trait_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
+	trait_text.style.paddingLeft = '1%';
+
+	table_container.appendChild(trait_text);
+
+	let trait_table = document.createElement("table");
+	trait_table.cellPadding = '5';
+	trait_table.style.marginLeft = '2%';
+	trait_table.style.fontSize = '12px';
+	trait_table.style.marginBottom = '2%';
+
+	let trait_row = document.createElement("tr");
 	
-	let label = document.createElement('label');
+	trait_table.appendChild(trait_row);
 
-	label.htmlFor = keysForCheckbox[i];
-	label.appendChild(document.createTextNode(keysForCheckbox[i]));
-	label.style.fontSize = '15px';
-	label.style.fontFamily = 'Arial, Helvetica, sans-serif';
+	let traitword_text = document.createElement("th");
+	traitword_text.innerHTML = 'Value';
+	traitword_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
-	quanti_form.appendChild(label);
-	quanti_form.appendChild(document.createElement('br'));
+	trait_row.appendChild(traitword_text);
+
+	for(let j = 0; j < map[keysForSelect[i]].length; j++) {
+
+		let trait_value = document.createElement("td");
+		trait_value.innerHTML = map[keysForSelect[i]][j];
+		trait_value.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+		trait_row.appendChild(trait_value);
+	}
+
+	let count_row = document.createElement("tr");
+
+	trait_table.appendChild(count_row);
+
+	let count_text = document.createElement("th");
+	count_text.innerHTML = 'Count';
+	count_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+	count_row.appendChild(count_text);
+
+	let count = 0;
+
+	for(let j = 0; j < map[keysForSelect[i]].length; j++) {
+
+		for(let x = 0; x < tree.length; x++) {
+
+			if(tree[x].qualitative_info[keysForSelect[i]] == map[keysForSelect[i]][j]) count++;
+		}
+
+		let trait_count = document.createElement("td");
+		trait_count.innerHTML = count;
+		trait_count.style.fontFamily = 'Arial. Helvetica, sans-serif';
+
+		count_row.appendChild(trait_count);
+		count = 0;
+	}
+
+	table_container.appendChild(trait_table);
 }
 
-quanti_form_div.appendChild(quanti_form)
-quanti_div.appendChild(quanti_form_div);
-body.appendChild(quanti_div);
+const separator = document.createElement("hr");
+separator.style.borderTop = '1px dotted #8c8b8b';
+
+table_container.appendChild(separator);
+
+let quantitative_text = document.createElement("h2");
+quantitative_text.innerHTML = "Quantitative Data"
+quantitative_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
+quantitative_text.style.paddingLeft = '1%';
+
+table_container.appendChild(quantitative_text);
+
+let quanti_table = document.createElement("table");
 
 // REFERENCES
 // https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
@@ -454,4 +550,4 @@ body.appendChild(quanti_div);
 
 // FOR IMPROVEMENTS
 // https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
-// https://codepen.io/marxtseng/pen/oBVjvB?editors=0010	
+// https://codepen.io/marxtseng/pen/oBVjvB?editors=0010		
