@@ -1,74 +1,48 @@
 /**
 
-TO DO
+VISUALIZER.JS
+
+A Javascript library for displaying the following data:
 	
-	1. MODULARIZE EVERYTHING. USE FUNCTIONS
+	1. family tree of the JSON pedigree input,
+	2. covariance table of the entities in the pedigree, and
+	3. inbred entities in the tree
+
+HOW TO USE
+
+	1. Include the visualizer.js to the index.html file
+	2. Call the visualize function with a JSON parameter in the script tag
+
+FEATURES
+	1. SVG for pedigree
+	2. Covariance Table
+	3. Inbreeding Coefficient
+	4. Toggleable Checkboxes for DOM manipulation
+	5. Qualitative Data Filters
+	6. Performance Table
 
 **/
 
-//	registrationnumber -> name
-//	parents -> children
-
-// let treeData = {"registrationnumber":"#00001", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Female","birthyear":"1994", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 57, "age_at_data_collection": 4, "average_daily_gain":7, "backfat_thickness": 3, "feed_efficiency": 3, "birth_weight":8, "total_when_born_male": 7, "total_when_born_female": 6, "littersize_born_alive": 5, "parity": 1},"parents": [
-// 	{"registrationnumber":"#20", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2008-07-20", "registered_by":"Netty"}, "quantitative_info": {"weight_at_data_collection": 59, "age_at_data_collection": 6, "average_daily_gain":9, "backfat_thickness": 5, "feed_efficiency": 5, "birth_weight":10, "total_when_born_male": 9, "total_when_born_female": 8, "littersize_born_alive": 7, "parity": 3},"parents":[
-// 		{"registrationnumber":"#411", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2004", "date_registered": "2017-06-22", "registered_by":"Brose"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 			{"registrationnumber":"#489", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2015-10-01", "registered_by":"Dermot"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 4, "average_daily_gain":9, "backfat_thickness": 5, "feed_efficiency": 3, "birth_weight":10, "total_when_born_male": 9, "total_when_born_female": 5, "littersize_born_alive": 3, "parity": 9},"parents":[
-// 				{"registrationnumber":"#148", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Female","birthyear":"2004", "date_registered": "2014-12-06", "registered_by":"Jo"},"quantitative_info": {"weight_at_data_collection": 42, "age_at_data_collection": 3, "average_daily_gain":4, "backfat_thickness": 5, "feed_efficiency": 1, "birth_weight":5, "total_when_born_male": 1, "total_when_born_female": 4, "littersize_born_alive": 6, "parity": 9}},
-// 				{"registrationnumber":"#277", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Male","birthyear":"2001", "date_registered": "2004-07-02", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 66, "age_at_data_collection": 7, "average_daily_gain":11, "backfat_thickness": 8, "feed_efficiency": 2, "birth_weight":9, "total_when_born_male": 2, "total_when_born_female": 3, "littersize_born_alive": 2, "parity": 5}}
-// 			]},
-			
-// 			{"registrationnumber":"#102", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2003", "date_registered": "2012-04-10", "registered_by":"Jo"}, "quantitative_info": {"weight_at_data_collection": 60, "age_at_data_collection": 2, "average_daily_gain": 8, "backfat_thickness": 11, "feed_efficiency": 2, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 8, "parity": 2},"parents":[
-// 				{"registrationnumber":"#445", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Yorkshire", "sex":"Female","birthyear":"2000", "date_registered": "2014-11-11", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 55, "age_at_data_collection": 6, "average_daily_gain":9, "backfat_thickness": 12, "feed_efficiency": 6, "birth_weight": 12, "total_when_born_male": 3, "total_when_born_female": 5, "littersize_born_alive": 2, "parity": 10}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 48, "age_at_data_collection": 5, "average_daily_gain":5, "backfat_thickness": 13, "feed_efficiency": 13, "birth_weight": 11, "total_when_born_male": 4, "total_when_born_female": 8, "littersize_born_alive": 1, "parity": 12}}
-// 			]}
-// 		]},
-// 		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
-// 			]},
-// 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
-// 			]}
-// 		]}	
-// 	]},
-// 	{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
-// 			]},
-// 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
-// 			]}
-// 		]},
-// 		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
-// 			]},
-// 			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
-// 				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
-// 			]}
-// 		]}
-// 	]}
-// ]};
-let treeData;
-let qualiKeys = [];		//storage of qualitative keys
-let quantiKeys = [];
-let map = {};	// for values in input
-let tree = [];
-let nodecount = 0;
-
 const visualize = (json) => {
 
-	treeData = json;
+	// storage of qualitative and quantitative value keys
+	let qualitative_value_keys = [];
+	let quantitative_value_keys = [];
 
+	// mapping of each qualitative keys to each possible values
+	let qualitative_value_map = {};
+	
+	// storage of each entities in the pedigree (traversed from rootnode to last leaf node, top lefto to bottom right)
+	let entities_tree = [];
+
+	// stores the JSON input to treeData variable
+	let treeData = json;
+
+	// changes the string "registrationnumber" key to "name" and "parents" key to children
 	treeData = JSON.parse(JSON.stringify(treeData).split('"registrationnumber":').join('"name":'));
 	treeData = JSON.parse(JSON.stringify(treeData).split('"parents":').join('"children":'));
+
+	/**	FEATURE #1. SVG for pedigree **/
 
 	// Set initial margins for SVG dimension initialization
 	let margin =	{
@@ -78,90 +52,93 @@ const visualize = (json) => {
 						bottom: 20
 					},
 
-		width =		800,
-		height =	550; 
+		width =		900,
+		height =	620; 
 
 	// Set SVG size
-	let svg =	d3.select("#mainDiv").append("svg")
+	const svg =	d3.select("#mainDiv").append("svg")
 					.attr("width", '100%')
-					.attr("height", screen.height - 150),
+					.attr("height", screen.height - 120),
 		g	=	svg.append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	// Set tree dimensions
-	let treemap = d3.tree().size([height, width]);
+	const treemap = d3.tree().size([height, width]);
 
-	// Count node count (to be used for dynamic SVG sizing)
-	let rootNode = d3.hierarchy(treeData, function(d) {return d.children;});
-	let data = treemap(rootNode);
-	let nodes = data.descendants();
+	// Store the entities to nodes for tree UI creation
+	const rootNode = d3.hierarchy(treeData, (d) => {return d.children;});
+	const data = treemap(rootNode);
+	const nodes = data.descendants();
 
-	// Tooltip feature (experiment)
-	let tooltipdiv =	d3.select("#mainDiv").append("div")
+	// Tooltip feature
+	const tooltipdiv = d3.select("#mainDiv").append("div")
 							.attr("class", "tooltip")
 							.style("opacity", 0);
 
-	// Add links to the nodes (aaralin ko pa)
-	let link =	g.selectAll(".link")
+	// Add links to the nodes
+	const link =	g.selectAll(".link")
 					.data(nodes.slice(1))
 				.enter().append("path")
 					.attr("class", "link")
-					.attr("d", function(d) {
+					.attr("d", (d) => {
 
-						for(let key in d.data.qualitative_info) if(!qualiKeys.includes(key)) qualiKeys.push(key);
-						for(let key in d.data.quantitative_info) if(!quantiKeys.includes(key)) quantiKeys.push(key);
+						// keys in the qualitative info are pushed to qualitative_value_keys array 
+						// for tooltip and filter purposes
+						for(let key in d.data.qualitative_info) 
+							if(!qualitative_value_keys.includes(key)) qualitative_value_keys.push(key);
+						
+						// keys in the quantitative info are pushed to quantitative_value_keys array
+						// for tooltip and filter purposes
+						for(let key in d.data.quantitative_info) 
+							if(!quantitative_value_keys.includes(key)) quantitative_value_keys.push(key);
 
+						// creates map keys for each keys in the qualitative traits of entities (for filter)
+						for(let i = 0; i < qualitative_value_keys.length; i++) 
+							qualitative_value_map[qualitative_value_keys[i]] = [];
 
-						for(let i = 0; i < qualiKeys.length; i++) map[qualiKeys[i]] = [];
-
-						// return	"M" + d.y + "," + d.x
-						// 		+ "C" + (d.y + d.parent.y) / 2 + "," + d.x
-						// 		+ " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
-						// 		+ " " + d.parent.y + "," + d.parent.x;
-
-						  return "M" + d.y + "," + d.x
-						    + "H" + (d.y + (d.parent.y-d.y)/2)
-						    + "V" + d.parent.x 
-						    + "H" + d.parent.y;
+						// generate straight line links to connect child entities to parent entities
+						return "M" + d.y + "," + d.x + "H" + (d.y + (d.parent.y-d.y)/2) 
+						+ "V" + d.parent.x + "H" + d.parent.y;
 				});
 
-	// Add nodes as group (aaralin ko pa)
-	let node =	g.selectAll(".node")
+	// Add nodes as group
+	const node =	g.selectAll(".node")
 					.data(nodes)
 				.enter().append("g")
-					.attr("class", function(d) {
+					.attr("class", (d) => {
 
 						return "node" + (d.children ? " node--internal" : " node--leaf");
 					})
-					.attr("transform", function(d) {
+					.attr("transform", (d) => {
 
 						return "translate(" + d.y + "," + d.x + ")";
 					})
 
-					// for storing different values to dropdown of values (depending on keys)
-					.attr("d", function(d) {
+					// stores possible trait value to the array value of the keys in qualitative_value_map
+					.attr("d", (d) => {
 
-						for(let i = 0; i < qualiKeys.length; i++) {
+						for(let i = 0; i < qualitative_value_keys.length; i++) {
 
 							for(let value in d.data.qualitative_info) {
 								
-								if(qualiKeys[i] == value) {
+								if(qualitative_value_keys[i] == value) {
 					
-									if(!map[qualiKeys[i]].includes(d.data.qualitative_info[value])) map[qualiKeys[i]].push(d.data.qualitative_info[value]);
+									if(!qualitative_value_map[qualitative_value_keys[i]].includes(d.data.qualitative_info[value])) 
+										qualitative_value_map[qualitative_value_keys[i]].push(d.data.qualitative_info[value]);
 								}
 							}
 						}
 
-						tree.push(d.data);
+						// adds the current entity to the entities_data
+						entities_tree.push(d.data);
 					});
 
 	// Add circle to node
 	node.append("circle")
 		.attr("r", 7)
-		.style("stroke", function(d) {
+		.style("stroke", (d) => {
 
-			nodecount++;
-
+			// colors the outline of the circle of the nodes depending on the sex of the entity
 			for(let key in d.data.qualitative_info) {
 
 				if(key == "sex") {
@@ -170,19 +147,22 @@ const visualize = (json) => {
 				}
 			}
 		})
-		.on("mouseover", function(d) {
+		.on("mouseover", (d) => {
 
+			// creates a table and  displays the ID of the node (for tooltip)
 			let animal_info = "<h4 align = 'center'> ID: " + d.data.name + "</h4><table>";
 
 			tooltipdiv.transition()
 				.duration(200)
 				.style("opacity", 0.9);
 
+			// adds each pairs of qualitative trait and its value to the table
 			for(let key in d.data.qualitative_info) {
 
 				animal_info = animal_info + "<tr><td>" + key + "</td><td>" + d.data.qualitative_info[key] + "</td></tr>";
 			}
 
+			// adds each pairs of quantitative trait and its value to the table
 			for(let key in d.data.quantitative_info) {
 
 				animal_info = animal_info + "<tr><td>" + key + "</td><td>" + d.data.quantitative_info[key] + "</td></tr>";	
@@ -194,7 +174,7 @@ const visualize = (json) => {
 				.style("left", (d3.event.pageX) + "px")
 				.style("top", (d3.event.pageY - 28) + "px");
 		})
-		.on("mouseout", function(d) {
+		.on("mouseout", (d) => {
 
 			tooltipdiv.transition()
 				.duration(500)
@@ -204,140 +184,157 @@ const visualize = (json) => {
 	// Add text(id) to node
 	node.append("text")
 		.attr("dy", ".20em")
-		.attr("x", function(d) { return d.children ? -10 : 10;})
+		.attr("x", (d) => { return d.children ? -10 : 10;})
 		.style("text-anchor", function(d) { return d.children ? "end" : "start";})
+		.style("font-size", "13px")
+		.style("font-weight", "bold")
 		.text(function(d) {return d.data.name;});
 
+	// assign the mainDiv to main_container variable for DOM manipulation
+	const main_container = document.getElementById("mainDiv");
 
-	let body = document.getElementById("mainDiv");
+	/** FEATURE #2. Covariance Table **/
 
-	let covariance_table_div = document.createElement("div");
-	covariance_table_div.style.width = '55%';
-	covariance_table_div.style.height = '350px';
-	covariance_table_div.style.float = 'left';
-	covariance_table_div.style.marginBottom = '5px';
-	covariance_table_div.style.border = '1px solid #c6b89e';
-	covariance_table_div.style.borderRadius = '5px';
+	// div for displaying covariance table
+	const covariance_table_div = document.createElement("div");
+	covariance_table_div.style.cssText =	"width:55%;height:350px;float:left;margin-bottom:5px;"+
+											"border:1px solid #c6b89e; border-radius: 5px;";
 
-	body.appendChild(covariance_table_div);
+	main_container.appendChild(covariance_table_div);
 
-	let covariance_table_text = document.createElement("h2");
+	const covariance_table_text = document.createElement("h2");
 	covariance_table_text.innerHTML = "Covariance Table"
-	covariance_table_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
-	covariance_table_text.style.paddingLeft = '1%';
+	covariance_table_text.style.cssText = "font-family: Arial, Helvetica, sans-serif; padding-left: 1%";
 
 	covariance_table_div.appendChild(covariance_table_text);
 
-	let covariance_table_desc = document.createElement("p");
-	covariance_table_desc.innerHTML = "A covariance table can be used to calculate individual inbreeding values. The table contains covariance values between two individuals or the covariance of each individual.";
-	covariance_table_desc.style.fontFamily = 'Arial, Helvetica, sans-serif';
-	covariance_table_desc.style.marginLeft = '5%';
+	const covariance_table_desc = document.createElement("p");
+	covariance_table_desc.innerHTML = 	"A covariance table can be used to calculate individual inbreeding values."+
+										" The table contains covariance values between two individuals or the covariance"+
+										" of each individual.";
 
+	covariance_table_desc.style.cssText = "font-family: Arial, Helvetica, sans-serif; margin-left: 5%";
+	
 	covariance_table_div.appendChild(covariance_table_desc);
 
-	let covariance_table_container = document.createElement("div");
-	covariance_table_container.style.width = '98%';
-	covariance_table_container.style.overflow = 'auto';
-	covariance_table_container.style.marginTop = '2%';
-	covariance_table_container.style.maxHeight = '200px';
+	const covariance_table_container = document.createElement("div");
+	covariance_table_container.style.cssText = "width: 98%; overflow: auto; margin-top: 2%; max-height: 200px";
 
 	covariance_table_div.appendChild(covariance_table_container);
 
-	let covariance_table_ui = document.createElement('table');
+	const covariance_table_ui = document.createElement('table');
 	covariance_table_ui.cellPadding = '5';
-	covariance_table_ui.style.marginLeft = '2%';
-	covariance_table_ui.style.fontSize = '12px';
-	covariance_table_ui.style.marginBottom = '2%';
+	covariance_table_ui.style.cssText = "margin-left: 2%; font-size: 12px; margin-bottom: 2%";
 
 	covariance_table_container.appendChild(covariance_table_ui);
 
-	const getCovarianceTableData = () => {	//return a 2D array of id names and their corresponding covariance value
-	
-		let arr = [];
-		let names_array = [];
 
-		for(let i = tree.length - 1; i >= 0; i--) if(!arr.some(e => e.name === tree[i].name)) {
+	// function getCovarianceTableData() returns a 2D array of id names and their corresponding covariance value
+	const getCovarianceTableData = () => {
+		
+		// store entities with unique names for determining covariance
+		const unique_entities_array = [];
 
-			arr.push(tree[i]);
-			names_array.push(tree[i].name);
+		// store unique entity names
+		const unique_names_array = [];
+
+		// push unique entities and names to unique_entities_array and unique_entity_names
+		for(let i = entities_tree.length - 1; i >= 0; i--) 
+			if(!unique_entities_array.some(e => e.name === entities_tree[i].name)) {
+
+			unique_entities_array.push(entities_tree[i]);
+			unique_names_array.push(entities_tree[i].name);
 		}
 
-		let row = [];
-		let covariance_table = [];
 
-		for(let i = 0; i < arr.length+1; i++) {
-			for(let j = 0; j < arr.length+1; j++) {
+		let covariance_row = [];
+		const covariance_table = [];
 
-					if(i == 0 && j > 0) row.push(arr[j-1].name);
-					else if(i > 0 && j == 0) row.push(arr[i-1].name);
-					else row.push(-1);
+		// the for loop will loop unique_names_array + 1 times to allot 1 row and column for the entity names
+		// at topmost row and leftmost column
+		// the loop will produce an initial 2d array for the covariance table with each covariance value initialized to -1
+		for(let i = 0; i < unique_names_array.length+1; i++) {
+			for(let j = 0; j < unique_names_array.length+1; j++) {
+
+					if(i == 0 && j > 0) covariance_row.push(unique_entities_array[j-1].name);
+					else if(i > 0 && j == 0) covariance_row.push(unique_entities_array[i-1].name);
+					else covariance_row.push(-1);
 			}
 
-			covariance_table.push(row);
-			row = [];
+			covariance_table.push(covariance_row);
+			covariance_row = [];
 		}
 
-		// loop for computation
-		for(let i = 1; i < arr.length + 1; i++) {
+		// loop for covariance values computation
+		// the inner loop will just loop up to i times to produce the lower diagonal of the table.
+		// the lower diagonal values are just the same as the upper diagonal values
+		for(let i = 1; i < unique_entities_array.length + 1; i++) {
 			for(let j = 1; j <= i; j++) {
 
-				let curr_individual_name = covariance_table[i][0];
-				let curr_individual_object = arr.filter(function(obj) { return obj.name == curr_individual_name});	
+				// gets the entity name of the current column
+				const curr_individual_name = covariance_table[i][0];
+				
+				// gets the entity object of the current column 
+				const curr_individual_object = unique_entities_array.filter((obj) => { return obj.name == curr_individual_name});	
 
-				if(i == j) {	// covariance of same name
+				// checks if entity names of the current row and column are the same
+				// the covariance value in covariance_table[current_row][current_column] will be the covariance value 
+				// of parents of the current entity object
+				if(i == j) {
 
-					if(curr_individual_object[0].children == undefined ||
-					curr_individual_object[0].children[0] == undefined || 
-					curr_individual_object[0].children[1] == undefined) {	//one or two unkonwn parent
+					//one or two unkonwn parent
+					if(curr_individual_object[0].children == undefined || curr_individual_object[0].children[0] == undefined || 
+					curr_individual_object[0].children[1] == undefined) covariance_table[i][j] = 1;
 
-						covariance_table[i][j] = 1;
-					}
-
-					else {	// both parents are known
+					// both parents are known
+					else {
 
 						let father = curr_individual_object[0].children[0].name;
 						let mother = curr_individual_object[0].children[1].name;
 						let father_index, mother_index, covariance_parents;
 
-						father_index = names_array.indexOf(father);
-						mother_index = names_array.indexOf(mother);
+						father_index = unique_names_array.indexOf(father);
+						mother_index = unique_names_array.indexOf(mother);
 
-						if(covariance_table[father_index+1][mother_index+1] != -1) covariance_parents = covariance_table[father_index+1][mother_index+1];
-						else if(covariance_table[mother_index+1][father_index+1] != -1) covariance_parents = covariance_table[mother_index+1][father_index+1];
+						if(covariance_table[father_index+1][mother_index+1] != -1) 
+							covariance_parents = covariance_table[father_index+1][mother_index+1];
+						
+						else if(covariance_table[mother_index+1][father_index+1] != -1)
+							covariance_parents = covariance_table[mother_index+1][father_index+1];
 
 						covariance_table[i][j] = covariance_parents/2;
 						covariance_table[i][j] = covariance_table[i][j] + 1;
 					}
 				}
 
-				// different individuals
-				// 4 cases(?) 
-				// 1. both parents unknown, 2. father/mother unknown, 3. mother unknown, 4. both parents known
-
+				// different entities (row name and column name are different, 3 cases) 
+				// 1. both parents unknown, 2. father/mother unknown, 4. both parents known
 				else {	
 
-					// curr_individual2_name = covariance_table[]
+					// case 1. assign the covariance value to 0 if both parents are unknown
+					if(curr_individual_object[0].children == undefined) covariance_table[i][j] = 0;
 
-					if(curr_individual_object[0].children == undefined)	// case 1.
-						covariance_table[i][j] = 0;
+					// case 2. get the covariance value of the current column entity and the sole parent of the current row
+					else if(curr_individual_object[0].children[1] == undefined) {
 
-					else if(curr_individual_object[0].children[1] == undefined) {	// case 2
+						const parent_name = curr_individual_object[0].children[0].name;
+						const parent_index = unique_names_array.indexOf(parent_name);
 
-						let parent_name = curr_individual_object[0].children[0].name;
-
-						let parent_index = names_array.indexOf(parent_name);
-
-						if(covariance_table[parent_index+1][j] != -1) covariance_table[i][j] = covariance_table[parent_index+1][j]/2;
-						else if(covariance_table[j][parent_index+1] != -1) covariance_table[i][j] = covariance_table[j][parent_index+1]/2;
+						if(covariance_table[parent_index+1][j] != -1) 
+							covariance_table[i][j] = covariance_table[parent_index+1][j]/2;
+						else if(covariance_table[j][parent_index+1] != -1) 
+							covariance_table[i][j] = covariance_table[j][parent_index+1]/2;
 					}
 
-					else if(curr_individual_object[0].children[1] != undefined && curr_individual_object[0].children[0] != undefined){
+					// case 3. get the covariance value of the current column entity to both parent entities of the current row
+					else if(curr_individual_object[0].children[1] != undefined && 
+						curr_individual_object[0].children[0] != undefined){
 
-						let mother_name = curr_individual_object[0].children[0].name;
-						let father_name = curr_individual_object[0].children[1].name;
+						const mother_name = curr_individual_object[0].children[0].name;
+						const father_name = curr_individual_object[0].children[1].name;
 
-						let mother_index = names_array.indexOf(mother_name);
-						let father_index = names_array.indexOf(father_name);
+						const mother_index = unique_names_array.indexOf(mother_name);
+						const father_index = unique_names_array.indexOf(father_name);
 
 						let covariance = 0;
 
@@ -356,11 +353,13 @@ const visualize = (json) => {
 		return covariance_table;
 	}
 
+	// assign the result of the getCovarianceTableData() to variable covariance_table for display
 	const covariance_table = getCovarianceTableData();
 
+	// create UI for covariance_table
 	for(let i = 0; i < covariance_table.length; i++) {
 
-		let covariance_row = document.createElement('tr');
+		const covariance_row = document.createElement('tr');
 
 		for(let j = 0; j < covariance_table[i].length; j++) {
 
@@ -373,7 +372,9 @@ const visualize = (json) => {
 				else if(j == 0) covariance_header = document.createElement('th');
 
 				covariance_header.style.fontFamily = 'Arial, Helvetica, sans-serif';
-				if(covariance_table[i][j] == -1) covariance_header.innerHTML = " ";
+
+				// for each -1 value in the covariance_table, display an empty string in the table
+				if(covariance_table[i][j] == -1) covariance_header.innerHTML = "";
 				else covariance_header.innerHTML = covariance_table[i][j];
 
 				covariance_row.appendChild(covariance_header);
@@ -381,10 +382,10 @@ const visualize = (json) => {
 
 			else {
 
-				let covariance_col = document.createElement('td');
+				const covariance_col = document.createElement('td');
 				covariance_col.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
-				if(covariance_table[i][j] == -1) covariance_col.innerHTML = " ";
+				if(covariance_table[i][j] == -1) covariance_col.innerHTML = "";
 				else covariance_col.innerHTML = covariance_table[i][j];
 
 				covariance_row.appendChild(covariance_col);	
@@ -394,62 +395,56 @@ const visualize = (json) => {
 		covariance_table_ui.appendChild(covariance_row);
 	}
 
+	/** FEATURE #3. Inbreeding Coefficient **/
 
-	let show_inbreeding_div = document.createElement("div");
-	show_inbreeding_div.style.width = '25%';
-	show_inbreeding_div.style.float = 'left';
-	show_inbreeding_div.style.border = '1px solid #c6b89e';
-	show_inbreeding_div.style.borderRadius = '5px';
-	show_inbreeding_div.style.marginBottom = '5px';
-	show_inbreeding_div.style.marginLeft = '6px';
-	show_inbreeding_div.style.height = '350px';
+	const show_inbreeding_div = document.createElement("div");
+	show_inbreeding_div.style.cssText = 	"width:25%;float:left;border:1px solid #c6b89e;"+
+											"border-radius:5px;margin-bottom:5px;margin-left:6px;height:350px";
 
-	body.appendChild(show_inbreeding_div);
+	main_container.appendChild(show_inbreeding_div);
 
-	let show_inbreeding_text = document.createElement("h2");
+	const show_inbreeding_text = document.createElement("h2");
 	show_inbreeding_text.innerHTML = "Inbreeding Table"
-	show_inbreeding_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
-	show_inbreeding_text.style.paddingLeft = '1%';
+	show_inbreeding_text.style.cssText = "font-family:Arial, Helvetica, sans-serif;padding-left:1%";
 
-	let inbreeding_table_desc = document.createElement("p");
-	inbreeding_table_desc.innerHTML = "Inbreeding results from the mating of two organisms that are closely-related genetically. Their offsprings are considered inbred organisms.";
-	inbreeding_table_desc.style.fontFamily = 'Arial, Helvetica, sans-serif';
-	inbreeding_table_desc.style.marginLeft = '5%';
+	const inbreeding_table_desc = document.createElement("p");
+	inbreeding_table_desc.innerHTML =	"Inbreeding results from the mating of two organisms that are closely-related genetically."+
+										" Their offsprings are considered inbred organisms.";
+	inbreeding_table_desc.style.cssText = "font-family:Arial, Helvetica, sans-serif;margin-left:5%";
 
-	let show_inbreeding_table_container = document.createElement("div");
-	show_inbreeding_table_container.style.overflowY = 'auto';
-	show_inbreeding_table_container.style.maxHeight = '200px';
+	const show_inbreeding_table_container = document.createElement("div");
+	show_inbreeding_table_container.style.cssText = "overflow-y:auto;max-height:200px";
 
 	show_inbreeding_div.appendChild(show_inbreeding_text);
 	show_inbreeding_div.appendChild(inbreeding_table_desc);
 	show_inbreeding_div.appendChild(show_inbreeding_table_container);
 
-	let inbreeding_table = document.createElement('table');
+	const inbreeding_table = document.createElement('table');
 	inbreeding_table.cellPadding = '5';
-	inbreeding_table.style.marginLeft = '2%';
-	inbreeding_table.style.fontSize = '12px';
-	inbreeding_table.style.marginBottom = '2%';
+	inbreeding_table.style.cssText = "margin-left:2%;font-size:12px;margin-bottom:2%"
 
 	show_inbreeding_table_container.appendChild(inbreeding_table);
 
-	let inbreeding_table_header = document.createElement("tr");
+	const inbreeding_table_header = document.createElement("tr");
 
 	inbreeding_table.appendChild(inbreeding_table_header);
 
-	let inbred_header = document.createElement("td");
+	const inbred_header = document.createElement("td");
 	inbred_header.innerHTML = 'Inbred Entity';
 	inbred_header.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
-	let inbreeding_coefficient = document.createElement("td");
+	const inbreeding_coefficient = document.createElement("td");
 	inbreeding_coefficient.innerHTML = 'Inbreeding Coefficient';
 	inbreeding_coefficient.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
 	inbreeding_table_header.appendChild(inbred_header);
 	inbreeding_table_header.appendChild(inbreeding_coefficient);
 
-	const getInbreedingTableData = () => {	// return a 2D array of entity names and their inbreeding coefficient
+	// return a 2D array of entity names and their inbreeding coefficient
+	// gets the value in covariance_table[index][index] then subtracts 1. an entity is inbred if the difference > 0
+	const getInbreedingTableData = () => {
 
-		let inbred_entities = [];	
+		const inbred_entities = [];
 		let inbreed_rows = [];
 
 		for(let i = 1; i < covariance_table.length; i++) {
@@ -477,14 +472,12 @@ const visualize = (json) => {
 		return inbred_entities;
 	}
 
-	let inbred_entities = getInbreedingTableData();
-
-	console.log(inbred_entities);
+	// assign result of getInbreedingTableData() to variable inbred_entities
+	const inbred_entities = getInbreedingTableData();
 
 	for(let i = 0; i < inbred_entities.length; i++) {
 
-
-		let inbred_row = document.createElement("tr");
+		const inbred_row = document.createElement("tr");
 
 		let entity_name_cell = document.createElement("td");
 		entity_name_cell.innerHTML = inbred_entities[i][0];
@@ -500,59 +493,47 @@ const visualize = (json) => {
 		inbreeding_table.appendChild(inbred_row);
 	}
 
-	/*
+	/** FEATURE #4 Toggleable Checkboxes **/
 
-	CHECKBOX DIV
+	const checkbox_div = document.createElement("div");
+	checkbox_div.style.cssText = "width:17%;margin-left:6px;height:330px;padding:10px;border:1px solid #c6b89e;float:left;" +
+	"border-radius:3px;margin-bottom:10px;";
 
-	Used to toggle different divs
+	const checkbox_form = document.createElement("form");
 
-	*/
-
-	let checkbox_div = document.createElement("div");
-	checkbox_div.style.width = '17%';
-	checkbox_div.style.marginLeft = '6px';
-	checkbox_div.style.height = '330px';
-	checkbox_div.style.padding = '10px';
-	checkbox_div.style.border = '1px solid #c6b89e';
-	checkbox_div.style.float = 'left';
-	checkbox_div.style.borderRadius = '3px';
-	checkbox_div.style.marginBottom = '10px';
-
-	let checkbox_form = document.createElement("form");
-
-	let filter_input = document.createElement("input");
+	// when filter_input is checked, the filter_div will appear, unchecking will make the filter_div disappear
+	const filter_input = document.createElement("input");
 	filter_input.type = 'checkbox';
 	filter_input.id = "filterCheckBox";
 
-	let filter_label = document.createElement("label");
+	const filter_label = document.createElement("label");
 	filter_label.for = filter_input.id;
 	filter_label.innerHTML = 'Show filters';
 	filter_label.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
-	let performance_input = document.createElement("input");
+	// when filter_input is checked, the performance_div will appear, unchecking will make the performance_div disappear
+	const performance_input = document.createElement("input");
 	performance_input.type = 'checkbox';
 	performance_input.id = "performanceCheckBox";
 
-	let performance_label = document.createElement("label");
+	const performance_label = document.createElement("label");
 	performance_label.for = performance_input.id;
 	performance_label.innerHTML = 'Show Performance Table';
 	performance_label.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
-	let inbreeding_input = document.createElement("input");
+	// when inbreeding_input is checked, the inbred entities in the SVG pedigree will be filled with red, unchecking will unfill
+	const inbreeding_input = document.createElement("input");
 	inbreeding_input.type = 'checkbox';
 	inbreeding_input.id = "inbreedingCheckBox";
 
-	let inbreeding_label = document.createElement("label");
+	const inbreeding_label = document.createElement("label");
 	inbreeding_label.for = inbreeding_input.id;
 	inbreeding_label.innerHTML = 'Show Inbred Entities';
 	inbreeding_label.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
-	let inbred_legend = document.createElement("p");
-	inbred_legend.style.fontFamily = 'Arial, Helvetica, sans-serif';
-	inbred_legend.style.fontSize = '10px';
+	const inbred_legend = document.createElement("p");
 	inbred_legend.innerHTML = '* The inbred entities will appear RED in the pedigree.';
-	inbred_legend.style.color = 'red';
-	inbred_legend.style.display = 'none';
+	inbred_legend.style.cssText = "font-family:Arial, Helvetica, sans-serif;font-size:10px;color:red;display:none";
 
 	checkbox_form.appendChild(filter_input);
 	checkbox_form.appendChild(filter_label);
@@ -566,157 +547,112 @@ const visualize = (json) => {
 
 	checkbox_div.appendChild(checkbox_form);
 
-	body.appendChild(checkbox_div);
-	/***
+	main_container.appendChild(checkbox_div);
 
-	1. FILTER FEATURE
+	/** FEATURE #5 Qualitative Data Filters **/
 
-	Filter feature creates a filter that can be used to view the SVG differently.
-	The filter feature depends on the qualitative data of the JSON data
+	const filter_div = document.createElement('div');
+	filter_div.style.cssText = 	"width:48%;padding:10px;border:1px solid #c6b89e;float:left;border-radius:3px;" +
+								"margin-bottom:10px;display:none;margin-right:10px;height:289px";
 
-	***/
+	main_container.appendChild(filter_div);
 
-	let filterDiv = document.createElement('div');
+	const filter_buttons_div = document.createElement('div');
+	filter_buttons_div.style.cssText = "width:100%;paddingBottom:5%";
 
-	// filter positioning
-	filterDiv.style.width = '48%';
-	filterDiv.style.padding = '10px';
-	filterDiv.style.border = '1px solid #c6b89e';
-	filterDiv.style.float = 'left';
-	filterDiv.style.borderRadius = '3px';
-	filterDiv.style.marginBottom = '10px';
-	filterDiv.style.display = 'none';
-	filterDiv.style.marginRight = '10px';
-	// Add the filter div to the body as 3rd element after the theme div. Keep track for DOM manipulation
-	body.appendChild(filterDiv);
+	// flag is used to monitor if there is already at least 1 filter (for displaying "Go Filter" button)
+	let flag = false;
 
-	// Filter div has 2 divs (button div and input div). Keep track for DOM manipulation
-	let buttonDiv = document.createElement('div');
-	buttonDiv.style.width = '100%';
-	buttonDiv.style.paddingBottom = '5%';
+	const add_button = document.createElement('button');
+	add_button.appendChild(document.createTextNode("Add Filters"));
+	add_button.type = "submit";
+	add_button.style.cssText =	"color:white;background:#0865ab;padding:8px;float:left;width:30%;"+
+								"border:none;cursor:pointer;border-radius:3px;";
+	
+	const filter_button = document.createElement('button');
+	filter_button.appendChild(document.createTextNode("Go Filter!"));
+	filter_button.type = 'submit';
+	filter_button.style.cssText =	"color:white;background:green;padding:8px;float:right;width:30%;"+
+									"border:none;cursor:pointer;border-radius:3px;";
 
-	let flag = 0, selectCounter = 0;	// for adding "Apply filter" button
+	filter_buttons_div.appendChild(add_button);
+	filter_div.appendChild(filter_buttons_div);
 
-	const addButton = document.createElement('button');
-	addButton.type = "submit";
-	addButton.appendChild(document.createTextNode("Add Filters"));
-	addButton.style.color = 'white';
-	addButton.style.background = '#0865ab';
-	addButton.style.padding = '8px';
-	addButton.style.float = 'left';
-	addButton.style.width = '30%';
-	addButton.style.border = 'none';
-	addButton.style.cursor = 'pointer';
-	addButton.style.borderRadius = '3px';
+	const input_div_container = document.createElement("div");
+	input_div_container.style.cssText = "max-height:250px;height:300;width:100%;overflow-y:auto;padding-top:5px;";
+	
+	filter_div.appendChild(input_div_container);
 
-	const goFilter = document.createElement('button');
-	goFilter.type = 'submit';
-	goFilter.appendChild(document.createTextNode("Go Filter!"));
-	goFilter.style.color = 'white';
-	goFilter.style.background = 'green';
-	goFilter.style.padding = '8px';
-	goFilter.style.float = 'right';
-	goFilter.style.width = '30%';
-	goFilter.style.border = 'none';
-	goFilter.style.cursor = 'pointer';
-	goFilter.style.borderRadius = '3px';
-
-	buttonDiv.appendChild(addButton);
-
-	filterDiv.appendChild(buttonDiv);
-
-	let inputDivContainer = document.createElement("div");
-	inputDivContainer.style.maxHeight = '250px';
-	inputDivContainer.style.height = '300px';
-	inputDivContainer.style.width = '100%';
-	inputDivContainer.style.overflowY = 'auto';
-	inputDivContainer.style.paddingTop = '5px';
-
-	filterDiv.appendChild(inputDivContainer);
-
-	addButton.addEventListener('click', function() {
+	add_button.addEventListener('click', function() {
 		
-		flag++;
+		flag = true;
 
-		let inputDiv = document.createElement('div');
+		const filter_input_div = document.createElement('div');
+		
+		const select_key = document.createElement('select');
+		select_key.style.cssText = "margin:3px;width:50%";
 
-		let selectKey = document.createElement('select');
-		let selectValue = document.createElement('select');
-		selectValue.style.width = '40%';
-		selectValue.style.margin = '3px';
-		let option;
-		selectKey.style.margin = '3px';
-		selectKey.style.width = '50%';
+		const select_value = document.createElement('select');
+		select_value.style.cssText = "width:40%;margin:3px;"
 
-		for(let i = 0; i < qualiKeys.length; i++) {
+		for(let i = 0; i < qualitative_value_keys.length; i++) {
 
-			option = document.createElement('option');
-			option.value = qualiKeys[i];
-			option.innerHTML = qualiKeys[i];
-			selectKey.appendChild(option);
+			const key_option = document.createElement('option');
+			key_option.value = qualitative_value_keys[i];
+			key_option.innerHTML = qualitative_value_keys[i];
+			select_key.appendChild(key_option);
 		}
 
-		for(let i = 0; i < map[selectKey.value].length; i++) {
+		for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
 
-			opt = document.createElement('option');
-			opt.value = map[selectKey.value][i];
-			opt.innerHTML = map[selectKey.value][i];
-			selectValue.appendChild(opt)
+			const value_option = document.createElement('option');
+			value_option.value = qualitative_value_map[select_key.value][i];
+			value_option.innerHTML = qualitative_value_map[select_key.value][i];
+			select_value.appendChild(value_option)
 		}
 
-		selectKey.addEventListener('change', function() {
+		select_key.addEventListener('change', function() {
 
-			let selectLength = selectValue.options.length;
+			const selectLength = select_value.options.length;
 
-			for(let i = selectValue.options.length - 1; i >= 0; i--) {
+			for(let i = select_value.options.length - 1; i >= 0; i--) select_value.remove(i);
 
-				selectValue.remove(i);
-			}
-
-			for(let i = 0; i < map[selectKey.value].length; i++) {
+			for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
 
 				opt = document.createElement('option');
-				opt.value = map[selectKey.value][i];
-				opt.innerHTML = map[selectKey.value][i];
-				selectValue.appendChild(opt)
+				opt.value = qualitative_value_map[select_key.value][i];
+				opt.innerHTML = qualitative_value_map[select_key.value][i];
+				select_value.appendChild(opt)
 			}
 		});
 
-		let deleteButton = document.createElement('button');
-		deleteButton.appendChild(document.createTextNode('x'));
-		deleteButton.style.color = 'white';
-		deleteButton.style.background = 'red';
-		deleteButton.style.height = '20px';
-		deleteButton.style.width = '5%';
-		deleteButton.style.border = 'none';
-		deleteButton.style.cursor = 'pointer';
-		deleteButton.style.borderRadius = '3px';
+		let delete_button = document.createElement('button');
+		delete_button.appendChild(document.createTextNode('x'));
+		delete_button.style.cssText =	"color:white;background:red;height:20px;width:5%;border:none;cursor:pointer;" + 
+										"border-radius:3px;"
 
-		deleteButton.addEventListener('click', function() {
+		delete_button.addEventListener('click', function() {
 
 			if(this.parentNode.parentNode.childNodes.length == 1) {
 
-				buttonDiv.removeChild(buttonDiv.childNodes[1]);
-				flag = 0;
+				filter_buttons_div.removeChild(filter_buttons_div.childNodes[1]);
+				flag = false;
 			}
 			this.parentNode.parentNode.removeChild(this.parentNode);
 		});
 
-		inputDiv.appendChild(selectKey);
-		inputDiv.appendChild(selectValue);
-		inputDiv.appendChild(deleteButton);
-		inputDivContainer.appendChild(inputDiv);
-		// check if there is at least one filter
+		filter_input_div.appendChild(select_key);
+		filter_input_div.appendChild(select_value);
+		filter_input_div.appendChild(delete_button);
+		input_div_container.appendChild(filter_input_div);
 		
-		if(flag == 1) buttonDiv.appendChild(goFilter);
-
+		// check if there is at least one filter
+		if(flag) filter_buttons_div.appendChild(filter_button);
 	});
 
-
-	goFilter.addEventListener('click', function() {
+	filter_button.addEventListener('click', function() {
 
 		// resets the tree to default (all nodes with white fill)
-
 		if(inbreeding_input.checked == true) inbreeding_input.checked = false;
 
 		node.append("circle")
@@ -740,10 +676,10 @@ const visualize = (json) => {
 
 		let keysForFilter = [], valuesForFilter = [];	// will be used for traversing the tree
 
-		while(i < inputDivContainer.childNodes.length) {
+		while(i < input_div_container.childNodes.length) {
 
-			keysForFilter.push(inputDivContainer.childNodes[i].childNodes[0].value);
-			valuesForFilter.push(inputDivContainer.childNodes[i].childNodes[1].value);
+			keysForFilter.push(input_div_container.childNodes[i].childNodes[0].value);
+			valuesForFilter.push(input_div_container.childNodes[i].childNodes[1].value);
 
 			i++;
 		}
@@ -752,8 +688,6 @@ const visualize = (json) => {
 		node.append("circle")
 		.attr("r", 7)
 		.style("stroke", function(d) {
-
-			nodecount++;
 
 			for(let key in d.data.qualitative_info) {
 
@@ -813,35 +747,29 @@ const visualize = (json) => {
 
 	});
 
-	/**
+	/** FEATURE #6 Performance Table **/
 
-	2. PERFORMANCE OF FAMILY
-
-	Performance of family basically tabularize the quantitative and qualitative traits of the entities in the tree.
-	The number/quantity/tally of each value of each traits are displayed.
-
-	**/
 
 	const getQualitativeDataCount = () => {	// return JSON of the qualitative data of the pedigree
 
 		let qualitative_data_object = {};
 		let count = 0;
 
-		for(let i = 0; i < qualiKeys.length; i++) {
+		for(let i = 0; i < qualitative_value_keys.length; i++) {
 
-			qualitative_data_object[qualiKeys[i]] = [];
+			qualitative_data_object[qualitative_value_keys[i]] = [];
 
-			for(let j = 0; j < map[qualiKeys[i]].length; j++) {
+			for(let j = 0; j < qualitative_value_map[qualitative_value_keys[i]].length; j++) {
 
 				let trait_count_pair = {};
 
-				for(let x = 0; x < tree.length; x++) {
+				for(let x = 0; x < entities_tree.length; x++) {
 
-					if(tree[x].qualitative_info[qualiKeys[i]] == map[qualiKeys[i]][j]) count++;
+					if(entities_tree[x].qualitative_info[qualitative_value_keys[i]] == qualitative_value_map[qualitative_value_keys[i]][j]) count++;
 				}
 
-				trait_count_pair[map[qualiKeys[i]][j]] = count;
-				qualitative_data_object[qualiKeys[i]].push(trait_count_pair);
+				trait_count_pair[qualitative_value_map[qualitative_value_keys[i]][j]] = count;
+				qualitative_data_object[qualitative_value_keys[i]].push(trait_count_pair);
 				count = 0;
 			}
 		}
@@ -860,7 +788,7 @@ const visualize = (json) => {
 	performance_div.style.display = 'none';
 	performance_div.style.height = '308px';
 
-	body.appendChild(performance_div);
+	main_container.appendChild(performance_div);
 
 	let qualitative_text = document.createElement("h2");
 	qualitative_text.innerHTML = "Qualitative Data"
@@ -942,20 +870,20 @@ const visualize = (json) => {
 
 		let quantitative_data_array = [];
 		let mean = 0, max = 0, min = 9999, std = 0, total = 0;
-		let count = tree.length;
+		let count = entities_tree.length;
 
-		for(let i = 0; i < quantiKeys.length; i++) {
+		for(let i = 0; i < quantitative_value_keys.length; i++) {
 
 			let quantitative_data_object = {};
 
-			quantitative_data_object['data'] = quantiKeys[i];
+			quantitative_data_object['data'] = quantitative_value_keys[i];
 
-			for(let j = 0; j < tree.length; j++) {
+			for(let j = 0; j < entities_tree.length; j++) {
 
-				total += tree[j].quantitative_info[quantiKeys[i]];
+				total += entities_tree[j].quantitative_info[quantitative_value_keys[i]];
 
-				if(tree[j].quantitative_info[quantiKeys[i]] > max) max = tree[j].quantitative_info[quantiKeys[i]];
-				if(tree[j].quantitative_info[quantiKeys[i]] < min) min = tree[j].quantitative_info[quantiKeys[i]];
+				if(entities_tree[j].quantitative_info[quantitative_value_keys[i]] > max) max = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
+				if(entities_tree[j].quantitative_info[quantitative_value_keys[i]] < min) min = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
 			}
 
 			quantitative_data_object['minimum'] = min;
@@ -965,9 +893,9 @@ const visualize = (json) => {
 
 			quantitative_data_object['ave'] = mean;
 
-			for(let j = 0; j < tree.length; j++) {
+			for(let j = 0; j < entities_tree.length; j++) {
 
-				std += Math.pow((tree[j].quantitative_info[quantiKeys[i]] - mean), 2);
+				std += Math.pow((entities_tree[j].quantitative_info[quantitative_value_keys[i]] - mean), 2);
 			}
 
 			std = Math.sqrt(std/(count-1));
@@ -1037,7 +965,7 @@ const visualize = (json) => {
 	headings_row.appendChild(std_col);
 
 	let mean = 0, max = 0, min = 9999, std = 0, total = 0;
-	let count = tree.length;
+	let count = entities_tree.length;
 
 	for(let i = 0; i < quantitative_data_array.length; i++) {
 
@@ -1078,8 +1006,8 @@ const visualize = (json) => {
 
 	filter_input.addEventListener('change', function() {
 
-		if(filter_input.checked == true) filterDiv.style.display = 'block';
-		else filterDiv.style.display = 'none';
+		if(filter_input.checked == true) filter_div.style.display = 'block';
+		else filter_div.style.display = 'none';
 	});
 
 	performance_input.addEventListener('change', function() {
@@ -1097,8 +1025,6 @@ const visualize = (json) => {
 			node.append("circle")
 			.attr("r", 7)
 			.style("stroke", function(d) {
-
-				nodecount++;
 
 				for(let key in d.data.qualitative_info) {
 
@@ -1156,8 +1082,6 @@ const visualize = (json) => {
 			.attr("r", 7)
 			.style("stroke", function(d) {
 
-				nodecount++;
-
 				for(let key in d.data.qualitative_info) {
 
 					if(key == "sex") {
@@ -1204,7 +1128,55 @@ const visualize = (json) => {
 	});
 }
 
-// treeData = getJSONPedigree(json);
+/**** SAMPLE JSON INPUTS *****
+
+let treeData = {"registrationnumber":"#00001", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Female","birthyear":"1994", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 57, "age_at_data_collection": 4, "average_daily_gain":7, "backfat_thickness": 3, "feed_efficiency": 3, "birth_weight":8, "total_when_born_male": 7, "total_when_born_female": 6, "littersize_born_alive": 5, "parity": 1},"parents": [
+	{"registrationnumber":"#20", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2008-07-20", "registered_by":"Netty"}, "quantitative_info": {"weight_at_data_collection": 59, "age_at_data_collection": 6, "average_daily_gain":9, "backfat_thickness": 5, "feed_efficiency": 5, "birth_weight":10, "total_when_born_male": 9, "total_when_born_female": 8, "littersize_born_alive": 7, "parity": 3},"parents":[
+		{"registrationnumber":"#411", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2004", "date_registered": "2017-06-22", "registered_by":"Brose"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#489", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2015-10-01", "registered_by":"Dermot"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 4, "average_daily_gain":9, "backfat_thickness": 5, "feed_efficiency": 3, "birth_weight":10, "total_when_born_male": 9, "total_when_born_female": 5, "littersize_born_alive": 3, "parity": 9},"parents":[
+				{"registrationnumber":"#148", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Female","birthyear":"2004", "date_registered": "2014-12-06", "registered_by":"Jo"},"quantitative_info": {"weight_at_data_collection": 42, "age_at_data_collection": 3, "average_daily_gain":4, "backfat_thickness": 5, "feed_efficiency": 1, "birth_weight":5, "total_when_born_male": 1, "total_when_born_female": 4, "littersize_born_alive": 6, "parity": 9}},
+				{"registrationnumber":"#277", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Male","birthyear":"2001", "date_registered": "2004-07-02", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 66, "age_at_data_collection": 7, "average_daily_gain":11, "backfat_thickness": 8, "feed_efficiency": 2, "birth_weight":9, "total_when_born_male": 2, "total_when_born_female": 3, "littersize_born_alive": 2, "parity": 5}}
+			]},
+			
+			{"registrationnumber":"#102", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2003", "date_registered": "2012-04-10", "registered_by":"Jo"}, "quantitative_info": {"weight_at_data_collection": 60, "age_at_data_collection": 2, "average_daily_gain": 8, "backfat_thickness": 11, "feed_efficiency": 2, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 8, "parity": 2},"parents":[
+				{"registrationnumber":"#445", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Yorkshire", "sex":"Female","birthyear":"2000", "date_registered": "2014-11-11", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 55, "age_at_data_collection": 6, "average_daily_gain":9, "backfat_thickness": 12, "feed_efficiency": 6, "birth_weight": 12, "total_when_born_male": 3, "total_when_born_female": 5, "littersize_born_alive": 2, "parity": 10}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Nangkaruka","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 48, "age_at_data_collection": 5, "average_daily_gain":5, "backfat_thickness": 13, "feed_efficiency": 13, "birth_weight": 11, "total_when_born_male": 4, "total_when_born_female": 8, "littersize_born_alive": 1, "parity": 12}}
+			]}
+		]},
+		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Baguio","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			]},
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Laguna","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			]}
+		]}	
+	]},
+	{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			]},
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			]}
+		]},
+		{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"},"quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			]},
+			{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2},"parents":[
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Female","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}},
+				{"registrationnumber":"#1412221234", "qualitative_info":{"farm_name":"Antipolo","breed":"Duroc", "sex":"Male","birthyear":"2005", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 58, "age_at_data_collection": 5, "average_daily_gain":8, "backfat_thickness": 4, "feed_efficiency": 4, "birth_weight":9, "total_when_born_male": 8, "total_when_born_female": 7, "littersize_born_alive": 6, "parity": 2}}
+			]}
+		]}
+	]}
+]};
 
 // let treeData = {"registrationnumber":"G", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Male","birthyear":"1994", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 57, "age_at_data_collection": 4, "average_daily_gain":7, "backfat_thickness": 3, "feed_efficiency": 3, "birth_weight":8, "total_when_born_male": 7, "total_when_born_female": 6, "littersize_born_alive": 5, "parity": 1},"parents": [
 	
@@ -1219,31 +1191,4 @@ const visualize = (json) => {
 // 		{"registrationnumber":"B", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Yorkshire", "sex":"Female","birthyear":"2005", "date_registered": "2008-07-20", "registered_by":"Netty"}, "quantitative_info": {"weight_at_data_collection": 59, "age_at_data_collection": 6, "average_daily_gain":9, "backfat_thickness": 5, "feed_efficiency": 5, "birth_weight":10, "total_when_born_male": 9, "total_when_born_female": 8, "littersize_born_alive": 7, "parity": 3}}
 // 	]}
 // ]};
-
-/********
-
-DIFFERENT FEATURES:
-
-1. FILTER
-2. PERFORMANCE OF FAMILY
-3. IN-BREEDING COEFFICIENT
-4. ADDITIVE GENETIC RELATIONSHIP
-
-********/
-/*
-
-3. SHOW IN-BREEDING AND COVARIANCE TABLE
-The inbred entities will be highlighted in the tree and the covariance tree of the pedigree will be shown
-
-*/
-
-// DISPLAYING COVARIANCE TABLE
-
-
-// REFERENCES
-// https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
-// https://bl.ocks.org/d3noob/5537fe63086c4f100114f87f124850dd
-
-// FOR IMPROVEMENTS
-// https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
-// https://codepen.io/marxtseng/pen/oBVjvB?editors=0010
+****************************/

@@ -5,17 +5,19 @@
 
 .node text {
 	font:	12px sans-serif;
+	background: white;
 }
 
 .node--internal text {
 
 	text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+	background: white;
 }
 
 .link {
 	fill: none;
 	stroke:	black;
-	stroke-width: 1px;
+	stroke-width: 0.5px;
 }
 
 div.tooltip {
