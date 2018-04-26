@@ -150,11 +150,16 @@ let link =	g.selectAll(".link")
 
 					for(let i = 0; i < qualiKeys.length; i++) map[qualiKeys[i]] = [];
 
-					return	"M" + d.y + "," + d.x
-							+ "C" + (d.y + d.parent.y) / 2 + "," + d.x
-							+ " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
-							+ " " + d.parent.y + "," + d.parent.x;
-				});
+					// return	"M" + d.y + "," + d.x
+					// 		+ "C" + (d.y + d.parent.y) / 2 + "," + d.x
+					// 		+ " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+					// 		+ " " + d.parent.y + "," + d.parent.x;
+
+					  return "M" + d.y + "," + d.x
+					    + "H" + (d.y + (d.parent.y-d.y)/2)
+					    + "V" + d.parent.x 
+					    + "H" + d.parent.y;
+			});
 
 // Add nodes as group (aaralin ko pa)
 let node =	g.selectAll(".node")
