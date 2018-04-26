@@ -208,7 +208,7 @@ node.append("circle")
 	})
 	.on("mouseover", function(d) {
 
-		let animal_info = "<table>";
+		let animal_info = "<h4 align = 'center'> ID: " + d.data.name + "</h4><table>";
 
 		tooltipdiv.transition()
 			.duration(200)
@@ -454,7 +454,7 @@ show_inbreeding_div.style.float = 'left';
 show_inbreeding_div.style.border = '1px solid #c6b89e';
 show_inbreeding_div.style.borderRadius = '5px';
 show_inbreeding_div.style.marginBottom = '5px';
-show_inbreeding_div.style.marginLeft = '5px';
+show_inbreeding_div.style.marginLeft = '6px';
 show_inbreeding_div.style.height = '350px';
 
 body.appendChild(show_inbreeding_div);

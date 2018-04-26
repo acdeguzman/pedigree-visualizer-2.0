@@ -14,8 +14,8 @@
 
 .link {
 	fill: none;
-	stroke:	#001a3c;
-	stroke-width:	2px;
+	stroke:	black;
+	stroke-width: 1px;
 }
 
 div.tooltip {
