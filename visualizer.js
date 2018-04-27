@@ -507,9 +507,13 @@ const visualize = (json) => {
 	filter_input.id = "filterCheckBox";
 
 	const filter_label = document.createElement("label");
-	filter_label.for = filter_input.id;
 	filter_label.innerHTML = 'Show filters';
 	filter_label.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+	const filter_label_for = document.createAttribute("for");
+	filter_label_for.value = filter_input.id;
+
+	filter_label.setAttributeNode(filter_label_for);
 
 	// when filter_input is checked, the performance_div will appear, unchecking will make the performance_div disappear
 	const performance_input = document.createElement("input");
@@ -517,9 +521,13 @@ const visualize = (json) => {
 	performance_input.id = "performanceCheckBox";
 
 	const performance_label = document.createElement("label");
-	performance_label.for = performance_input.id;
 	performance_label.innerHTML = 'Show Performance Table';
 	performance_label.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+	const performance_label_for = document.createAttribute("for");
+	performance_label_for.value = performance_input.id;
+
+	performance_label.setAttributeNode(performance_label_for);
 
 	// when inbreeding_input is checked, the inbred entities in the SVG pedigree will be filled with red, unchecking will unfill
 	const inbreeding_input = document.createElement("input");
@@ -527,9 +535,13 @@ const visualize = (json) => {
 	inbreeding_input.id = "inbreedingCheckBox";
 
 	const inbreeding_label = document.createElement("label");
-	inbreeding_label.for = inbreeding_input.id;
 	inbreeding_label.innerHTML = 'Show Inbred Entities';
 	inbreeding_label.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+	const inbreeding_label_for = document.createAttribute("for");
+	inbreeding_label_for.value = inbreeding_input.id;
+
+	inbreeding_label.setAttributeNode(inbreeding_label_for);
 
 	const inbred_legend = document.createElement("p");
 	inbred_legend.innerHTML = '* The inbred entities will appear RED in the pedigree.';
