@@ -32,6 +32,11 @@ div.tooltip {
 	text-align: justify;
 }
 
+html, body {
+
+	height: 100%;
+}
+
 pre {
 	tab-size: 16;
 }

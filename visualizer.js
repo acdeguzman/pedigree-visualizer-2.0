@@ -192,12 +192,12 @@ const visualize = (json) => {
 
 	// assign the mainDiv to main_container variable for DOM manipulation
 	const main_container = document.getElementById("mainDiv");
-
+	main_container.style.height = '100%';
 	/** FEATURE #2. Covariance Table **/
 
 	// div for displaying covariance table
 	const covariance_table_div = document.createElement("div");
-	covariance_table_div.style.cssText =	"width:55%;height:350px;float:left;margin-bottom:5px;"+
+	covariance_table_div.style.cssText =	"width:54%;height:50%;float:left;margin-bottom:5px;"+
 											"border:1px solid #c6b89e; border-radius: 5px;";
 
 	main_container.appendChild(covariance_table_div);
@@ -218,7 +218,7 @@ const visualize = (json) => {
 	covariance_table_div.appendChild(covariance_table_desc);
 
 	const covariance_table_container = document.createElement("div");
-	covariance_table_container.style.cssText = "width: 98%; overflow: auto; margin-top: 2%; max-height: 200px";
+	covariance_table_container.style.cssText = "width: 98%; overflow: auto; margin-top: 2%; max-height: 90%";
 
 	covariance_table_div.appendChild(covariance_table_container);
 
@@ -399,7 +399,7 @@ const visualize = (json) => {
 
 	const show_inbreeding_div = document.createElement("div");
 	show_inbreeding_div.style.cssText = 	"width:25%;float:left;border:1px solid #c6b89e;"+
-											"border-radius:5px;margin-bottom:5px;margin-left:6px;height:350px";
+											"border-radius:5px;margin-bottom:5px;margin-left:0.5%;height:50%;";
 
 	main_container.appendChild(show_inbreeding_div);
 
@@ -413,7 +413,7 @@ const visualize = (json) => {
 	inbreeding_table_desc.style.cssText = "font-family:Arial, Helvetica, sans-serif;margin-left:5%";
 
 	const show_inbreeding_table_container = document.createElement("div");
-	show_inbreeding_table_container.style.cssText = "overflow-y:auto;max-height:200px";
+	show_inbreeding_table_container.style.cssText = "overflow-y:auto;max-height:90%;";
 
 	show_inbreeding_div.appendChild(show_inbreeding_text);
 	show_inbreeding_div.appendChild(inbreeding_table_desc);
@@ -496,8 +496,8 @@ const visualize = (json) => {
 	/** FEATURE #4 Toggleable Checkboxes **/
 
 	const checkbox_div = document.createElement("div");
-	checkbox_div.style.cssText = "width:17%;margin-left:6px;height:330px;padding:10px;border:1px solid #c6b89e;float:left;" +
-	"border-radius:3px;margin-bottom:10px;";
+	checkbox_div.style.cssText = "width:19.5%;margin-left:0.5%;height:50%;border:1px solid #c6b89e;float:left;" +
+	"border-radius:3px;margin-bottom:5px;";
 
 	const checkbox_form = document.createElement("form");
 
@@ -553,7 +553,7 @@ const visualize = (json) => {
 
 	const filter_div = document.createElement('div');
 	filter_div.style.cssText = 	"width:48%;padding:10px;border:1px solid #c6b89e;float:left;border-radius:3px;" +
-								"margin-bottom:10px;display:none;margin-right:10px;height:289px";
+								"margin-bottom:1%;display:none;height:50%;";
 
 	main_container.appendChild(filter_div);
 
@@ -566,20 +566,20 @@ const visualize = (json) => {
 	const add_button = document.createElement('button');
 	add_button.appendChild(document.createTextNode("Add Filters"));
 	add_button.type = "submit";
-	add_button.style.cssText =	"color:white;background:#0865ab;padding:8px;float:left;width:30%;"+
+	add_button.style.cssText =	"color:white;background:#0865ab;padding:1%;float:left;width:30%;"+
 								"border:none;cursor:pointer;border-radius:3px;";
 	
 	const filter_button = document.createElement('button');
 	filter_button.appendChild(document.createTextNode("Go Filter!"));
 	filter_button.type = 'submit';
-	filter_button.style.cssText =	"color:white;background:green;padding:8px;float:right;width:30%;"+
+	filter_button.style.cssText =	"color:white;background:green;padding:1%;float:right;width:30%;"+
 									"border:none;cursor:pointer;border-radius:3px;";
 
 	filter_buttons_div.appendChild(add_button);
 	filter_div.appendChild(filter_buttons_div);
 
 	const input_div_container = document.createElement("div");
-	input_div_container.style.cssText = "max-height:250px;height:300;width:100%;overflow-y:auto;padding-top:5px;";
+	input_div_container.style.cssText = "max-height:90%;height:95%;width:100%;overflow-y:auto;padding-top:5px;";
 	
 	filter_div.appendChild(input_div_container);
 
@@ -780,13 +780,14 @@ const visualize = (json) => {
 	let qualitative_data_object = getQualitativeDataCount();
 
 	let performance_div = document.createElement("div");
-	performance_div.style.width = '49%';
+	performance_div.style.width = '49.5%';
+	performance_div.style.height = '53%';
 	performance_div.style.float = 'left';
 	performance_div.style.marginBottom = '5px';
+	performance_div.style.marginLeft = '0.5%';
 	performance_div.style.border = '1px solid #c6b89e';
 	performance_div.style.borderRadius = '5px';
 	performance_div.style.display = 'none';
-	performance_div.style.height = '308px';
 
 	main_container.appendChild(performance_div);
 
@@ -796,7 +797,7 @@ const visualize = (json) => {
 	qualitative_text.style.paddingLeft = '1%';
 
 	let table_container = document.createElement("div");
-	table_container.style.maxHeight = '300px';
+	table_container.style.maxHeight = '90%';
 	table_container.style.overflow = 'auto';
 	table_container.style.width = '100%';
 
