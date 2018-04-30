@@ -32,21 +32,13 @@ div.tooltip {
 	text-align: justify;
 }
 
-html, body {
-
-	height: 100%;
-}
-
-pre {
-	tab-size: 16;
-}
-
-table, tr, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
 svg {
 	border: 1px solid #c6b89e;
-	border-radius: 3px;
+	border-radius: 5px;
+	margin-top: 5px;
+}
+
+.flex {
+	display: flex;
+	flex: wrap;
 }
