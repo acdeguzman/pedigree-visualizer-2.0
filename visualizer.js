@@ -626,7 +626,7 @@ const visualize = (json) => {
 
 		const select_key = document.createElement('select');
 		select_key.className = 'browser-default';
-		select_key.style.cssText = 'height: 5%; width: 45%; float: left;';
+		select_key.style.cssText = 'height: 3%; width: 100%; float: left;';
 
 		select_key_div.append(select_key);
 			
@@ -634,8 +634,8 @@ const visualize = (json) => {
 		select_value_div.className = 'col s5 m5 l5 xl5';
 
 		const select_value = document.createElement('select');
-		select_value.className = 'browser-default col s5 m5 l5 xl5';
-		select_value.style.cssText = 'height: 1%; width: 45%; float: left;';
+		select_value.className = 'browser-default';
+		select_value.style.cssText = 'height: 3%; width: 100%; float: left;';
 
 		select_value_div.appendChild(select_value);
 
@@ -672,7 +672,7 @@ const visualize = (json) => {
 
 		let delete_button = document.createElement('button');
 		delete_button.appendChild(document.createTextNode('x'));
-		delete_button.style.cssText =	"color:white; margin-right:1%; margin-left:1%; height: 1%;";
+		delete_button.style.cssText =	"color:white; margin-right:1%; margin-left:1%; height: 1%; margin-bottom:1%; width: 2%; height: 2%;";
 		delete_button.className = 'btn-flat btn-small red darken-4';
 		delete_button.addEventListener('click', function() {
 
@@ -829,14 +829,14 @@ const visualize = (json) => {
 
 	let qualitative_data_object = getQualitativeDataCount();
 
-	let performance_div = document.createElement("div");
-	performance_div.style.display = 'none';
-	performance_div.className = 'col s12 m12 l12 xl12';
+	// let performance_div = document.createElement("div");
+	// performance_div.style.display = 'none';
+	// performance_div.className = 'col s12 m12 l12 xl12';
 
-	main_container.appendChild(performance_div);
+	// main_container.appendChild(performance_div);
 
 	let qualitative_data_container = document.createElement("div");
-	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;";
+	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;display:none;";
 	qualitative_data_container.className = 'col s12 m12 l12 xl12';
 
 	let qualitative_text = document.createElement("h4");
@@ -846,7 +846,7 @@ const visualize = (json) => {
 
 	qualitative_data_container.appendChild(qualitative_text);
 
-	performance_div.appendChild(qualitative_data_container);
+	main_container.appendChild(qualitative_data_container);
 
 	//	tables for qualitative data
 
@@ -960,10 +960,10 @@ const visualize = (json) => {
 	const quantitative_data_array = getQuantitativeDataCount();
 
 	let quantitative_data_container = document.createElement("div");
-	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;";
+	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;";
 	quantitative_data_container.className = 'col s12 m12 l12 xl12'
 
-	performance_div.appendChild(quantitative_data_container);
+	main_container.appendChild(quantitative_data_container);
 
 	let quantitative_text = document.createElement("h4");
 	quantitative_text.innerHTML = "Quantitative Data";
@@ -1059,8 +1059,17 @@ const visualize = (json) => {
 
 	performance_input.addEventListener('change', function() {
 
-		if(performance_input.checked == true) performance_div.style.display = 'block';
-		else performance_div.style.display = 'none';
+		if(performance_input.checked == true) {
+
+			qualitative_data_container.style.display = 'block';
+			quantitative_data_container.style.display = 'block';
+		}
+
+		else {
+
+			qualitative_data_container.style.display = 'none';
+			quantitative_data_container.style.display = 'none';
+		}
 	});
 
 	inbreeding_input.addEventListener('change', function() {
