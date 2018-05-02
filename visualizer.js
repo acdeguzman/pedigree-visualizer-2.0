@@ -630,6 +630,7 @@ const visualize = (json) => {
 
 		const select_key = document.createElement('select');
 		select_key.className = 'browser-default';
+		select_key.style.cssText = 'height: 1%; width: 45%; float: left;';
 
 		select_key_div.append(select_key);
 			
@@ -638,6 +639,7 @@ const visualize = (json) => {
 
 		const select_value = document.createElement('select');
 		select_value.className = 'browser-default col s5 m5 l5 xl5';
+		select_value.style.cssText = 'height: 1%; width: 45%; float: left;';
 
 		select_value_div.appendChild(select_value);
 
@@ -674,7 +676,7 @@ const visualize = (json) => {
 
 		let delete_button = document.createElement('button');
 		delete_button.appendChild(document.createTextNode('x'));
-		delete_button.style.cssText =	"color:white; margin-right:1%;";
+		delete_button.style.cssText =	"color:white; margin-right:1%; margin-left:1%; height: 1%;";
 		delete_button.className = 'btn-flat btn-small red darken-4';
 		delete_button.addEventListener('click', function() {
 
@@ -698,7 +700,11 @@ const visualize = (json) => {
 	filter_button.addEventListener('click', function() {
 
 		// resets the tree to default (all nodes with white fill)
-		if(inbreeding_input.checked == true) inbreeding_input.checked = false;
+		if(inbreeding_input.checked == true) {
+
+			inbreeding_input.checked = false;
+			inbred_legend.style.display = 'none';
+		}
 
 		node.append("circle")
 		.attr("r", 7)
@@ -723,8 +729,8 @@ const visualize = (json) => {
 
 		while(i < input_div_container.childNodes.length) {
 
-			keysForFilter.push(input_div_container.childNodes[i].childNodes[0].value);
-			valuesForFilter.push(input_div_container.childNodes[i].childNodes[1].value);
+			keysForFilter.push(input_div_container.childNodes[i].childNodes[0].childNodes[0].value);
+			valuesForFilter.push(input_div_container.childNodes[i].childNodes[1].childNodes[0].value);
 
 			i++;
 		}
@@ -743,6 +749,8 @@ const visualize = (json) => {
 			}
 		})
 		.style("fill", function(d) {
+
+			console.log(valuesForFilter);
 
 			for(let i = 0; i < keysForFilter.length; i++) {
 
