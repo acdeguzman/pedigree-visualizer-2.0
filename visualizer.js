@@ -25,6 +25,10 @@ FEATURES
 
 const visualize = (json) => {
 
+	// assign the mainDiv to main_container variable for DOM manipulation
+	const main_container = document.getElementById("mainDiv");
+	main_container.className = 'col s12 m12 l12 xl12';
+	main_container.style.border = '1%;';
 	// storage of qualitative and quantitative value keys
 	let qualitative_value_keys = [];
 	let quantitative_value_keys = [];
@@ -52,8 +56,8 @@ const visualize = (json) => {
 						bottom: 20
 					},
 
-		width =		600,
-		height =	600; 
+		width =		700,
+		height =	700; 
 
 	// Set SVG size
 	const svg =	d3.select("#mainDiv").append("svg")
@@ -190,8 +194,6 @@ const visualize = (json) => {
 		.style("font-weight", "bold")
 		.text(function(d) {return d.data.name;});
 
-	// assign the mainDiv to main_container variable for DOM manipulation
-	const main_container = document.getElementById("mainDiv");
 	
 	/** FEATURE #2. Covariance Table **/
 
@@ -231,7 +233,6 @@ const visualize = (json) => {
 	covariance_table_div.appendChild(covariance_table_container);
 
 	const covariance_table_ui = document.createElement('table');
-	covariance_table_ui.className = "center-align";
 	covariance_table_ui.cellPadding = '5';
 	covariance_table_ui.style.cssText = "font-size: 12px; margin-bottom: 2%";
 
@@ -526,9 +527,9 @@ const visualize = (json) => {
 	filter_input.id = "filterCheckBox";
 
 	const filter_label = document.createElement("label");
+	filter_label.innerHTML = "Show filters";
+	filter_label.setAttribute("for", filter_input.id);
 
-	const filter_span = document.createElement("span");
-	filter_span.innerHTML = "Show filters";
 
 	// when filter_input is checked, the performance_div will appear, unchecking will make the performance_div disappear
 	
@@ -540,9 +541,8 @@ const visualize = (json) => {
 	performance_input.id = "performanceCheckBox";
 
 	const performance_label = document.createElement("label");
-
-	const performance_span = document.createElement("span");
-	performance_span.innerHTML = "Show Performance Table";	
+	performance_label.innerHTML = "Show Performance Table";	
+	performance_label.setAttribute("for", performance_input.id);
 
 	// when inbreeding_input is checked, the inbred entities in the SVG pedigree will be filled with red, unchecking will unfill
 	const inbreeding_p = document.createElement("p");
@@ -553,26 +553,22 @@ const visualize = (json) => {
 	inbreeding_input.id = "inbreedingCheckBox";
 
 	const inbreeding_label = document.createElement("label");
-
-	const inbreeding_span = document.createElement("span");
-	inbreeding_span.innerHTML = "Show Inbred Entities"
+	inbreeding_label.innerHTML = "Show Inbred Entities";
+	inbreeding_label.setAttribute("for", inbreeding_input.id);
 
 	const inbred_legend = document.createElement("p");
 	inbred_legend.innerHTML = '* The inbred entities will appear RED in the pedigree.';
 	inbred_legend.style.cssText = "font-family:Arial, Helvetica, sans-serif;font-size:10px;color:red;display:none";
 
 	checkbox_form.appendChild(filter_p);
+	filter_p.appendChild(filter_input);
 	filter_p.appendChild(filter_label);
-	filter_label.appendChild(filter_input);
-	filter_label.appendChild(filter_span);
 	checkbox_form.appendChild(performance_p);
+	performance_p.appendChild(performance_input);
 	performance_p.appendChild(performance_label);
-	performance_label.appendChild(performance_input);
-	performance_label.appendChild(performance_span);
 	checkbox_form.appendChild(inbreeding_p);
+	inbreeding_p.appendChild(inbreeding_input);
 	inbreeding_p.appendChild(inbreeding_label);
-	inbreeding_label.appendChild(inbreeding_input);
-	inbreeding_label.appendChild(inbreeding_span);
 	checkbox_form.appendChild(inbred_legend);
 
 	checkbox_div.appendChild(checkbox_form);
@@ -619,23 +615,23 @@ const visualize = (json) => {
 	filter_div.appendChild(input_div_container);
 
 	add_button.addEventListener('click', function() {
-		
+
 		flag = true;
 
 		const filter_input_div = document.createElement('div');
 		filter_input_div.className = 'col s12 m12 l12 xl12 input-field';
 
 		const select_key_div = document.createElement('div');
-		select_key_div.className = 'col s5 m5 l5 xl5 input-field';
+		select_key_div.className = 'col s5 m5 l5 xl5';
 
 		const select_key = document.createElement('select');
 		select_key.className = 'browser-default';
-		select_key.style.cssText = 'height: 1%; width: 45%; float: left;';
+		select_key.style.cssText = 'height: 5%; width: 45%; float: left;';
 
 		select_key_div.append(select_key);
 			
 		const select_value_div = document.createElement('div');
-		select_value_div.className = 'col s5 m5 l5 xl5 input-field';
+		select_value_div.className = 'col s5 m5 l5 xl5';
 
 		const select_value = document.createElement('select');
 		select_value.className = 'browser-default col s5 m5 l5 xl5';
@@ -858,7 +854,7 @@ const visualize = (json) => {
 
 		let curr_trait = Object.keys(qualitative_data_object)[i];
 
-		let trait_text = document.createElement("h6");
+		let trait_text = document.createElement("h5");
 		trait_text.innerHTML = curr_trait
 		trait_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
 		trait_text.style.paddingLeft = '1%';
@@ -884,7 +880,7 @@ const visualize = (json) => {
 
 		for(let j = 0; j < qualitative_data_object[curr_trait].length; j++) {
 
-			let trait_value = document.createElement("th");
+			let trait_value = document.createElement("td");
 			trait_value.innerHTML = Object.keys(qualitative_data_object[curr_trait][j])[0];
 			trait_value.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
 
@@ -991,19 +987,19 @@ const visualize = (json) => {
 	trait_col.innerHTML = 'Data';
 	trait_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
 
-	let min_col = document.createElement("th");
+	let min_col = document.createElement("td");
 	min_col.innerHTML = 'Minimum';
 	min_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
 
-	let max_col = document.createElement("th");
+	let max_col = document.createElement("td");
 	max_col.innerHTML = 'Maximum';
 	max_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
 
-	let ave_col = document.createElement("th");
+	let ave_col = document.createElement("td");
 	ave_col.innerHTML = 'Average';
 	ave_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
 	
-	let std_col = document.createElement("th");
+	let std_col = document.createElement("td");
 	std_col.innerHTML = 'Standard Deviation';
 	std_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
 
