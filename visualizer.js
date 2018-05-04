@@ -27,7 +27,7 @@ const visualize = (json) => {
 
 	// assign the mainDiv to main_container variable for DOM manipulation
 	const main_container = document.getElementById("mainDiv");
-	main_container.className = 'col s12 m12 l12 xl12';
+	// main_container.className = 'col s12 m12 l12 xl12';
 	main_container.style.border = '1%;';
 	// storage of qualitative and quantitative value keys
 	let qualitative_value_keys = [];
@@ -154,7 +154,7 @@ const visualize = (json) => {
 		.on("mouseover", (d) => {
 
 			// creates a table and  displays the ID of the node (for tooltip)
-			let animal_info = "<h6 class='center-align'> ID: " + d.data.name + "</h6><table>";
+			let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse: collapse; border:1px solid black;'>";
 
 			tooltipdiv.transition()
 				.duration(200)
@@ -163,13 +163,13 @@ const visualize = (json) => {
 			// adds each pairs of qualitative trait and its value to the table
 			for(let key in d.data.qualitative_info) {
 
-				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.qualitative_info[key] + "</td></tr>";
+				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 			}
 
 			// adds each pairs of quantitative trait and its value to the table
 			for(let key in d.data.quantitative_info) {
 
-				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.quantitative_info[key] + "</td></tr>";	
+				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 			}
 
 			animal_info = animal_info + "</table>"
@@ -201,13 +201,13 @@ const visualize = (json) => {
 
 	const required_data_div = document.createElement("div");
 	required_data_div.style.marginBottom = '2px';
-	required_data_div.className = "row";
+	// required_data_div.className = "row";
 
 	main_container.appendChild(required_data_div);
 
 	const covariance_table_div = document.createElement("div");
-	covariance_table_div.style.cssText = "border:1px solid #c6b89e; border-radius: 5px; margin-bottom: 5px;";
-	covariance_table_div.className = "col s12 m12 l12 xl12";
+	covariance_table_div.style.cssText = "border:1px solid #c6b89e; border-radius: 5px; margin-bottom: 5px; width: 100%;overflow:auto;";
+	// covariance_table_div.className = "col s12 m12 l12 xl12";
 
 	required_data_div.appendChild(covariance_table_div);
 
@@ -234,7 +234,7 @@ const visualize = (json) => {
 
 	const covariance_table_ui = document.createElement('table');
 	covariance_table_ui.cellPadding = '5';
-	covariance_table_ui.style.cssText = "font-size: 12px; margin-bottom: 2%";
+	covariance_table_ui.style.cssText = "font-size: 12px; margin-bottom: 2%;border:1px solid black; margin-left:1%;border-collapse:collapse;";
 
 	covariance_table_container.appendChild(covariance_table_ui);
 
@@ -384,7 +384,7 @@ const visualize = (json) => {
 		for(let j = 0; j < covariance_table[i].length; j++) {
 				
 			let covariance_header = document.createElement("td");
-			covariance_header.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.5;';
+			covariance_header.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.5;border:1px solid black;';
 
 			if(i == 0) {
 				
@@ -398,7 +398,7 @@ const visualize = (json) => {
 			else {
 
 				const covariance_col = document.createElement('td');
-				covariance_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 0.5;';
+				covariance_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 0.5;border:1px solid black;';
 
 				if(covariance_table[i][j] == -1) covariance_col.innerHTML = "";
 				else covariance_col.innerHTML = covariance_table[i][j];
@@ -413,8 +413,7 @@ const visualize = (json) => {
 	/** FEATURE #3. Inbreeding Coefficient **/
 
 	const show_inbreeding_div = document.createElement("div");
-	show_inbreeding_div.className = "col s12 m12 l12 xl12";
-	show_inbreeding_div.style.cssText = "border:1px solid #c6b89e;border-radius:5px; margin-bottom: 5px;";
+	show_inbreeding_div.style.cssText = "border:1px solid #c6b89e;border-radius:5px; margin-bottom: 5px;width:100%;overflow:auto;";
 
 	required_data_div.appendChild(show_inbreeding_div);
 
@@ -435,7 +434,7 @@ const visualize = (json) => {
 
 	const inbreeding_table = document.createElement('table');
 	inbreeding_table.cellPadding = '5';
-	inbreeding_table.style.cssText = "font-size:12px; margin-bottom:1%;";
+	inbreeding_table.style.cssText = "font-size:12px; margin-bottom:1%;border:1px solid black;border-collapse:collapse;margin-left:1%;";
 
 	show_inbreeding_table_container.appendChild(inbreeding_table);
 
@@ -445,11 +444,11 @@ const visualize = (json) => {
 
 	const inbred_header = document.createElement("td");
 	inbred_header.innerHTML = 'Inbred Entity';
-	inbred_header.style.fontFamily = 'Arial, Helvetica, sans-serif';
+	inbred_header.style.cssText = 'font-family: Arial, Helvetica, sans-serif; border:1px solid black;';
 
 	const inbreeding_coefficient = document.createElement("td");
 	inbreeding_coefficient.innerHTML = 'Inbreeding Coefficient';
-	inbreeding_coefficient.style.fontFamily = 'Arial, Helvetica, sans-serif';
+	inbreeding_coefficient.style.cssText = 'font-family: Arial, Helvetica, sans-serif; border:1px solid black;';
 
 	inbreeding_table_header.appendChild(inbred_header);
 	inbreeding_table_header.appendChild(inbreeding_coefficient);
@@ -496,11 +495,11 @@ const visualize = (json) => {
 
 		let entity_name_cell = document.createElement("td");
 		entity_name_cell.innerHTML = inbred_entities[i][0];
-		entity_name_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 1;';
+		entity_name_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 1;border:1px solid black;';
 
 		let coeff_cell = document.createElement("td");
 		coeff_cell.innerHTML = inbred_entities[i][1];
-		coeff_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 1;';
+		coeff_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 1;border:1px solid black;';
 
 		inbred_row.appendChild(entity_name_cell);
 		inbred_row.appendChild(coeff_cell);
@@ -511,7 +510,7 @@ const visualize = (json) => {
 	/** FEATURE #4 Toggleable Checkboxes **/
 
 	const checkbox_div = document.createElement("div");
-	checkbox_div.className = "col s4 m4 l4 xl12";
+	// checkbox_div.className = "col s4 m4 l4 xl12";
 	checkbox_div.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; padding-left: 10px;";
 
 	const checkbox_form = document.createElement("form");
@@ -523,13 +522,13 @@ const visualize = (json) => {
 
 	const filter_input = document.createElement("input");
 	filter_input.type = 'checkbox';
-	filter_input.className = "filled-in";
+	// filter_input.className = "filled-in";
 	filter_input.id = "filterCheckBox";
 
 	const filter_label = document.createElement("label");
 	filter_label.innerHTML = "Show filters";
 	filter_label.setAttribute("for", filter_input.id);
-
+	filter_label.style.cssText = 'font-family: Arial, Helvetica, sans-serif;';
 
 	// when filter_input is checked, the performance_div will appear, unchecking will make the performance_div disappear
 	
@@ -537,24 +536,26 @@ const visualize = (json) => {
 
 	const performance_input = document.createElement("input");
 	performance_input.type = 'checkbox';
-	performance_input.className = "filled-in";
+	// performance_input.className = "filled-in";
 	performance_input.id = "performanceCheckBox";
 
 	const performance_label = document.createElement("label");
 	performance_label.innerHTML = "Show Performance Table";	
 	performance_label.setAttribute("for", performance_input.id);
+	performance_label.style.cssText = 'font-family: Arial, Helvetica, sans-serif;';
 
 	// when inbreeding_input is checked, the inbred entities in the SVG pedigree will be filled with red, unchecking will unfill
 	const inbreeding_p = document.createElement("p");
 
 	const inbreeding_input = document.createElement("input");
 	inbreeding_input.type = 'checkbox';
-	inbreeding_input.className = "filled-in";
+	// inbreeding_input.className = "filled-in";
 	inbreeding_input.id = "inbreedingCheckBox";
 
 	const inbreeding_label = document.createElement("label");
 	inbreeding_label.innerHTML = "Show Inbred Entities";
 	inbreeding_label.setAttribute("for", inbreeding_input.id);
+	inbreeding_label.style.cssText = 'font-family: Arial, Helvetica, sans-serif;';
 
 	const inbred_legend = document.createElement("p");
 	inbred_legend.innerHTML = '* The inbred entities will appear RED in the pedigree.';
@@ -578,19 +579,20 @@ const visualize = (json) => {
 	/** FEATURE #5 Qualitative Data Filters **/
 
 	const filter_div = document.createElement('div');
-	filter_div.style.cssText = 	"border:1px solid #c6b89e;border-radius:5px;display:none;margin-bottom:5px;";
-	filter_div.className = 'col s12 m12 l12 xl12';
+	filter_div.style.cssText = 	"border:1px solid #c6b89e;border-radius:5px;display:none;margin-bottom:5px;width:100%;overflow:auto;height:250px;";
+	// filter_div.className = 'col s12 m12 l12 xl12';
 
 	main_container.appendChild(filter_div);
 
 	const filter_text = document.createElement("h4");
 	filter_text.innerHTML = "Qualitative Data Filter";
-	filter_text.style.cssText = "font-family:Arial, Helvetica, sans-serif;padding-left:1%";
+	filter_text.style.cssText = "font-family:Arial, Helvetica, sans-serif;padding-left:1%;";
 
 	filter_div.appendChild(filter_text);
 
 	const filter_buttons_div = document.createElement('div');
-	filter_buttons_div.className = 'col s12 m12 l12 xl12';
+	// filter_buttons_div.className = 'col s12 m12 l12 xl12';
+	filter_buttons_div.cssText = 'width:100%;';
 
 	// flag is used to monitor if there is already at least 1 filter (for displaying "Go Filter" button)
 	let flag = false;
@@ -598,19 +600,20 @@ const visualize = (json) => {
 	const add_button = document.createElement('button');
 	add_button.appendChild(document.createTextNode("Add Filters"));
 	add_button.type = "submit";
-	add_button.style.cssText =	"color:white;margin-left:1%;margin-bottom:1%;";
-	add_button.className = 'btn-flat btn-small light-blue darken-4';
+	add_button.style.cssText =	"color:white;margin-left:1%;margin-bottom:1%;background:steelblue;font-family:Arial, Helvetica, sans-serif;padding:0.5%;";
+	// add_button.className = 'btn-flat btn-small light-blue darken-4';
 
 	const filter_button = document.createElement('button');
 	filter_button.appendChild(document.createTextNode("Go Filter!"));
 	filter_button.type = 'submit';
-	filter_button.style.cssText =	"color:white;margin-right:1%;float:right";
-	filter_button.className = 'btn-flat btn-small green accent-4';
+	filter_button.style.cssText = "color:white;margin-right:1%;margin-bottom:1%;float:right;padding:0.5%;background:green;font-family:Arial, Helvetica, sans-serif;";
+	// filter_button.className = 'btn-flat btn-small green accent-4';
 
 	filter_buttons_div.appendChild(add_button);
 	filter_div.appendChild(filter_buttons_div);
 
 	const input_div_container = document.createElement("div");
+	input_div_container.style.cssText = "overflowY:auto; max-height:200px;";
 	
 	filter_div.appendChild(input_div_container);
 
@@ -619,23 +622,26 @@ const visualize = (json) => {
 		flag = true;
 
 		const filter_input_div = document.createElement('div');
-		filter_input_div.className = 'col s12 m12 l12 xl12 input-field';
+		// filter_input_div.className = 'col s12 m12 l12 xl12 input-field';
+		filter_input_div.style.cssText = 'width:100%;';
 
 		const select_key_div = document.createElement('div');
-		select_key_div.className = 'col s5 m5 l5 xl5';
+		// select_key_div.className = 'col s5 m5 l5 xl5';
+		select_key_div.style.cssText = 'width: 45%; margin-left:1%;';
 
 		const select_key = document.createElement('select');
-		select_key.className = 'browser-default';
-		select_key.style.cssText = 'height: 3%; width: 100%; float: left;';
+		// select_key.className = 'browser-default';
+		select_key.style.cssText = 'height: 3%; width: 100%; float:left;';
 
 		select_key_div.append(select_key);
 			
 		const select_value_div = document.createElement('div');
-		select_value_div.className = 'col s5 m5 l5 xl5';
+		// select_value_div.className = 'col s5 m5 l5 xl5';
+		select_value_div.style.cssText = 'width: 45%; margin-left:1%;float:left;';
 
 		const select_value = document.createElement('select');
-		select_value.className = 'browser-default';
-		select_value.style.cssText = 'height: 3%; width: 100%; float: left;';
+		// select_value.className = 'browser-default';
+		select_value.style.cssText = 'height: 3%; width: 100%;float:left;';
 
 		select_value_div.appendChild(select_value);
 
@@ -652,7 +658,7 @@ const visualize = (json) => {
 			const value_option = document.createElement('option');
 			value_option.value = qualitative_value_map[select_key.value][i];
 			value_option.innerHTML = qualitative_value_map[select_key.value][i];
-			select_value.appendChild(value_option)
+			select_value.appendChild(value_option);
 		}
 
 		select_key.addEventListener('change', function() {
@@ -666,14 +672,14 @@ const visualize = (json) => {
 				opt = document.createElement('option');
 				opt.value = qualitative_value_map[select_key.value][i];
 				opt.innerHTML = qualitative_value_map[select_key.value][i];
-				select_value.appendChild(opt)
+				select_value.appendChild(opt);
 			}
 		});
 
 		let delete_button = document.createElement('button');
 		delete_button.appendChild(document.createTextNode('x'));
-		delete_button.style.cssText =	"color:white; margin-right:1%; margin-left:1%; height: 1%; margin-bottom:1%; width: 2%; height: 2%;";
-		delete_button.className = 'btn-flat btn-small red darken-4';
+		delete_button.style.cssText =	"color:white; margin-right:1%; background: red;margin-left:1%; height: 2%; margin-bottom:1%; width: 2%; height: 2%;float:left;";
+		// delete_button.className = 'btn-flat btn-small red darken-4';
 		delete_button.addEventListener('click', function() {
 
 			if(this.parentNode.parentNode.childNodes.length == 1) {
@@ -698,7 +704,7 @@ const visualize = (json) => {
 		// resets the tree to default (all nodes with white fill)
 		if(inbreeding_input.checked == true) {
 
-			inbreeding_input.checked = false;
+			inbreeding_input.checked = false;	
 			inbred_legend.style.display = 'none';
 		}
 
@@ -766,7 +772,7 @@ const visualize = (json) => {
 		.on("mouseover", function(d) {
 
 			// creates a table and  displays the ID of the node (for tooltip)
-			let animal_info = "<h6 class='center-align'> ID: " + d.data.name + "</h6><table>";
+			let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse:collapse;'>";
 
 			tooltipdiv.transition()
 				.duration(200)
@@ -774,13 +780,13 @@ const visualize = (json) => {
 
 			for(let key in d.data.qualitative_info) {
 
-				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.qualitative_info[key] + "</td></tr>";
+				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 			}
 
 			// adds each pairs of quantitative trait and its value to the table
 			for(let key in d.data.quantitative_info) {
 
-				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.quantitative_info[key] + "</td></tr>";	
+				animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 			}
 
 			animal_info = animal_info + "</table>"
@@ -836,8 +842,8 @@ const visualize = (json) => {
 	// main_container.appendChild(performance_div);
 
 	let qualitative_data_container = document.createElement("div");
-	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;display:none;";
-	qualitative_data_container.className = 'col s12 m12 l12 xl12';
+	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;display:none;width:100%;overflow:auto;";
+	// qualitative_data_container.className = 'col s12 m12 l12 xl12';
 
 	let qualitative_text = document.createElement("h4");
 	qualitative_text.innerHTML = "Qualitative Data"
@@ -864,8 +870,7 @@ const visualize = (json) => {
 
 		let trait_table = document.createElement("table");
 		trait_table.cellPadding = '5';
-		trait_table.style.fontSize = '12px';
-		trait_table.style.marginBottom = '1%';
+		trait_table.style.cssText = 'font-size:12px;margin-bottom:1%;border-collapse:collapse;margin-left:1%;';
 
 		let trait_row = document.createElement("tr");
 		trait_row.style.cssText = 'line-height: 0.8;';	
@@ -874,7 +879,7 @@ const visualize = (json) => {
 
 		let traitword_text = document.createElement("th");
 		traitword_text.innerHTML = 'Data';
-		traitword_text.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		traitword_text.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 		trait_row.appendChild(traitword_text);
 
@@ -882,7 +887,7 @@ const visualize = (json) => {
 
 			let trait_value = document.createElement("td");
 			trait_value.innerHTML = Object.keys(qualitative_data_object[curr_trait][j])[0];
-			trait_value.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+			trait_value.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 			trait_row.appendChild(trait_value);
 		}
@@ -892,7 +897,7 @@ const visualize = (json) => {
 		trait_table.appendChild(count_row);
 
 		let count_text = document.createElement("th");
-		count_text.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		count_text.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 		count_text.innerHTML = 'Count';
 		count_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
 
@@ -903,7 +908,7 @@ const visualize = (json) => {
 		for(let j = 0; j < qualitative_data_object[curr_trait].length; j++) {
 
 			let trait_count = document.createElement("td");
-			trait_count.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+			trait_count.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 			trait_count.innerHTML = qualitative_data_object[curr_trait][j][Object.keys(qualitative_data_object[curr_trait][j])[0]];
 			trait_count.style.fontFamily = 'Arial. Helvetica, sans-serif';
 
@@ -960,8 +965,8 @@ const visualize = (json) => {
 	const quantitative_data_array = getQuantitativeDataCount();
 
 	let quantitative_data_container = document.createElement("div");
-	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;";
-	quantitative_data_container.className = 'col s12 m12 l12 xl12'
+	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;width:100%;overflow:auto;";
+	// quantitative_data_container.className = 'col s12 m12 l12 xl12'
 
 	main_container.appendChild(quantitative_data_container);
 
@@ -972,9 +977,8 @@ const visualize = (json) => {
 	quantitative_data_container.appendChild(quantitative_text);
 
 	let quanti_table = document.createElement("table");
-	quanti_table.style.fontSize = '12px';
-	quanti_table.style.marginBottom = '2%';
-	quanti_table.className = 'responsive-table striped';
+	quanti_table.style.cssText = 'font-size:12px;margin-bottom:2%;border-collapse:collapse;margin-left:1%;';
+	// quanti_table.className = 'responsive-table striped';
 
 	let quanti_head = document.createElement("thead");
 
@@ -985,23 +989,23 @@ const visualize = (json) => {
 
 	let trait_col = document.createElement("th");
 	trait_col.innerHTML = 'Data';
-	trait_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+	trait_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 	let min_col = document.createElement("td");
 	min_col.innerHTML = 'Minimum';
-	min_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+	min_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 	let max_col = document.createElement("td");
 	max_col.innerHTML = 'Maximum';
-	max_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+	max_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 	let ave_col = document.createElement("td");
 	ave_col.innerHTML = 'Average';
-	ave_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+	ave_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 	
 	let std_col = document.createElement("td");
 	std_col.innerHTML = 'Standard Deviation';
-	std_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+	std_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 	quanti_head.appendChild(headings_row);
 
@@ -1021,25 +1025,25 @@ const visualize = (json) => {
 
 		let quanti_trait = document.createElement("th");
 		quanti_trait.innerHTML = quantitative_data_array[i]['data'];
-		quanti_trait.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		quanti_trait.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 		quanti_row.appendChild(quanti_trait);
 
 		let min_cell = document.createElement("td");
 		min_cell.innerHTML = quantitative_data_array[i]['minimum'];
-		min_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		min_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 		let max_cell = document.createElement("td");
 		max_cell.innerHTML = quantitative_data_array[i]['maximum'];
-		max_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		max_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 		let mean_cell = document.createElement("td");
 		mean_cell.innerHTML = quantitative_data_array[i]['ave'].toFixed(4);
-		mean_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		mean_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 		
 		let std_cell = document.createElement("td");
 		std_cell.innerHTML = quantitative_data_array[i]['stdev'].toFixed(4);
-		std_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;';
+		std_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 		quanti_row.appendChild(min_cell);
 		quanti_row.appendChild(max_cell);
@@ -1100,7 +1104,7 @@ const visualize = (json) => {
 			.on("mouseover", function(d) {
 			
 				// creates a table and  displays the ID of the node (for tooltip)
-				let animal_info = "<h6 class='center-align'> ID: " + d.data.name + "</h6><table>";
+				let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse:collapse;'>";
 
 				tooltipdiv.transition()
 					.duration(200)
@@ -1108,13 +1112,13 @@ const visualize = (json) => {
 
 				for(let key in d.data.qualitative_info) {
 
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.qualitative_info[key] + "</td></tr>";
+					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 				}
 
 				// adds each pairs of quantitative trait and its value to the table
 				for(let key in d.data.quantitative_info) {
 
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.quantitative_info[key] + "</td></tr>";	
+					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 				}
 
 				animal_info = animal_info + "</table>"
@@ -1155,7 +1159,7 @@ const visualize = (json) => {
 			.on("mouseover", function(d) {
 
 				// creates a table and  displays the ID of the node (for tooltip)
-				let animal_info = "<h6 class='center-align'> ID: " + d.data.name + "</h6><table>";
+				let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse:collapse;'>";
 
 				tooltipdiv.transition()
 					.duration(200)
@@ -1163,13 +1167,13 @@ const visualize = (json) => {
 
 				for(let key in d.data.qualitative_info) {
 
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.qualitative_info[key] + "</td></tr>";
+					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 				}
 
 				// adds each pairs of quantitative trait and its value to the table
 				for(let key in d.data.quantitative_info) {
 
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5'>" + d.data.quantitative_info[key] + "</td></tr>";	
+					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 				}
 
 				animal_info = animal_info + "</table>"
