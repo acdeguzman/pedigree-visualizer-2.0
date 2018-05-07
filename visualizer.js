@@ -624,61 +624,196 @@ const visualize = (json) => {
 			const filter_input_div = document.createElement('div');
 			// filter_input_div.className = 'col s12 m12 l12 xl12 input-field';
 			filter_input_div.style.cssText = 'width:100%;';
-	
-			const select_key_div = document.createElement('div');
-			// select_key_div.className = 'col s5 m5 l5 xl5';
-			select_key_div.style.cssText = 'width: 45%; margin-left:1%;';
-	
-			const select_key = document.createElement('select');
-			// select_key.className = 'browser-default';
-			select_key.style.cssText = 'height: 3%; width: 100%; float:left;';
-	
-			select_key_div.append(select_key);
-				
-			const select_value_div = document.createElement('div');
-			// select_value_div.className = 'col s5 m5 l5 xl5';
-			select_value_div.style.cssText = 'width: 45%; margin-left:1%;float:left;';
-	
-			const select_value = document.createElement('select');
-			// select_value.className = 'browser-default';
-			select_value.style.cssText = 'height: 3%; width: 100%;float:left;';
-	
-			select_value_div.appendChild(select_value);
-	
+
+			input_div_container.appendChild(filter_input_div);
+		
+			const dropdown_key = document.createElement("div");
+			dropdown_key.className = "dropdown";
+			dropdown_key.style.cssText = 'width: 45%; margin-left:1%;';
+
+			const dropdown_key_select = document.createElement("div");
+			dropdown_key_select.className = "select";
+
+			const span_key = document.createElement("span");
+			span_key.innerHTML = "Select Filter";
+
+			dropdown_key.appendChild(dropdown_key_select);
+			dropdown_key_select.appendChild(span_key);
+
+			key_input = document.createElement("input");
+			key_input.type = 'hidden';
+			key_input.name = 'key';
+			// key_input.value = qualitative_value_keys[0];
+
+			dropdown_key.appendChild(key_input);
+
+			key_ul = document.createElement('ul');
+			key_ul.className = 'dropdown-menu';
+			key_ul.style.cssText = 'display:none;';
+
+			dropdown_key.appendChild(key_ul);
+
 			for(let i = 0; i < qualitative_value_keys.length; i++) {
 	
-				const key_option = document.createElement('option');
-				key_option.value = qualitative_value_keys[i];
-				key_option.innerHTML = qualitative_value_keys[i];
-				select_key.appendChild(key_option);
+				const key_li = document.createElement('li');
+				key_li.id = qualitative_value_keys[i];
+				key_li.innerHTML = qualitative_value_keys[i];
+				key_ul.appendChild(key_li);
 			}
-	
-			for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
-	
-				const value_option = document.createElement('option');
-				value_option.value = qualitative_value_map[select_key.value][i];
-				value_option.innerHTML = qualitative_value_map[select_key.value][i];
-				select_value.appendChild(value_option);
-			}
-	
-			select_key.addEventListener('change', function() {
-	
-				const selectLength = select_value.options.length;
-	
-				for(let i = select_value.options.length - 1; i >= 0; i--) select_value.remove(i);
-	
-				for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
-	
-					opt = document.createElement('option');
-					opt.value = qualitative_value_map[select_key.value][i];
-					opt.innerHTML = qualitative_value_map[select_key.value][i];
-					select_value.appendChild(opt);
-				}
+
+			dropdown_key.addEventListener('click', function () {
+
+				if(this.childNodes[2].style.display == 'none') this.childNodes[2].style.display = 'block';
+				else this.childNodes[2].style.display = 'none';
 			});
+
+			filter_input_div.appendChild(dropdown_key);
+
+			const dropdown_value = document.createElement("div");
+			dropdown_value.className = "dropdown";
+			dropdown_value.style.cssText = 'width: 45%; margin-left:1%;';
+
+			const dropdown_value_select = document.createElement("div");
+			dropdown_value_select.className = "select";
+
+			const span_value = document.createElement("span");
+			span_value.innerHTML = "Select Value";
+
+			dropdown_value.appendChild(dropdown_value_select);
+			dropdown_value_select.appendChild(span_value);
+
+			value_input = document.createElement("input");
+			value_input.type = 'hidden';
+			value_input.name = 'value';
+			// value_input.value = qualitative_value_map[key_input.value][0];
+
+			dropdown_value.appendChild(value_input);
+
+			value_ul = document.createElement('ul');
+			value_ul.className = 'dropdown-menu';
+			value_ul.style.cssText = 'display:none';
+
+			dropdown_value.appendChild(value_ul);
+
+			dropdown_value.addEventListener('click', function () {
+
+				let input_value = this.parentNode.childNodes[0].childNodes[1].value;
+				let values_length = this.childNodes[2].childNodes.length;
+
+				for(let j = values_length - 1; j >= 0; j--) this.childNodes[2].removeChild(this.childNodes[2].childNodes[j]);
+		
+				for(let k = 0; k < qualitative_value_map[input_value].length; k++) {
+	
+					opt = document.createElement('li');
+					opt.id = qualitative_value_map[input_value][k];
+					opt.innerHTML = qualitative_value_map[input_value][k];
+					this.childNodes[2].appendChild(opt);
+
+					opt.addEventListener('click', function() {
+
+						console.log('pasok');
+
+						this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
+						this.parentNode.parentNode.childNodes[1].value = this.id;
+					});
+
+				}
+
+				if(this.childNodes[2].style.display == 'none') this.childNodes[2].style.display = 'block';
+				else this.childNodes[2].style.display = 'none';
+			
+			});
+
+			filter_input_div.appendChild(dropdown_value);
+
+			let key_list = key_ul.childNodes;
+
+			for(let i = 0; i < key_list.length; i++) {
+
+				key_list[i].addEventListener('click', function() {
+
+		  			// console.log(this.parentNode.parentNode);
+		    		this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
+		      		this.parentNode.parentNode.childNodes[1].value = this.id;
+
+			      	const values_length = this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].length;
+			      	span_value.innerHTML = qualitative_value_map[this.id][0];
+			      	this.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].value = qualitative_value_map[this.id][0];
+
+			      	// console.log(value_ul.childNodes);
+					
+			      	if(this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].style.display == 'block') {
+
+						// console.log(this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2]);
+						this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].style.display = 'none'; 
+					}
+
+					for(let j = values_length - 1; j >= 0; j--) this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].removeChild(this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].childNodes[j]);
+		
+					for(let k = 0; k < qualitative_value_map[this.id].length; k++) {
+		
+						opt = document.createElement('li');
+						opt.id = qualitative_value_map[this.id][k];
+						opt.innerHTML = qualitative_value_map[this.id][k];
+						value_ul.appendChild(opt);
+					}
+		    	});
+			}
+
+			// const select_key_div = document.createElement('div');
+			// // select_key_div.className = 'col s5 m5 l5 xl5';
+			// select_key_div.style.cssText = 'width: 45%; margin-left:1%;';
+	
+			// const select_key = document.createElement('select');
+			// // select_key.className = 'browser-default';
+			// select_key.style.cssText = 'height: 3%; width: 100%; float:left;';
+	
+			// select_key_div.append(select_key);
+				
+			// const select_value_div = document.createElement('div');
+			// // select_value_div.className = 'col s5 m5 l5 xl5';
+			// select_value_div.style.cssText = 'width: 45%; margin-left:1%;float:left;';
+	
+			// const select_value = document.createElement('select');
+			// // select_value.className = 'browser-default';
+			// select_value.style.cssText = 'height: 3%; width: 100%;float:left;';
+	
+			// select_value_div.appendChild(select_value);
+	
+			// for(let i = 0; i < qualitative_value_keys.length; i++) {
+	
+			// 	const key_option = document.createElement('option');
+			// 	key_option.value = qualitative_value_keys[i];
+			// 	key_option.innerHTML = qualitative_value_keys[i];
+			// 	select_key.appendChild(key_option);
+			// }
+	
+			// for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
+	
+			// 	const value_option = document.createElement('option');
+			// 	value_option.value = qualitative_value_map[select_key.value][i];
+			// 	value_option.innerHTML = qualitative_value_map[select_key.value][i];
+			// 	select_value.appendChild(value_option);
+			// }
+	
+			// select_key.addEventListener('change', function() {
+	
+			// 	const selectLength = select_value.options.length;
+	
+			// 	for(let i = select_value.options.length - 1; i >= 0; i--) select_value.remove(i);
+	
+			// 	for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
+	
+			// 		opt = document.createElement('option');
+			// 		opt.value = qualitative_value_map[select_key.value][i];
+			// 		opt.innerHTML = qualitative_value_map[select_key.value][i];
+			// 		select_value.appendChild(opt);
+			// 	}
+			// });
 	
 			let delete_button = document.createElement('button');
 			delete_button.appendChild(document.createTextNode('x'));
-			delete_button.style.cssText =	"color:white; margin-right:1%; background: red;margin-left:1%; height: 2%; margin-bottom:1%; width: 2%; height: 2%;float:left;";
+			delete_button.style.cssText =	"color:white; margin-right:1%; background: red;margin-left:1%; height: 2%; margin-bottom:1%; width: 2%; height: 2%;";
 			// delete_button.className = 'btn-flat btn-small red darken-4';
 			delete_button.addEventListener('click', function() {
 	
@@ -690,10 +825,9 @@ const visualize = (json) => {
 				this.parentNode.parentNode.removeChild(this.parentNode);
 			});
 	
-			filter_input_div.appendChild(select_key_div);
-			filter_input_div.appendChild(select_value_div);
+			// filter_input_div.appendChild(select_key_div);
+			// filter_input_div.appendChild(select_value_div);
 			filter_input_div.appendChild(delete_button);
-			input_div_container.appendChild(filter_input_div);
 			
 			// check if there is at least one filter
 			if(flag) filter_buttons_div.appendChild(filter_button);
@@ -728,15 +862,18 @@ const visualize = (json) => {
 			let i = 0;
 	
 			let keysForFilter = [], valuesForFilter = [];	// will be used for traversing the tree
-	
+			
 			while(i < input_div_container.childNodes.length) {
 	
-				keysForFilter.push(input_div_container.childNodes[i].childNodes[0].childNodes[0].value);
-				valuesForFilter.push(input_div_container.childNodes[i].childNodes[1].childNodes[0].value);
+				keysForFilter.push(input_div_container.childNodes[i].childNodes[0].childNodes[1].value);
+				valuesForFilter.push(input_div_container.childNodes[i].childNodes[1].childNodes[1].value);
 	
 				i++;
 			}
-	
+		
+			console.log(keysForFilter);
+			console.log(valuesForFilter);
+
 			// fill nodes according to filter
 			node.append("circle")
 			.attr("r", 7)
@@ -751,8 +888,6 @@ const visualize = (json) => {
 				}
 			})
 			.style("fill", function(d) {
-	
-				console.log(valuesForFilter);
 	
 				for(let i = 0; i < keysForFilter.length; i++) {
 	
