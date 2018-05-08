@@ -159,7 +159,7 @@ const visualize = (json) => {
 			.on("mouseover", (d) => {
 	
 				// creates a table and  displays the ID of the node (for tooltip)
-				let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
+				let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 1'><th colspan = '2' style='padding: 7px 7px; line-height: 1;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 				tooltipdiv.transition()
 					.duration(200)
@@ -389,7 +389,7 @@ const visualize = (json) => {
 			for(let j = 0; j < covariance_table[i].length; j++) {
 					
 				let covariance_header = document.createElement("td");
-				covariance_header.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.5;border:1px solid black;';
+				covariance_header.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 1;border:1px solid black;';
 	
 				if(i == 0) {
 					
@@ -403,7 +403,7 @@ const visualize = (json) => {
 				else {
 	
 					const covariance_col = document.createElement('td');
-					covariance_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 0.5;border:1px solid black;';
+					covariance_col.style.cssText = 'font-family: Arial, Helvetica, sans-serif;padding: 7px 7px; line-height: 1;border:1px solid black;';
 	
 					if(covariance_table[i][j] == -1) covariance_col.innerHTML = "";
 					else covariance_col.innerHTML = covariance_table[i][j];
