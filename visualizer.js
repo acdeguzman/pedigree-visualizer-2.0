@@ -61,8 +61,8 @@ const visualize = (json) => {
 							bottom: 20
 						},
 	
-			width =		700,
-			height =	700; 
+			width =		1000,
+			height =	600; 
 	
 		// Set SVG size
 		const svg =	d3.select("#mainDiv").append("svg")
@@ -70,7 +70,8 @@ const visualize = (json) => {
 						.attr("height", screen.height - 120),
 			g	=	svg.append("g")
 						.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
+		
+		console.log(svg);
 		// Set tree dimensions
 		const treemap = d3.tree().size([height, width]);
 	
@@ -943,6 +944,10 @@ const visualize = (json) => {
 			});
 	
 		});
+
+		const svg_sect = document.getElementsByTagName('svg')[0];
+
+		svg_sect.scrollIntoView();
 	
 		/** FEATURE #6 Performance Table **/
 	
