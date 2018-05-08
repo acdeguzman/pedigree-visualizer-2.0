@@ -27,8 +27,13 @@ const visualize = (json) => {
 	
 		// assign the mainDiv to main_container variable for DOM manipulation
 		const main_container = document.getElementById("mainDiv");
+
+		main_container.innerHTML = '';
+		// console.log(main_container.childNodes);
+
 		// main_container.className = 'col s12 m12 l12 xl12';
 		main_container.style.border = '1%;';
+
 		// storage of qualitative and quantitative value keys
 		let qualitative_value_keys = [];
 		let quantitative_value_keys = [];
@@ -154,7 +159,7 @@ const visualize = (json) => {
 			.on("mouseover", (d) => {
 	
 				// creates a table and  displays the ID of the node (for tooltip)
-				let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse: collapse; border:1px solid black;'>";
+				let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 				tooltipdiv.transition()
 					.duration(200)
@@ -186,13 +191,13 @@ const visualize = (json) => {
 			});
 	
 		// Add text(id) to node
-		node.append("text")
-			.attr("dy", ".20em")
-			.attr("x", (d) => { return d.children ? -10 : 10;})
-			.style("text-anchor", function(d) { return d.children ? "end" : "start";})
-			.style("font-size", "13px")
-			.style("font-weight", "bold")
-			.text(function(d) {return d.data.name;});
+		// node.append("text")
+		// 	.attr("dy", ".20em")
+		// 	.attr("x", (d) => { return d.children ? -10 : 10;})
+		// 	.style("text-anchor", function(d) { return d.children ? "end" : "start";})
+		// 	.style("font-size", "13px")
+		// 	.style("font-weight", "bold")
+		// 	.text(function(d) {return d.data.name;});
 	
 		
 		/** FEATURE #2. Covariance Table **/
@@ -907,7 +912,7 @@ const visualize = (json) => {
 			.on("mouseover", function(d) {
 	
 				// creates a table and  displays the ID of the node (for tooltip)
-				let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse:collapse;'>";
+				let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 				tooltipdiv.transition()
 					.duration(200)
@@ -1239,7 +1244,7 @@ const visualize = (json) => {
 				.on("mouseover", function(d) {
 				
 					// creates a table and  displays the ID of the node (for tooltip)
-					let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse:collapse;'>";
+					let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 					tooltipdiv.transition()
 						.duration(200)
@@ -1294,7 +1299,7 @@ const visualize = (json) => {
 				.on("mouseover", function(d) {
 	
 					// creates a table and  displays the ID of the node (for tooltip)
-					let animal_info = "<h4 style='text-align:center;'> ID: " + d.data.name + "</h4><table style='border-collapse:collapse;'>";
+					let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 					tooltipdiv.transition()
 						.duration(200)
