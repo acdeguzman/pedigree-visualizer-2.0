@@ -1033,9 +1033,11 @@ const pediview = (json) => {
 	
 				quantitative_data_object['minimum'] = min;
 				quantitative_data_object['maximum'] = max;
-	
+				
 				mean = total/count;
-		
+				
+				console.log(count);
+
 				console.log(mean);
 
 				quantitative_data_object['ave'] = mean;
