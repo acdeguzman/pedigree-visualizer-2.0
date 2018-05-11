@@ -23,7 +23,7 @@ FEATURES
 
 **/
 
-const visualize = (json) => {
+const pediview = (json) => {
 	
 		// assign the mainDiv to main_container variable for DOM manipulation
 		const main_container = document.getElementById("mainDiv");
@@ -61,8 +61,8 @@ const visualize = (json) => {
 							bottom: 20
 						},
 	
-			width =		1000,
-			height =	600; 
+			width =		700,
+			height =	700; 
 	
 		// Set SVG size
 		const svg =	d3.select("#mainDiv").append("svg")
@@ -71,7 +71,6 @@ const visualize = (json) => {
 			g	=	svg.append("g")
 						.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		
-		console.log(svg);
 		// Set tree dimensions
 		const treemap = d3.tree().size([height, width]);
 	
@@ -83,7 +82,9 @@ const visualize = (json) => {
 		// Tooltip feature
 		const tooltipdiv = d3.select("#mainDiv").append("div")
 								.attr("class", "tooltip")
-								.style("opacity", 0);
+								.style("opacity", 0)
+								.style('display', 'none')
+								.style('position', 'relative');
 	
 		// Add links to the nodes
 		const link =	g.selectAll(".link")
@@ -164,25 +165,26 @@ const visualize = (json) => {
 	
 				tooltipdiv.transition()
 					.duration(200)
-					.style("opacity", 0.9);
+					.style("opacity", 0.9)
+					.style('display', 'inline');
 	
 				// adds each pairs of qualitative trait and its value to the table
 				for(let key in d.data.qualitative_info) {
 	
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
+					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 				}
 	
 				// adds each pairs of quantitative trait and its value to the table
 				for(let key in d.data.quantitative_info) {
 	
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
+					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 				}
 	
 				animal_info = animal_info + "</table>"
-	
+
 				tooltipdiv.html(animal_info)
-					.style("left", (d3.event.pageX) + "px")
-					.style("top", (d3.event.pageY - 28) + "px");
+					.style("left", (d3.event.offsetX) + "px")
+					.style("top", (d3.event.offsetY - 28) + "px");
 			})
 			.on("mouseout", (d) => {
 	
@@ -192,13 +194,14 @@ const visualize = (json) => {
 			});
 	
 		// Add text(id) to node
-		// node.append("text")
-		// 	.attr("dy", ".20em")
-		// 	.attr("x", (d) => { return d.children ? -10 : 10;})
-		// 	.style("text-anchor", function(d) { return d.children ? "end" : "start";})
-		// 	.style("font-size", "13px")
-		// 	.style("font-weight", "bold")
-		// 	.text(function(d) {return d.data.name;});
+		node.append("text")
+			.attr("dy", ".20em")
+			.attr("x", (d) => { return d.children ? -10 : 10;})
+			.attr("y", (d) => {return 20;})
+			.style("text-anchor", function(d) { return d.children ? "start" : "end";})
+			.style("font-size", "12px")
+			.style("font-weight", "bold")
+			.text(function(d) {return d.data.name;});
 	
 		
 		/** FEATURE #2. Covariance Table **/
@@ -717,8 +720,6 @@ const visualize = (json) => {
 
 					opt.addEventListener('click', function() {
 
-						console.log('pasok');
-
 						this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
 						this.parentNode.parentNode.childNodes[1].value = this.id;
 					});
@@ -765,57 +766,6 @@ const visualize = (json) => {
 					}
 		    	});
 			}
-
-			// const select_key_div = document.createElement('div');
-			// // select_key_div.className = 'col s5 m5 l5 xl5';
-			// select_key_div.style.cssText = 'width: 45%; margin-left:1%;';
-	
-			// const select_key = document.createElement('select');
-			// // select_key.className = 'browser-default';
-			// select_key.style.cssText = 'height: 3%; width: 100%; float:left;';
-	
-			// select_key_div.append(select_key);
-				
-			// const select_value_div = document.createElement('div');
-			// // select_value_div.className = 'col s5 m5 l5 xl5';
-			// select_value_div.style.cssText = 'width: 45%; margin-left:1%;float:left;';
-	
-			// const select_value = document.createElement('select');
-			// // select_value.className = 'browser-default';
-			// select_value.style.cssText = 'height: 3%; width: 100%;float:left;';
-	
-			// select_value_div.appendChild(select_value);
-	
-			// for(let i = 0; i < qualitative_value_keys.length; i++) {
-	
-			// 	const key_option = document.createElement('option');
-			// 	key_option.value = qualitative_value_keys[i];
-			// 	key_option.innerHTML = qualitative_value_keys[i];
-			// 	select_key.appendChild(key_option);
-			// }
-	
-			// for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
-	
-			// 	const value_option = document.createElement('option');
-			// 	value_option.value = qualitative_value_map[select_key.value][i];
-			// 	value_option.innerHTML = qualitative_value_map[select_key.value][i];
-			// 	select_value.appendChild(value_option);
-			// }
-	
-			// select_key.addEventListener('change', function() {
-	
-			// 	const selectLength = select_value.options.length;
-	
-			// 	for(let i = select_value.options.length - 1; i >= 0; i--) select_value.remove(i);
-	
-			// 	for(let i = 0; i < qualitative_value_map[select_key.value].length; i++) {
-	
-			// 		opt = document.createElement('option');
-			// 		opt.value = qualitative_value_map[select_key.value][i];
-			// 		opt.innerHTML = qualitative_value_map[select_key.value][i];
-			// 		select_value.appendChild(opt);
-			// 	}
-			// });
 	
 			let delete_button = document.createElement('button');
 			delete_button.appendChild(document.createTextNode('x'));
@@ -877,8 +827,6 @@ const visualize = (json) => {
 				i++;
 			}
 		
-			console.log(keysForFilter);
-			console.log(valuesForFilter);
 
 			// fill nodes according to filter
 			node.append("circle")
@@ -921,20 +869,20 @@ const visualize = (json) => {
 	
 				for(let key in d.data.qualitative_info) {
 	
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
+					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 				}
 	
 				// adds each pairs of quantitative trait and its value to the table
 				for(let key in d.data.quantitative_info) {
 	
-					animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
+					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 				}
 	
 				animal_info = animal_info + "</table>"
 	
 				tooltipdiv.html(animal_info)
-					.style("left", (d3.event.pageX) + "px")
-					.style("top", (d3.event.pageY - 28) + "px");
+					.style("left", (d3.event.offsetX) + "px")
+					.style("top", (d3.event.offsetY - 28) + "px");
 			})
 			.on("mouseout", function(d) {
 	
@@ -1249,7 +1197,7 @@ const visualize = (json) => {
 				.on("mouseover", function(d) {
 				
 					// creates a table and  displays the ID of the node (for tooltip)
-					let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
+					let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 1;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 					tooltipdiv.transition()
 						.duration(200)
@@ -1257,20 +1205,20 @@ const visualize = (json) => {
 	
 					for(let key in d.data.qualitative_info) {
 	
-						animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
+						animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 					}
 	
 					// adds each pairs of quantitative trait and its value to the table
 					for(let key in d.data.quantitative_info) {
 	
-						animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
+						animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 					}
 	
 					animal_info = animal_info + "</table>"
 	
 					tooltipdiv.html(animal_info)
-						.style("left", (d3.event.pageX) + "px")
-						.style("top", (d3.event.pageY - 28) + "px");
+						.style("left", (d3.event.offsetX) + "px")
+						.style("top", (d3.event.offsetY - 28) + "px");
 				})
 				.on("mouseout", function(d) {
 	
@@ -1304,7 +1252,7 @@ const visualize = (json) => {
 				.on("mouseover", function(d) {
 	
 					// creates a table and  displays the ID of the node (for tooltip)
-					let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
+					let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 1;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 	
 					tooltipdiv.transition()
 						.duration(200)
@@ -1312,20 +1260,20 @@ const visualize = (json) => {
 	
 					for(let key in d.data.qualitative_info) {
 	
-						animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
+						animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
 					}
 	
 					// adds each pairs of quantitative trait and its value to the table
 					for(let key in d.data.quantitative_info) {
 	
-						animal_info = animal_info + "<tr style='line-height: 0.5'><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 0.5;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
+						animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
 					}
 	
 					animal_info = animal_info + "</table>"
 	
 					tooltipdiv.html(animal_info)
-						.style("left", (d3.event.pageX) + "px")
-						.style("top", (d3.event.pageY - 28) + "px");
+						.style("left", (d3.event.offsetX) + "px")
+						.style("top", (d3.event.offsetY - 28) + "px");
 				})
 				.on("mouseout", function(d) {
 	
