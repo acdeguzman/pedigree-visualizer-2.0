@@ -153,7 +153,7 @@ const pediview = (json) => {
 				for(let key in d.data.qualitative_info) {
 	
 					if(key == "sex") {
-						if(d.data.qualitative_info[key] == "Male") return "#1b77b8";
+						if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
 						else return "#f5a905";
 					}
 				}
@@ -805,7 +805,7 @@ const pediview = (json) => {
 				for(let key in d.data.qualitative_info) {
 	
 					if(key == "sex") {
-						if(d.data.qualitative_info[key] == "Male") return "#1b77b8";
+						if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
 						else return "#f5a905";
 					}
 				}
@@ -836,7 +836,7 @@ const pediview = (json) => {
 				for(let key in d.data.qualitative_info) {
 	
 					if(key == "sex") {
-						if(d.data.qualitative_info[key] == "Male") return "#1b77b8";
+						if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
 						else return "#f5a905";
 					}
 				}
@@ -851,8 +851,8 @@ const pediview = (json) => {
 	
 							if(d.data.qualitative_info[key].toLowerCase() == valuesForFilter[i].toLowerCase()) {
 	
-								if(d.data.qualitative_info.sex == "Male") return "#1b77b8";
-								else if(d.data.qualitative_info.sex == "Female") return "#f5a905";
+								if(d.data.qualitative_info.sex.toLowerCase() == "male") return "#1b77b8";
+								else if(d.data.qualitative_info.sex.toLowerCase() == "female") return "#f5a905";
 							}
 						}
 					}
@@ -1035,16 +1035,20 @@ const pediview = (json) => {
 				quantitative_data_object['maximum'] = max;
 	
 				mean = total/count;
-	
+		
+				console.log(mean);
+
 				quantitative_data_object['ave'] = mean;
 	
 				for(let j = 0; j < entities_tree.length; j++) {
 	
 					std += Math.pow((entities_tree[j].quantitative_info[quantitative_value_keys[i]] - mean), 2);
 				}
-	
+
 				std = Math.sqrt(std/(count-1));
-	
+		
+				console.log(std);
+
 				quantitative_data_object['stdev'] = std;
 	
 				min = 9999; max = 0; mean = 0; std = 0; total = 0;
@@ -1182,7 +1186,7 @@ const pediview = (json) => {
 					for(let key in d.data.qualitative_info) {
 	
 						if(key == "sex") {
-							if(d.data.qualitative_info[key] == "Male") return "#1b77b8";
+							if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
 							else return "#f5a905";
 						}
 					}
@@ -1240,7 +1244,7 @@ const pediview = (json) => {
 					for(let key in d.data.qualitative_info) {
 	
 						if(key == "sex") {
-							if(d.data.qualitative_info[key] == "Male") return "#1b77b8";
+							if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
 							else return "#f5a905";
 						}
 					}
