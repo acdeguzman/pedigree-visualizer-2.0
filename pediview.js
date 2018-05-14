@@ -4,7 +4,7 @@ PediView.JS
 
 A Javascript library for displaying the following data:
 	
-	1. family tree of the JSON pedigree input,
+	1. pedigree SVG of the data in the JSON input,
 	2. covariance table of the entities in the pedigree, and
 	3. inbred entities in the tree
 
@@ -21,6 +21,11 @@ FEATURES
 	5. Qualitative Data Filters
 	6. Performance Table
 
+
+Created by:
+	Adriell Dane C. de Guzman
+	GMail: 	adcdeguzman
+	Github: acdeguzman
 **/
 
 const visualize = (json) => {
@@ -82,7 +87,7 @@ const visualize = (json) => {
 							.attr("class", "tooltip")
 							.style("opacity", 0)
 							.style('display', 'none')
-							.style('position', 'relative');
+							.style('position', 'inline');
 
 	// Add links to the nodes
 	const link =	g.selectAll(".link")
@@ -142,55 +147,62 @@ const visualize = (json) => {
 						entities_tree.push(d.data);
 					});
 
-	// Add circle to node
-	node.append("circle")
-		.attr("r", 7)
-		.style("stroke", (d) => {
+	// function drawNodes() adds nodes to the tree with its corresponding tooltip containing node data
+	const drawNodes = () => {	
+	
+		// Add circle to node
+		node.append("circle")
+			.attr("r", 7)
+			.style("stroke", (d) => {
 
-			// colors the outline of the circle of the nodes depending on the sex of the entity
-			for(let key in d.data.qualitative_info) {
+				// colors the outline of the circle of the nodes depending on the sex of the entity
+				for(let key in d.data.qualitative_info) {
 
-				if(key == "sex") {
-					if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
-					else return "#f5a905";
+					if(key == "sex") {
+						if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
+						else return "#f5a905";
+					}
 				}
-			}
-		})
-		.on("mouseover", (d) => {
+			})
+			.style("fill", "white")
+			.on("mouseover", (d) => {
 
-			// creates a table and  displays the ID of the node (for tooltip)
-			let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 1'><th colspan = '2' style='padding: 7px 7px; line-height: 1;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
+				// creates a table and  displays the ID of the node (for tooltip)
+				let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 1'><th colspan = '2' style='padding: 7px 7px; line-height: 1;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
 
-			tooltipdiv.transition()
-				.duration(200)
-				.style("opacity", 0.9)
-				.style('display', 'inline');
+				tooltipdiv.transition()
+					.duration(200)
+					.style("opacity", 0.9)
+					.style('display', 'inline');
 
-			// adds each pairs of qualitative trait and its value to the table
-			for(let key in d.data.qualitative_info) {
+				// adds each pairs of qualitative trait and its value to the table
+				for(let key in d.data.qualitative_info) {
 
-				animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
-			}
+					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
+				}
 
-			// adds each pairs of quantitative trait and its value to the table
-			for(let key in d.data.quantitative_info) {
+				// adds each pairs of quantitative trait and its value to the table
+				for(let key in d.data.quantitative_info) {
 
-				animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
-			}
+					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
+				}
 
-			animal_info = animal_info + "</table>"
+				animal_info = animal_info + "</table>"
 
-			// generates the tooltip for each node in the pedigree
-			tooltipdiv.html(animal_info)
-				.style("left", (d3.event.offsetX) + "px")
-				.style("top", (d3.event.offsetY - 28) + "px");
-		})
-		.on("mouseout", (d) => {
+				// generates the tooltip for each node in the pedigree
+				tooltipdiv.html(animal_info)
+					.style("left", (d3.event.offsetX) + "px")
+					.style("top", (d3.event.offsetY - 28) + "px");
+			})
+			.on("mouseout", (d) => {
 
-			tooltipdiv.transition()
-				.duration(500)
-				.style("opacity", 0);
-		});
+				tooltipdiv.transition()
+					.duration(500)
+					.style("opacity", 0);
+			});
+	}
+
+	drawNodes();
 
 	// Add text(id) to node
 	node.append("text")
@@ -465,11 +477,13 @@ const visualize = (json) => {
 		const inbred_entities = [];
 		let inbreed_rows = [];
 
+		// start at index 1 because all elements at index 0 are entity names
 		for(let i = 1; i < covariance_table.length; i++) {
 			for(let j = 1; j < covariance_table[i].length; j++) {
 
 				if(i == j) {
 
+					// check if the values at the diagonal, subtracted by 1, is greater than 0 (means inbred)
 					if(covariance_table[i][j] - 1 >  0) {
 
 						let entity_name = covariance_table[0][j];
@@ -662,7 +676,7 @@ const visualize = (json) => {
 		}
 
 		// reverts the display of the counterpart dropdown of the current key dropdown
-		dropdown_key.addEventListener('click', () => {
+		dropdown_key.addEventListener('click', function() {
 
 			if(this.childNodes[2].style.display == 'none') this.childNodes[2].style.display = 'block';
 			else this.childNodes[2].style.display = 'none';
@@ -696,7 +710,8 @@ const visualize = (json) => {
 
 		dropdown_value.appendChild(value_ul);
 
-		dropdown_value.addEventListener('click', () => {
+
+		dropdown_value.addEventListener('click', function() {
 
 			let input_value = this.parentNode.childNodes[0].childNodes[1].value;
 			let values_length = this.childNodes[2].childNodes.length;
@@ -712,7 +727,7 @@ const visualize = (json) => {
 				this.childNodes[2].appendChild(opt);
 
 				// assigns the value of the dropdown_value to the selected li
-				opt.addEventListener('click', () => {
+				opt.addEventListener('click', function() {
 
 					this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
 					this.parentNode.parentNode.childNodes[1].value = this.id;
@@ -731,7 +746,7 @@ const visualize = (json) => {
 
 		for(let i = 0; i < key_list.length; i++) {
 
-			key_list[i].addEventListener('click', () => {
+			key_list[i].addEventListener('click', function() {
 
 	    		this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
 	      		this.parentNode.parentNode.childNodes[1].value = this.id;
@@ -758,7 +773,7 @@ const visualize = (json) => {
 		let delete_button = document.createElement('button');
 		delete_button.appendChild(document.createTextNode('x'));
 		delete_button.style.cssText = "color:white; margin-right:1%; background: red;margin-left:1%; height: 2%; margin-bottom:1%; width: 2%; height: 2%;";
-		delete_button.addEventListener('click', () => {
+		delete_button.addEventListener('click', function() {
 
 			if(this.parentNode.parentNode.childNodes.length == 1) {
 
@@ -774,7 +789,7 @@ const visualize = (json) => {
 		if(flag) filter_buttons_div.appendChild(filter_button);
 	});
 
-	filter_button.addEventListener('click', () => {
+	filter_button.addEventListener('click', function() {
 
 		// resets the tree to default (all nodes with white fill)
 		if(inbreeding_input.checked == true) {
@@ -880,6 +895,8 @@ const visualize = (json) => {
 
 	/** FEATURE #6 Performance Table **/
 
+	// function getQualitativeDataCount() acquires every key in the qualitative data and tracks the count for each possible
+	// value of each key
 	const getQualitativeDataCount = () => {	// return JSON of the qualitative data of the pedigree
 
 		let qualitative_data_object = {};
@@ -887,15 +904,18 @@ const visualize = (json) => {
 
 		for(let i = 0; i < qualitative_value_keys.length; i++) {
 
+			// store each qualitative data key in the qualitative_data_object as keys
 			qualitative_data_object[qualitative_value_keys[i]] = [];
 
+			// traverese and count each possible trait value of each qualitative data key
 			for(let j = 0; j < qualitative_value_map[qualitative_value_keys[i]].length; j++) {
 
 				let trait_count_pair = {};
 
 				for(let x = 0; x < entities_tree.length; x++) {
 
-					if(entities_tree[x].qualitative_info[qualitative_value_keys[i]] == qualitative_value_map[qualitative_value_keys[i]][j]) count++;
+					if(entities_tree[x].qualitative_info[qualitative_value_keys[i]] == qualitative_value_map[qualitative_value_keys[i]][j])
+						count++;
 				}
 
 				trait_count_pair[qualitative_value_map[qualitative_value_keys[i]][j]] = count;
@@ -984,7 +1004,8 @@ const visualize = (json) => {
 		qualitative_data_container.appendChild(trait_table);
 	}
 
-	const getQuantitativeDataCount = () => {	// returns array of quantitative data
+	// function getQuantitativeDataCount() gets the min, max, mean, and standard deviation of each quantitative data trait
+	const getQuantitativeDataCount = () => {	// returns array of quantitative Data
 
 		let quantitative_data_array = [];
 		let mean = 0, max = 0, min = 9999, std = 0, total = 0;
@@ -1001,6 +1022,7 @@ const visualize = (json) => {
 
 				let current_value = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
 
+				// parse the value to float if the value in the JSON is in string type
 				if(typeof(entities_tree[j].quantitative_info[quantitative_value_keys[i]]) == 'string')
 					current_value = parseFloat(entities_tree[j].quantitative_info[quantitative_value_keys[i]]);
 
@@ -1217,54 +1239,7 @@ const visualize = (json) => {
 
 			inbred_legend.style.display = 'none';
 
-			node.append("circle")
-			.attr("r", 7)
-			.style("stroke", (d) => {
-
-				for(let key in d.data.qualitative_info) {
-
-					if(key == "sex") {
-						if(d.data.qualitative_info[key].toLowerCase() == "male") return "#1b77b8";
-						else return "#f5a905";
-					}
-				}
-			})
-			.style("fill", (d) => {
-
-				return "white";
-			})
-			.on("mouseover", (d) => {
-
-				// creates a table and  displays the ID of the node (for tooltip)
-				let animal_info = "<table style='border-collapse: collapse; border:1px solid black;'><tr style='line-height: 0.5'><th colspan = '2' style='padding: 7px 7px; line-height: 1;border:1px solid black;'> ID: " + d.data.name + "</th></tr>";
-
-				tooltipdiv.transition()
-					.duration(200)
-					.style("opacity", 0.9);
-
-				for(let key in d.data.qualitative_info) {
-
-					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.qualitative_info[key] + "</td></tr>";
-				}
-
-				// adds each pairs of quantitative trait and its value to the table
-				for(let key in d.data.quantitative_info) {
-
-					animal_info = animal_info + "<tr style='line-height: 1'><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + key + "</td><td style='padding: 7px 7px; line-height: 1;border:1px solid black;'>" + d.data.quantitative_info[key] + "</td></tr>";	
-				}
-
-				animal_info = animal_info + "</table>"
-
-				tooltipdiv.html(animal_info)
-					.style("left", (d3.event.offsetX) + "px")
-					.style("top", (d3.event.offsetY - 28) + "px");
-			})
-			.on("mouseout", (d) => {
-
-				tooltipdiv.transition()
-					.duration(500)
-					.style("opacity", 0);
-			});
+			drawNodes();
 		}
 	});
 }
