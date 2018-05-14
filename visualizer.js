@@ -182,6 +182,9 @@ const pediview = (json) => {
 	
 				animal_info = animal_info + "</table>"
 
+				// console.log(d3.event);
+				// console.log(svg.getBoundingClientRect());
+
 				tooltipdiv.html(animal_info)
 					.style("left", (d3.event.offsetX) + "px")
 					.style("top", (d3.event.offsetY - 28) + "px");
@@ -1016,19 +1019,24 @@ const pediview = (json) => {
 			let quantitative_data_array = [];
 			let mean = 0, max = 0, min = 9999, std = 0, total = 0;
 			let count = entities_tree.length;
-	
+			let quantitative_data_object;
+
 			for(let i = 0; i < quantitative_value_keys.length; i++) {
-	
-				let quantitative_data_object = {};
-	
+				
+				quantitative_data_object = {};
+
 				quantitative_data_object['data'] = quantitative_value_keys[i];
 	
 				for(let j = 0; j < entities_tree.length; j++) {
 	
 					total += entities_tree[j].quantitative_info[quantitative_value_keys[i]];
-	
-					if(entities_tree[j].quantitative_info[quantitative_value_keys[i]] > max) max = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
-					if(entities_tree[j].quantitative_info[quantitative_value_keys[i]] < min) min = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
+					
+					console.log(entities_tree[j].quantitative_info[quantitative_value_keys[i]]);
+
+					if(entities_tree[j].quantitative_info[quantitative_value_keys[i]] > max)
+						max = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
+					if(entities_tree[j].quantitative_info[quantitative_value_keys[i]] < min)
+						min = entities_tree[j].quantitative_info[quantitative_value_keys[i]];
 				}
 	
 				quantitative_data_object['minimum'] = min;
@@ -1036,9 +1044,9 @@ const pediview = (json) => {
 				
 				mean = total/count;
 				
-				console.log(count);
+				// console.log(count);
 
-				console.log(mean);
+				// console.log(mean);
 
 				quantitative_data_object['ave'] = mean;
 	
@@ -1048,8 +1056,6 @@ const pediview = (json) => {
 				}
 
 				std = Math.sqrt(std/(count-1));
-		
-				console.log(std);
 
 				quantitative_data_object['stdev'] = std;
 	
