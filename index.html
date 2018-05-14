@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+	<!-- <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
@@ -20,8 +20,8 @@
 	
 	<script src="d3/d3.js"></script>
 	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
-	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-	<script src="visualizer.js"></script>
+	<!-- <script type="text/javascript" src="materialize/js/materialize.min.js"></script> -->
+	<script src="pediview.js"></script>
 	<script>
 
 		let json = {"registrationnumber":"AGGGGGGGGGGGGGGGGGGGGGGGGGGGGG", "qualitative_info":{"farm_name":"Mapusagafou","breed":"Duroc", "sex":"Male","birthyear":"1994", "date_registered": "2014-02-10", "registered_by":"Wendy"}, "quantitative_info": {"weight_at_data_collection": 57, "age_at_data_collection": 4, "average_daily_gain":7, "backfat_thickness": 3, "feed_efficiency": 3, "birth_weight":8, "total_when_born_male": 7, "total_when_born_female": 6, "littersize_born_alive": 5, "parity": 1},"parents": [
@@ -99,7 +99,7 @@
 // 		]}
 // 	]}
 // ]};
-		pediview(json);
+		visualize(json);
 		// visualize(json2);
 	</script>
 </body>
