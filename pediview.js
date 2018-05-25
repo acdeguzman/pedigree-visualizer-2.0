@@ -560,6 +560,17 @@ const visualize = (json) => {
 	performance_label.setAttribute("for", performance_input.id);
 	performance_label.style.cssText = 'font-family: Arial, Helvetica, sans-serif;';
 
+	const qualitative_graph_p = document.createElement("p");
+
+	const qualitative_graph_input = document.createElement("input");
+	qualitative_graph_input.type = 'checkbox';
+	qualitative_graph_input.id = "qualitativeGraphCheckBox";
+
+	const qualitative_graph_label = document.createElement("label");
+	qualitative_graph_label.innerHTML = "Show Qualitative Graph";	
+	qualitative_graph_label.setAttribute("for", qualitative_graph_input.id);
+	qualitative_graph_label.style.cssText = 'font-family: Arial, Helvetica, sans-serif;';
+
 	// when inbreeding_input is checked, the inbred entities in the SVG pedigree will be filled with red, unchecking will unfill
 	const inbreeding_p = document.createElement("p");
 
@@ -582,6 +593,9 @@ const visualize = (json) => {
 	checkbox_form.appendChild(performance_p);
 	performance_p.appendChild(performance_input);
 	performance_p.appendChild(performance_label);
+	checkbox_form.appendChild(qualitative_graph_p);
+	qualitative_graph_p.appendChild(qualitative_graph_input);
+	qualitative_graph_p.appendChild(qualitative_graph_label);
 	checkbox_form.appendChild(inbreeding_p);
 	inbreeding_p.appendChild(inbreeding_input);
 	inbreeding_p.appendChild(inbreeding_label);
@@ -600,7 +614,7 @@ const visualize = (json) => {
 	main_container.appendChild(filter_div);
 
 	const filter_text = document.createElement("h4");
-	filter_text.innerHTML = "Qualitative Data Filter";
+	filter_text.innerHTML = "Qualitative Trait Filter";
 	filter_text.style.cssText = "font-family:Arial, Helvetica, sans-serif;padding-left:1%;";
 
 	filter_div.appendChild(filter_text);
@@ -748,14 +762,14 @@ const visualize = (json) => {
 
 			key_list[i].addEventListener('click', function() {
 
-	    		this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
-	      		this.parentNode.parentNode.childNodes[1].value = this.id;
+				this.parentNode.parentNode.childNodes[0].childNodes[0].innerHTML = this.innerHTML;
+				this.parentNode.parentNode.childNodes[1].value = this.id;
 
-		      	const values_length = this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].length;
-		      	span_value.innerHTML = qualitative_value_map[this.id][0];
-		      	this.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].value = qualitative_value_map[this.id][0];
+				const values_length = this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].length;
+				span_value.innerHTML = qualitative_value_map[this.id][0];
+				this.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].value = qualitative_value_map[this.id][0];
 				
-		      	if(this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].style.display == 'block')
+				if(this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].style.display == 'block')
 					this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].style.display = 'none'; 
 
 				for(let j = values_length - 1; j >= 0; j--) this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].removeChild(this.parentNode.parentNode.parentNode.childNodes[1].childNodes[2].childNodes[j]);
@@ -767,7 +781,7 @@ const visualize = (json) => {
 					opt.innerHTML = qualitative_value_map[this.id][k];
 					value_ul.appendChild(opt);
 				}
-	    	});
+			});
 		}
 
 		let delete_button = document.createElement('button');
@@ -899,13 +913,16 @@ const visualize = (json) => {
 	// value of each key
 	const getQualitativeDataCount = () => {	// return JSON of the qualitative data of the pedigree
 
-		let qualitative_data_object = {};
+		let qualitative_data_array = [];
 		let count = 0;
 
 		for(let i = 0; i < qualitative_value_keys.length; i++) {
 
+			let qualitative_data_object = {};
+
 			// store each qualitative data key in the qualitative_data_object as keys
-			qualitative_data_object[qualitative_value_keys[i]] = [];
+			qualitative_data_object['trait'] = qualitative_value_keys[i];
+			qualitative_data_object['values'] = [];
 
 			// traverese and count each possible trait value of each qualitative data key
 			for(let j = 0; j < qualitative_value_map[qualitative_value_keys[i]].length; j++) {
@@ -918,22 +935,27 @@ const visualize = (json) => {
 						count++;
 				}
 
-				trait_count_pair[qualitative_value_map[qualitative_value_keys[i]][j]] = count;
-				qualitative_data_object[qualitative_value_keys[i]].push(trait_count_pair);
+				trait_count_pair['value'] = qualitative_value_map[qualitative_value_keys[i]][j];
+				trait_count_pair['count'] = count;
+				qualitative_data_object['values'].push(trait_count_pair);
 				count = 0;
 			}
+
+			qualitative_data_array.push(qualitative_data_object);
 		}
 
-		return qualitative_data_object;
+		return qualitative_data_array;
 	}
 
-	let qualitative_data_object = getQualitativeDataCount();
+	let qualitative_data_array = getQualitativeDataCount();
+
+	console.log(qualitative_data_array);
 
 	let qualitative_data_container = document.createElement("div");
 	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;display:none;width:100%;overflow:auto;";
 	
 	let qualitative_text = document.createElement("h4");
-	qualitative_text.innerHTML = "Qualitative Data"
+	qualitative_text.innerHTML = "Qualitative Traits"
 	qualitative_text.style.fontFamily = 'Arial, Helvetica, sans-serif';
 	qualitative_text.style.paddingLeft = '1%';
 
@@ -942,9 +964,9 @@ const visualize = (json) => {
 	main_container.appendChild(qualitative_data_container);
 
 	//	tables for qualitative data
-	for(let i = 0; i < Object.keys(qualitative_data_object).length; i++) {
+	for(let i = 0; i < qualitative_data_array.length; i++) {
 
-		let curr_trait = Object.keys(qualitative_data_object)[i];
+		let curr_trait = qualitative_data_array[i]['trait'];
 
 		let trait_text = document.createElement("h5");
 		trait_text.innerHTML = curr_trait
@@ -969,10 +991,10 @@ const visualize = (json) => {
 
 		trait_row.appendChild(traitword_text);
 
-		for(let j = 0; j < qualitative_data_object[curr_trait].length; j++) {
+		for(let j = 0; j < qualitative_data_array[i]['values'].length; j++) {
 
 			let trait_value = document.createElement("td");
-			trait_value.innerHTML = Object.keys(qualitative_data_object[curr_trait][j])[0];
+			trait_value.innerHTML = qualitative_data_array[i]['values'][j]['value'];
 			trait_value.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 			trait_row.appendChild(trait_value);
@@ -991,11 +1013,11 @@ const visualize = (json) => {
 
 		let count = 0;
 
-		for(let j = 0; j < qualitative_data_object[curr_trait].length; j++) {
+		for(let j = 0; j < qualitative_data_array[i]['values'].length; j++) {
 
 			let trait_count = document.createElement("td");
 			trait_count.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
-			trait_count.innerHTML = qualitative_data_object[curr_trait][j][Object.keys(qualitative_data_object[curr_trait][j])[0]];
+			trait_count.innerHTML = qualitative_data_array[i]['values'][j]['count'];
 			trait_count.style.fontFamily = 'Arial. Helvetica, sans-serif';
 
 			count_row.appendChild(trait_count);
@@ -1016,7 +1038,9 @@ const visualize = (json) => {
 			
 			quantitative_data_object = {};
 
-			quantitative_data_object['data'] = quantitative_value_keys[i];
+			quantitative_data_object['trait'] = quantitative_value_keys[i];
+
+			quantitative_data_object['values'] = [];
 
 			for(let j = 0; j < entities_tree.length; j++) {
 
@@ -1033,13 +1057,22 @@ const visualize = (json) => {
 				if(current_value < min)
 					min = current_value;
 			}
+			
+			let min_object = {};
+			let max_object = {};
+			let ave_object = {};
+			let std_object = {};
 
-			quantitative_data_object['minimum'] = min;
-			quantitative_data_object['maximum'] = max;
+			min_object['value'] = min;
+			min_object['category'] = 'Minimum';
+
+			max_object['value'] = max;
+			max_object['category'] = 'Maximum';
 			
 			mean = total/count;
 
-			quantitative_data_object['ave'] = mean;
+			ave_object['value'] = mean;
+			ave_object['category'] = 'Average';
 
 			for(let j = 0; j < entities_tree.length; j++) {
 
@@ -1053,7 +1086,13 @@ const visualize = (json) => {
 
 			std = Math.sqrt(std/(count-1));
 
-			quantitative_data_object['stdev'] = std;
+			std_object['value'] = std;
+			std_object['category'] = 'Standard Deviation';
+
+			quantitative_data_object['values'].push(min_object);
+			quantitative_data_object['values'].push(max_object);
+			quantitative_data_object['values'].push(ave_object);
+			quantitative_data_object['values'].push(std_object);
 
 			min = 9999; max = 0; mean = 0; std = 0; total = 0;
 
@@ -1065,13 +1104,15 @@ const visualize = (json) => {
 
 	const quantitative_data_array = getQuantitativeDataCount();
 
+	console.log(quantitative_data_array);
+
 	let quantitative_data_container = document.createElement("div");
 	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;width:100%;overflow:auto;";
 
 	main_container.appendChild(quantitative_data_container);
 
 	let quantitative_text = document.createElement("h4");
-	quantitative_text.innerHTML = "Quantitative Data";
+	quantitative_text.innerHTML = "Quantitative Traits";
 	quantitative_text.style.cssText = "font-family: Arial, Helvetica, sans-serif; padding-left: 1%;"
 
 	quantitative_data_container.appendChild(quantitative_text);
@@ -1123,36 +1164,104 @@ const visualize = (json) => {
 		quanti_row.style.cssText = 'line-height: 0.8;';
 
 		let quanti_trait = document.createElement("th");
-		quanti_trait.innerHTML = quantitative_data_array[i]['data'];
+		quanti_trait.innerHTML = quantitative_data_array[i]['trait'];
 		quanti_trait.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
 		quanti_row.appendChild(quanti_trait);
 
-		let min_cell = document.createElement("td");
-		min_cell.innerHTML = quantitative_data_array[i]['minimum'];
-		min_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
+		for(let index = 0; index < quantitative_data_array[i]['values'].length; index++) {
 
-		let max_cell = document.createElement("td");
-		max_cell.innerHTML = quantitative_data_array[i]['maximum'];
-		max_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
+			let quanti_trait = document.createElement("td");
+			quanti_trait.innerHTML = quantitative_data_array[i]['values'][index]['value'].toFixed(4);
+			quanti_trait.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
 
-		let mean_cell = document.createElement("td");
-		mean_cell.innerHTML = quantitative_data_array[i]['ave'].toFixed(4);
-		mean_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
-		
-		let std_cell = document.createElement("td");
-		std_cell.innerHTML = quantitative_data_array[i]['stdev'].toFixed(4);
-		std_cell.style.cssText = 'font-family: Arial, Helvetica, sans-serif; padding: 7px 7px; line-height: 0.8;border:1px solid black;';
-
-		quanti_row.appendChild(min_cell);
-		quanti_row.appendChild(max_cell);
-		quanti_row.appendChild(mean_cell);
-		quanti_row.appendChild(std_cell);
+			quanti_row.appendChild(quanti_trait);			
+		}
 
 		quanti_table.appendChild(quanti_row);
 	}
 
 	quantitative_data_container.appendChild(quanti_table);
+
+	// GRAPH VERSION SECTION
+
+	const qualitative_data_graph = document.createElement("div");
+	qualitative_data_graph.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;width:100%;overflow:auto;";
+
+	let qualitative_graph_text = document.createElement("h4");
+	qualitative_graph_text.innerHTML = "Quantitative Traits Graph";
+	qualitative_graph_text.style.cssText = "font-family: Arial, Helvetica, sans-serif; padding-left: 1%;"
+
+	main_container.appendChild(qualitative_data_graph);
+
+	qualitative_data_graph.appendChild(qualitative_graph_text);
+
+	const graph_margin = {top: 30, right: 20, bottom: 30, left: 50},
+	graph_width = 400 - graph_margin.left - graph_margin.right,
+	graph_height = 220 - graph_margin.top - graph_margin.bottom;
+
+	for(let i = 0; i < qualitative_data_array.length; i++) {
+
+		let data = qualitative_data_array[i]['values'];
+
+		let graph_x = d3.scaleBand()
+        	.range([0, graph_width])
+        	.padding(0.1);
+
+		let graph_y = d3.scaleLinear()
+		    .range([graph_height, 0]);
+
+		var graph_svg = d3.select(qualitative_data_graph).append("svg")
+    		.attr("width", graph_width + graph_margin.left + graph_margin.right)
+    		.attr("height", graph_height + graph_margin.top + graph_margin.bottom)
+  		.append("g")
+    	.attr("transform", "translate(" + graph_margin.left + "," + graph_margin.top + ")");
+
+    	graph_x.domain(data.map(function(d) { return d.value; }));
+    	graph_y.domain([0, d3.max(data, function(d) { return d.count; })]);
+
+   //      const toolTip = d3.select(qualitative_data_graph).append('div')
+			// .attr('class', 'toolTip')
+			// .style('opacity', 0);
+
+    	graph_svg.selectAll(".bar")
+	      .data(data)
+	    .enter().append("rect")
+	      .attr("class", "bar")
+	      .attr("x", function(d) { return graph_x(d.value); })
+	      .attr("width", graph_x.bandwidth())
+	      .attr("y", function(d) { return graph_y(d.count); })
+	      .attr("height", function(d) { return graph_height - graph_y(d.count); })
+	   //    .on('mouseover', (d) => {
+		  //   toolTip.transition().duration(200).style('opacity', 0.9);
+		  //   toolTip.html("Value: <span>" + d.value + "</span>")
+		  //     .style('left', (d3.event.layerX) + "px")
+		  //     .style('top',  (d3.event.layerY - 28) + "px");
+		  // })
+ 	 	// .on('mouseout', () => toolTip.transition().duration(500).style('opacity', 0));
+
+	    graph_svg.append("g")
+	    	.attr("transform", "translate(0," + graph_height + ")")
+	    	.call(d3.axisBottom(graph_x).ticks(10));
+	    	// .selectAll("text")	
+		    //     .style("text-anchor", "middle")
+		    //     .attr("dx", "-.8em")
+		    //     .attr("dy", ".20em")
+		    //     .attr("transform", "rotate(-8)");
+
+		  // add the y Axis
+		graph_svg.append("g")
+		      .call(d3.axisLeft(graph_y));
+
+		graph_svg.append("text")
+        .attr("x", (graph_width / 2))             
+        .attr("y", 0 - (graph_margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px")
+        .text(qualitative_data_array[i].trait + " Graph");
+	}	
+
+	// checkbox listeners
 
 	filter_input.addEventListener('change', () => {
 
@@ -1172,6 +1281,19 @@ const visualize = (json) => {
 
 			qualitative_data_container.style.display = 'none';
 			quantitative_data_container.style.display = 'none';
+		}
+	});
+
+	qualitative_graph_input.addEventListener('change', () => {
+
+		if(qualitative_graph_input.checked == true) {
+
+			qualitative_data_graph.style.display = 'block';
+		}
+
+		else {
+
+			qualitative_data_graph.style.display = 'none';
 		}
 	});
 

@@ -120,3 +120,18 @@ span.choose {
 .dropdown .dropdown-menu li:active {
     background-color: #e2e2e2
 }
+
+.bar { fill: steelblue; }
+
+.toolTip {
+  border: 0
+  border-radius: 8px
+  font-size: 12px
+  font-weight: bold
+  height: 20px
+  padding: 2px
+  pointer-events: none
+  position: absolute
+  text-align: center
+  width: 120px
+}
