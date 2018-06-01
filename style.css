@@ -33,13 +33,10 @@ div.tooltip {
 }
 
 svg {
-	border: 1px solid #c6b89e;
-	border-radius: 5px;
 	margin-top: 5px;
 }
 
 body {
-	
   font-family: sans-serif;
 }
 span.msg,
@@ -121,17 +118,38 @@ span.choose {
     background-color: #e2e2e2
 }
 
-.bar { fill: steelblue; }
-
 .toolTip {
-  border: 0
-  border-radius: 8px
-  font-size: 12px
-  font-weight: bold
-  height: 20px
-  padding: 2px
-  pointer-events: none
-  position: absolute
-  text-align: center
-  width: 120px
+    position: relative;
+    /*display: inline-block;*/
+    /*border-bottom: 1px dotted black;*/
+}
+
+.toolTip .toolTiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.toolTip .toolTiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.toolTip:hover .toolTiptext {
+    visibility: visible;
 }
