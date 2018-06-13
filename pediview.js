@@ -57,21 +57,21 @@ const visualize = (json) => {
 	/**	FEATURE #1. SVG for pedigree **/
 
 	let svg_div = document.createElement("div");
-	svg_div.style.cssText = "border:1px solid #c6b89e; border-radius: 5px; margin-bottom: 5px; width: 98vw;overflow:auto;";
+	svg_div.style.cssText = "border:1px solid #c6b89e; border-radius: 5px; margin-bottom: 5px;overflow:auto;";
 	svg_div.setAttribute("class", "svgrow");
 
 	main_container.appendChild(svg_div);
 
 	// Set initial margins for SVG dimension initialization
 	let margin =	{
-						top: 20,
+						top: 10,
 						right: 100,
-						left: 200,
+						left: 100,
 						bottom: 20
 					},
 
-		width =		400,
-		height =	200; 
+		width =		800,
+		height =	600; 
 
 	// width = generations * 200
 	// svg width = generations * 400
@@ -79,7 +79,7 @@ const visualize = (json) => {
 	const rootNode = d3.hierarchy(treeData, (d) => {return d.children;});
 
 	// Set tree dimensions
-	const treemap = d3.tree().size([rootNode.height*height, rootNode.height * width]);
+	const treemap = d3.tree().size([height, width]);
 
 	// Store the entities to nodes for tree UI creation
 	const data = treemap(rootNode);
@@ -87,8 +87,8 @@ const visualize = (json) => {
 
 	// Set SVG size
 	const svg =	d3.select(svg_div).append("svg")
-					.attr("width", rootNode.height * 550 + "px")
-					.attr("height", rootNode.height * 200 + "px"),
+					.attr("width", 1200 + "px")
+					.attr("height", height + "px"),
 		g	=	svg.append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -235,7 +235,7 @@ const visualize = (json) => {
 	
 	// div for the covariance table
 	const covariance_table_div = document.createElement("div");
-	covariance_table_div.style.cssText = "border:1px solid #c6b89e; border-radius: 5px; margin-bottom: 5px; width: 100%;overflow:auto;min-height: 200px; max-height:400px;";
+	covariance_table_div.style.cssText = "border:1px solid #c6b89e; border-radius: 5px; margin-bottom: 5px;overflow:auto;min-height: 200px; max-height:400px;";
 	
 	required_data_div.appendChild(covariance_table_div);
 
@@ -470,7 +470,7 @@ const visualize = (json) => {
 	
 	// create div for the inbreeding table
 	const show_inbreeding_div = document.createElement("div");
-	show_inbreeding_div.style.cssText = "border:1px solid #c6b89e;border-radius:5px; margin-bottom: 5px;width:100%;overflow:auto;";
+	show_inbreeding_div.style.cssText = "border:1px solid #c6b89e;border-radius:5px; margin-bottom: 5px;overflow:auto;";
 
 	required_data_div.appendChild(show_inbreeding_div);
 	
@@ -636,7 +636,7 @@ const visualize = (json) => {
 
 	// div for filter section
 	const filter_div = document.createElement('div');
-	filter_div.style.cssText = 	"border:1px solid #c6b89e;border-radius:5px;display:none;margin-bottom:5px;width:100%;overflow:auto;height:250px;";
+	filter_div.style.cssText = 	"border:1px solid #c6b89e;border-radius:5px;display:none;margin-bottom:5px;overflow:auto;height:250px;";
 	
 	main_container.appendChild(filter_div);
 
@@ -979,7 +979,7 @@ const visualize = (json) => {
 	console.log(qualitative_data_array);
 
 	let qualitative_data_container = document.createElement("div");
-	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;display:none;width:100%;overflow:auto;";
+	qualitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px;display:none;overflow:auto;";
 	
 	let qualitative_text = document.createElement("h4");
 	qualitative_text.innerHTML = "Qualitative Traits"
@@ -1136,7 +1136,7 @@ const visualize = (json) => {
 	console.log(quantitative_data_array);
 
 	let quantitative_data_container = document.createElement("div");
-	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;width:100%;overflow:auto;";
+	quantitative_data_container.style.cssText = "border:1px solid #c6b89e;border-radius:5px;margin-bottom:5px; display:none;overflow:auto;";
 
 	main_container.appendChild(quantitative_data_container);
 
