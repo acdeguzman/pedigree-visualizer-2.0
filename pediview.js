@@ -70,8 +70,8 @@ const visualize = (json) => {
 						bottom: 20
 					},
 
-		width =		800,
-		height =	600; 
+		width =		1000,
+		height =	800; 
 
 	// width = generations * 200
 	// svg width = generations * 400
@@ -88,7 +88,7 @@ const visualize = (json) => {
 	// Set SVG size
 	const svg =	d3.select(svg_div).append("svg")
 					.attr("width", 1200 + "px")
-					.attr("height", height + "px"),
+					.attr("height", 800 + "px"),
 		g	=	svg.append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -1069,7 +1069,7 @@ const visualize = (json) => {
 
 			quantitative_data_object['values'] = [];
 
-			console.log(entities_tree[i].quantitative_info);
+			// console.log(entities_tree[i].quantitative_info);
 
 			for(let j = 0; j < entities_tree.length; j++) {
 
@@ -1079,7 +1079,7 @@ const visualize = (json) => {
 				if(typeof(entities_tree[j].quantitative_info[quantitative_value_keys[i]]) == 'string')
 					current_value = parseFloat(entities_tree[j].quantitative_info[quantitative_value_keys[i]]);
 
-				total += entities_tree[j].quantitative_info[quantitative_value_keys[i]];
+				total += current_value;
 
 				if(current_value > max)
 					max = current_value;
